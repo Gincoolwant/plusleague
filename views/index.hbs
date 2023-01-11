@@ -1,3 +1,27 @@
-{{#each matches}}
-  {{this}}
-{{/each}}
+<div class="row mt-3">
+  {{#each matches}}
+  <div class="col-md-3">
+    <div class="card mb-4 shadow-sm">
+      <div class="card-body">
+        <span class="float-end badge bg-secondary">G{{this.id}}</span>
+        <h5 class="card-title fw-bolder">{{this.date}}{{this.day}}</h5>
+        <h6 class="card-subtitle mb-2 fw-bold text-muted">{{this.time}}</h6>
+        <div class="text-center d-flex justify-content-center align-items-center mb-3">
+          <div>
+            <img class="card-img-top" src="{{this.guest.logo}}" alt="Card image cap"
+              style="transition: opacity 0.5s; opacity:0; width:80px; height:80px" onload="this.style.opacity=1;">
+            <div class="fs-6 fw-bolder">{{this.guest.name}}</div>
+          </div>
+          <span class="mx-3"><i class="fa-solid fa-at"></i></span>
+          <div>
+            <img class="card-img-top" src="{{this.home.logo}}" alt="Card image cap"
+              style="transition: opacity 0.5s; opacity:0; width:80px; height:80px" onload="this.style.opacity=1;">
+            <div class="fs-6 fw-bolder">{{this.home.name}}</div>
+          </div>
+        </div>
+        <div class="float-start"><i class="fa-solid fa-location-dot me-1"></i><span class="text-muted">{{this.arena}}</span></div>
+      </div>
+    </div>
+  </div>
+  {{/each}}
+</div>
