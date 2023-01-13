@@ -2,6 +2,11 @@ const express = require('express')
 const exphbs = require('express-handlebars')
 const axios = require('axios')
 const cheerio = require('cheerio')
+const { User } = require('./models')
+const flash = require('connect-flash')
+const usePassport = require('./config/passport')
+const session = require('express-session')
+const bcrypt = require('bcryptjs')
 const handlebarsHelpers = require('./helpers/handlebars-helper')
 
 if (process.env.NODE_ENV !== 'production') {
@@ -12,6 +17,19 @@ const app = express()
 
 app.engine('hbs', exphbs.engine({ defaultLayout: 'main', extname: '.hbs', helpers: handlebarsHelpers }))
 app.set('view engine', 'hbs')
+app.use(express.urlencoded({ extended: true }))
+app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: true }))
+app.use(flash())
+usePassport(app)
+app.use((req, res, next) => {
+  res.locals.isAuthenticated = req.isAuthenticated()
+  res.locals.user = req.user
+  res.locals.success_msg = req.flash('success-msg')
+  res.locals.warning_msg = req.flash('warning-msg')
+  res.locals.error = req.flash('error')
+
+  next()
+})
 
 const { google } = require('googleapis')
 const oauth2Client = new google.auth.OAuth2(
@@ -74,7 +92,56 @@ app.get('/google/redirect', async (req, res) => {
   res.redirect('/')
 })
 
-app.use('/', async (req, res) => {
+app.get('/login', (req, res) => {
+  res.render('login')
+})
+
+app.get('/register', (req, res) => {
+  res.render('register')
+})
+
+app.post('/register', (req, res) => {
+  const { email, password, confirmPassword } = req.body
+  // 未輸入name以email帳號為name
+  let name = req.body.name
+  if (!name) {
+    name = email.slice(0, email.indexOf('@'))
+  }
+
+  // 必填欄位及確認密碼驗證
+  const errors = []
+  if (!email || !password || !confirmPassword) {
+    errors.push({ message: '請完成必填欄位。' })
+  }
+  if (password !== confirmPassword) {
+    errors.push({ message: '兩次密碼輸入不相符。' })
+  }
+  if (errors.length) {
+    return res.render('register', { name, email, password, confirmPassword, errors })
+  }
+
+  // 確認email是否註冊，是: 提示已註冊，否: 創建使用者
+  return User.findOne({ where: { email } })
+    .then(user => {
+      // 已有用相同email使用者
+      if (user) {
+        errors.push({ message: '此Email已註冊' })
+        return res.render('register', { name, email, password, confirmPassword, errors })
+      }
+      // 可註冊email，密碼加密並創建使用者
+      return bcrypt.genSalt(10)
+        .then(salt => bcrypt.hash(password, salt))
+        .then(hash => {
+          return User.create({ name, email, password: hash })
+            .then(() => res.redirect('login'))
+            .catch(err => console.log(err))
+        })
+        .catch(err => console.log(err))
+    })
+    .catch(err => console.log(err))
+})
+
+app.get('/', async (req, res) => {
   axios('https://pleagueofficial.com/schedule-regular-season/2022-23')
     .then((response) => {
       const html = response.data

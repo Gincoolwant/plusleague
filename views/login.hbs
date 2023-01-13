@@ -1,0 +1,32 @@
+<div class="container mb-5">
+  <div class="row">
+    <div class="col-md-6 m-auto">
+      <div class="card card-body mt-2">
+        <h2 class="text-center">Login</h2>
+        {{> message}}
+        <form action="/users/login" method="post">
+          <div class="mb-3">
+            <label class="mb-3" for="email">Email</label>
+            <input type="email" class="form-control" name="email" id="email" placeholder="Please enter Email">
+          </div>
+          <div class="mb-3">
+            <label class="mb-3" for="password">Password</label>
+            <input type="password" class="form-control" name="password" id="password"
+              placeholder="Please enter Password">
+          </div>
+          <div class="d-grid gap-2 mt-4">
+            <button type="submit" class="btn btn-info">Login</button>
+            <div class="text-center">or</div>
+            <a href="/auth/google" class="btn btn-warning">
+              <i class="fa-brands fa-google me-1"></i>
+              Google Login
+            </a>
+          </div>
+        </form>
+        <p class="lead mt-4">
+          No Account? <a href="/users/register">Register Here</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
