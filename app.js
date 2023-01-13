@@ -22,7 +22,6 @@ const oauth2Client = new google.auth.OAuth2(
 const scopes = [
   'https://www.googleapis.com/auth/calendar'
 ]
-const calendar = google.calendar({ version: 'v3', auth: process.env.GOOGLE_API_KEY })
 
 app.get('/google', (req, res) => {
   const url = oauth2Client.generateAuthUrl({
@@ -37,10 +36,6 @@ app.get('/google/redirect', async (req, res) => {
   const { tokens } = await oauth2Client.getToken(req.query.code)
   oauth2Client.setCredentials(tokens)
 
-  res.redirect('/')
-})
-
-app.get('/google/schedule/', (req, res) => {
   const event = {
     summary: 'Test event',
     description: 'Google add event testing.',
@@ -61,6 +56,7 @@ app.get('/google/schedule/', (req, res) => {
     }
   }
 
+  const calendar = google.calendar({ version: 'v3', auth: process.env.GOOGLE_API_KEY })
   calendar.events.insert({
     auth: oauth2Client,
     calendarId: 'primary',
