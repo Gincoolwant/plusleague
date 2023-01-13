@@ -8,26 +8,26 @@ module.exports = app => {
   app.use(passport.initialize())
   app.use(passport.session())
 
-  passport.use(
-    new LocalStrategy({
+  passport.use(new LocalStrategy(
+    // customize user field
+    {
       usernameField: 'email',
+      passwordField: 'password',
       passReqToCallback: true
-    }, (req, email, password, done) => {
-      if (!email || !password) return done(null, false, req.flash('error', { message: '請輸入Email及password。' }))
-      User.findOne({ email })
+    },
+    // authenticate user
+    (req, email, password, cb) => {
+      User.findOne({ where: { email } })
         .then(user => {
-          // 無效email登入嘗試，flash msg提示
-          if (!user) return done(null, false, req.flash('error', { message: '請確認Email或密碼是否正確。' }))
-          // 比對bcrypt，相同則登入，不相同flash msg提示
-          return bcrypt.compare(password, user.password)
-            .then((isMatch) => {
-              if (!isMatch) return done(null, req.flash('error', { message: '請確認Email或密碼是否正確。' }))
-              return done(null, user)
-            })
+          if (!user) return cb(null, false, req.flash('error_messages', '帳號或密碼輸入錯誤！'))
+          bcrypt.compare(password, user.password).then(res => {
+            if (!res) return cb(null, false, req.flash('error_messages', '帳號或密碼輸入錯誤！'))
+            return cb(null, user)
+          })
         })
-        .catch(err => done(err))
-    })
-  )
+        .catch(err => cb(err))
+    }
+  ))
 
   // const jwtOptions = {
   //   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -71,9 +71,8 @@ module.exports = app => {
   })
 
   passport.deserializeUser((id, done) => {
-    return User.findById(id)
-      .lean()
-      .then(user => done(null, user))
+    User.findByPk(id)
+      .then(user => done(null, user.toJSON()))
       .catch(err => done(err))
   })
 }

@@ -4,6 +4,7 @@ const axios = require('axios')
 const cheerio = require('cheerio')
 const { User } = require('./models')
 const flash = require('connect-flash')
+const passport = require('passport')
 const usePassport = require('./config/passport')
 const session = require('express-session')
 const bcrypt = require('bcryptjs')
@@ -22,12 +23,10 @@ app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUniniti
 app.use(flash())
 usePassport(app)
 app.use((req, res, next) => {
-  res.locals.isAuthenticated = req.isAuthenticated()
+  res.locals.success_messages = req.flash('success_messages')
+  res.locals.error_messages = req.flash('error_messages')
+  res.locals.warning_messages = req.flash('warning_messages')
   res.locals.user = req.user
-  res.locals.success_msg = req.flash('success-msg')
-  res.locals.warning_msg = req.flash('warning-msg')
-  res.locals.error = req.flash('error')
-
   next()
 })
 
@@ -96,6 +95,11 @@ app.get('/login', (req, res) => {
   res.render('login')
 })
 
+app.post('/login', passport.authenticate('local', {
+  successRedirect: '/',
+  failureRedirect: '/login'
+}))
+
 app.get('/register', (req, res) => {
   res.render('register')
 })
@@ -139,6 +143,14 @@ app.post('/register', (req, res) => {
         .catch(err => console.log(err))
     })
     .catch(err => console.log(err))
+})
+
+app.get('/logout', (req, res) => {
+  req.logout((err) => {
+    if (err) console.log(err)
+    req.flash('success_msg', '你已成功登出。')
+    return res.redirect('/')
+  })
 })
 
 app.get('/', async (req, res) => {
