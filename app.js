@@ -23,12 +23,47 @@ const scopes = [
   'https://www.googleapis.com/auth/calendar'
 ]
 
-app.get('/google', (req, res) => {
+app.get('/schedule/:id', (req, res) => {
+  if (oauth2Client.credentials.access_token) {
+    const event = {
+      summary: `賽事編號G${req.params.id}`,
+      description: 'Google add event testing.',
+      start: {
+        dateTime: '2023-01-11T01:00:00-07:00',
+        timeZone: 'Asia/Kolkata'
+      },
+      end: {
+        dateTime: '2023-01-11T05:00:00-07:00',
+        timeZone: 'Asia/Kolkata'
+      },
+      reminders: {
+        useDefault: false,
+        overrides: [
+          { method: 'email', minutes: 24 * 60 },
+          { method: 'popup', minutes: 30 }
+        ]
+      }
+    }
+
+    const calendar = google.calendar({ version: 'v3', auth: process.env.GOOGLE_API_KEY })
+    calendar.events.insert({
+      auth: oauth2Client,
+      calendarId: 'primary',
+      resource: event
+    })
+      .then(() => res.redirect('/'))
+      .catch((error) => console.log('Some error occured', error))
+  } else {
+    console.log('no token')
+    res.redirect('/google')
+  }
+})
+
+app.get('/google', async (req, res) => {
   const url = oauth2Client.generateAuthUrl({
     access_type: 'offline',
     scope: scopes
   })
-
   res.redirect(url)
 })
 
@@ -36,34 +71,7 @@ app.get('/google/redirect', async (req, res) => {
   const { tokens } = await oauth2Client.getToken(req.query.code)
   oauth2Client.setCredentials(tokens)
 
-  const event = {
-    summary: 'Test event',
-    description: 'Google add event testing.',
-    start: {
-      dateTime: '2023-01-11T01:00:00-07:00',
-      timeZone: 'Asia/Kolkata'
-    },
-    end: {
-      dateTime: '2023-01-11T05:00:00-07:00',
-      timeZone: 'Asia/Kolkata'
-    },
-    reminders: {
-      useDefault: false,
-      overrides: [
-        { method: 'email', minutes: 24 * 60 },
-        { method: 'popup', minutes: 30 }
-      ]
-    }
-  }
-
-  const calendar = google.calendar({ version: 'v3', auth: process.env.GOOGLE_API_KEY })
-  calendar.events.insert({
-    auth: oauth2Client,
-    calendarId: 'primary',
-    resource: event
-  })
-    .then(event => console.log(event.data.htmlLink))
-    .catch((error) => console.log('Some error occured', error))
+  res.redirect('/')
 })
 
 app.use('/', async (req, res) => {
