@@ -9,7 +9,7 @@ router.use('/auth', auth)
 router.use('/users', user)
 
 router.get('/', (req, res) => {
-  axios('https://pleagueofficial.com/schedule-regular-season/2022-23')
+  axios.get('https://pleagueofficial.com/schedule-regular-season/2022-23')
     .then((response) => {
       const html = response.data
       const $ = cheerio.load(html)
