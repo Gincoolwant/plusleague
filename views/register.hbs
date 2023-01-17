@@ -5,7 +5,7 @@
         <h2 class="text-center">Register</h2>
         {{> message}}
         <div class="requiredTag mb-2 text-end text-danger">*為必填欄位</div>
-        <form action="/register" method="post">
+        <form action="/users/register" method="post">
           <div class="mb-3">
             <label class="mb-3" for="name">Name</label>
             <input type="name" class="form-control" name="name" id="email" placeholder="Please enter Name"
@@ -31,7 +31,7 @@
           </div>
         </form>
         <p class="lead mt-4">
-          Let's go <a href="/login">Login</a>
+          Let's go <a href="/users/login">Login</a>
         </p>
       </div>
     </div>

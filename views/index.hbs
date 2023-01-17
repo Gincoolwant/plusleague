@@ -1,3 +1,4 @@
+{{> message}}
 <div class="row mt-3">
   {{#each matches}}
   <div class="col-md-3">
@@ -22,7 +23,7 @@
         <div class="float-start"><i class="fa-solid fa-location-dot me-1"></i><span class="text-muted">{{this.arena}}</span></div>
         {{#if ../user}}
         <br>
-        <a href="/schedule/{{this.id}}"><div class="float-start"><i class="fa-regular fa-calendar-plus me-1"></i><span class="text-muted">加入行事曆</span></div></a>
+        <a href="/auth/schedule/{{this.id}}"><div class="float-start"><i class="fa-regular fa-calendar-plus me-1"></i><span class="text-muted">加入行事曆</span></div></a>
         {{/if}}
       </div>
     </div>

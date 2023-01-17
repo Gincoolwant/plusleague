@@ -18,7 +18,7 @@
             <span class="text-white nav-link">Hi, {{ user.name }}</span>
           </li>
           <li class="nav-item">
-            <a href="/logout"><button class="btn btn-outline-secondary my-sm-0 my-2">登出</button></a>
+            <a href="/users/logout"><button class="btn btn-outline-secondary my-sm-0 my-2">登出</button></a>
           </li>
         </ul>
       </div>
@@ -29,16 +29,11 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav ms-auto mb-2 mb-md-0">
-          {{#if user.isAdmin}}
-          <li class="nav-item">
-            <a href="/admin" class="nav-link">Admin 後台</a>
-          </li>
-          {{/if}}
           <li class="nav-item me-2">
-            <a href="/login"><button class="btn btn-secondary my-sm-0 my-2">登入</button></a>
+            <a href="/users/login"><button class="btn btn-secondary my-sm-0 my-2">登入</button></a>
           </li>
           <li class="nav-item me-2">
-            <a href="/register"><button class="btn btn-secondary my-sm-0 my-2">註冊</button></a>
+            <a href="/users/register"><button class="btn btn-secondary my-sm-0 my-2">註冊</button></a>
           </li>
         </ul>
       </div>
