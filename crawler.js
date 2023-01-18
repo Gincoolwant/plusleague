@@ -1,9 +1,19 @@
 const axios = require('axios')
 const cheerio = require('cheerio')
+const dayjs = require('dayjs')
+const utc = require('dayjs/plugin/utc')
+dayjs.extend(utc)
 
-const urlMatches = 'https://pleagueofficial.com/schedule-regular-season/2022-23'
+// const urlMatches = 'https://pleagueofficial.com/schedule-regular-season/2022-23'
+function parseGameTime (match) {
+  const gameTime = dayjs(`2022/${match.date} ${match.time}`, 'YYYY/MM/DD HH:mm')
+  if (gameTime.isBefore('2022-10-01')) {
+    return gameTime.add(1, 'year').format('YYYY-MM-DD HH:mm:ss')
+  }
+  return gameTime.format('YYYY-MM-DD HH:mm:ss')
+}
 
-function convertTeamId (teamName) {
+function parseTeamId (teamName) {
   switch (teamName) {
     case '勇士':
       return 1
@@ -25,7 +35,7 @@ async function crawlMatches (url) {
     const response = await axios.get(url)
     const html = response.data
     const $ = cheerio.load(html)
-    const matches = $('.match_row.is-future').map((index, el) => {
+    const matches = $('.match_row').map((index, el) => {
       const result = {
         id: Number($(el).find('.fs14.mb-2').text().slice(1)),
         date: $(el).find('.match_row_datetime').find('h5').eq(0).text(),
@@ -46,18 +56,22 @@ async function crawlMatches (url) {
       return result
     }).get()
     const MatchList = matches.map(match => ({
-      gameId: match.id,
-      date: match.date,
-      day: match.day,
-      time: match.time,
+      game_id: match.id,
+      game_time: parseGameTime(match),
+      // date: match.date,
+      // time: match.time,
+      // day: match.day,
       arena: match.arena,
-      guest: convertTeamId(match.guest.name),
-      home: convertTeamId(match.home.name)
+      guest_id: parseTeamId(match.guest.name),
+      home_id: parseTeamId(match.home.name),
+      created_at: new Date(),
+      updated_at: new Date()
     }))
-    console.log(MatchList)
+    return MatchList
   } catch (err) {
     console.log(err)
   }
 }
 
-crawlMatches(urlMatches)
+// crawlMatches(urlMatches)
+module.exports = { crawlMatches }
