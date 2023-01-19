@@ -1,15 +1,9 @@
 const express = require('express')
 const router = express.Router()
-const auth = require('./modules/auth')
-const users = require('./modules/user')
-const admin = require('./modules/admin')
-const { Match, sequelize } = require('../models')
+const { Match, sequelize } = require('../../models')
 const { Op } = require('sequelize')
 const dayjs = require('dayjs')
 
-router.use('/auth', auth)
-router.use('/users', users)
-router.use('/admin', admin)
 router.get('/', (req, res) => {
   return Match.findAll({
     where: { gameTime: { [Op.gte]: dayjs() } },
@@ -24,7 +18,7 @@ router.get('/', (req, res) => {
     raw: true
   })
     .then(matches => {
-      res.render('index', { matches })
+      res.render('admin', { matches })
     })
     .catch((err) => console.log(err))
 })

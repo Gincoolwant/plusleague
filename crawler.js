@@ -8,9 +8,9 @@ dayjs.extend(utc)
 function parseGameTime (match) {
   const gameTime = dayjs(`2022/${match.date} ${match.time}`, 'YYYY/MM/DD HH:mm')
   if (gameTime.isBefore('2022-10-01')) {
-    return gameTime.add(1, 'year').format('YYYY-MM-DD HH:mm:ss')
+    return gameTime.add(1, 'year').utc().format('YYYY-MM-DD HH:mm:ss')
   }
-  return gameTime.format('YYYY-MM-DD HH:mm:ss')
+  return gameTime.utc().format('YYYY-MM-DD HH:mm:ss')
 }
 
 function parseTeamId (teamName) {

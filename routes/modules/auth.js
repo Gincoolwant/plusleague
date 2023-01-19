@@ -1,6 +1,8 @@
 const express = require('express')
 const router = express.Router()
+const { Match, sequelize } = require('../../models')
 const { google } = require('googleapis')
+const dayjs = require('dayjs')
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
@@ -15,36 +17,49 @@ const scopes = [
   'https://www.googleapis.com/auth/calendar'
 ]
 
-router.get('/schedule/:id', (req, res) => {
+router.post('/schedule/:gameId', (req, res) => {
   if (oauth2Client.credentials.access_token) {
-    const event = {
-      summary: `賽事編號G${req.params.id}`,
-      description: 'Google add event testing.',
-      start: {
-        dateTime: '2023-01-11T01:00:00-07:00',
-        timeZone: 'Asia/Kolkata'
-      },
-      end: {
-        dateTime: '2023-01-11T05:00:00-07:00',
-        timeZone: 'Asia/Kolkata'
-      },
-      reminders: {
-        useDefault: false,
-        overrides: [
-          { method: 'email', minutes: 24 * 60 },
-          { method: 'popup', minutes: 30 }
-        ]
-      }
-    }
-
-    const calendar = google.calendar({ version: 'v3', auth: process.env.GOOGLE_API_KEY })
-    calendar.events.insert({
-      auth: oauth2Client,
-      calendarId: 'primary',
-      resource: event
+    return Match.findOne({
+      where: { gameId: req.params.gameId },
+      attributes: [
+        'game_id', 'game_time', 'arena',
+        [sequelize.literal('(SELECT logo FROM Teams WHERE Teams.id = Match.guest_id)'), 'g_logo'],
+        [sequelize.literal('(SELECT name FROM Teams WHERE Teams.id = Match.guest_id)'), 'g_name'],
+        [sequelize.literal('(SELECT logo FROM Teams WHERE Teams.id = Match.home_id)'), 'h_logo'],
+        [sequelize.literal('(SELECT name FROM Teams WHERE Teams.id = Match.home_id)'), 'h_name']
+      ],
+      raw: true
     })
+      .then(match => {
+        const startTime = dayjs(match.game_time).format()
+        const endTime = dayjs(match.game_time).add(2, 'hour').format()
+        const event = {
+          summary: `G${match.game_id}${match.g_name} vs ${match.h_name}`,
+          description: `賽事編號G${match.game_id} @ ${match.arena}`,
+          start: {
+            dateTime: `${startTime}`,
+            timeZone: 'Asia/Taipei'
+          },
+          end: {
+            dateTime: `${endTime}`,
+            timeZone: 'Asia/Taipei'
+          },
+          reminders: {
+            useDefault: false,
+            overrides: [
+              { method: 'popup', minutes: 120 }
+            ]
+          }
+        }
+
+        const calendar = google.calendar({ version: 'v3', auth: oauth2Client })
+        return calendar.events.insert({
+          calendarId: 'primary',
+          resource: event
+        })
+      })
       .then(() => {
-        req.flash('success_messages', '已成功加入行事曆。')
+        req.flash('success_messages', '已成功加入您的行事曆。')
         res.redirect('/')
       })
       .catch(err => console.log(err))
@@ -60,6 +75,7 @@ router.get('/schedule/:id', (req, res) => {
 router.get('/google/callback', async (req, res) => {
   const { tokens } = await oauth2Client.getToken(req.query.code)
   oauth2Client.setCredentials(tokens)
+  req.flash('success_messages', '成功授權，歡迎使用加入行事曆功能。')
   res.redirect('/')
 })
 

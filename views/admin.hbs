@@ -22,14 +22,12 @@
         </div>
         <div class="float-start"><i class="fa-solid fa-location-dot me-1"></i><span
             class="text-muted">{{this.arena}}</span></div>
-        {{#if ../user}}
         <br>
-        <form action="/auth/schedule/{{this.game_id}}" method="post">
-            <button type="submit" class="px-0 btn float-start btn-link text-decoration-none">
-              <i class="fa-regular fa-calendar-plus me-1"></i><span class="text-muted">加入行事曆</span>
-            </button>
+        <form action="/auth/matches/delete/{{this.game_id}}" method="post">
+          <button type="submit" class="mt-1 btn btn-danger">
+            下架比賽
+          </button>
         </form>
-        {{/if}}
       </div>
     </div>
   </div>

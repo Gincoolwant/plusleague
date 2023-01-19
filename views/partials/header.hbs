@@ -9,16 +9,16 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav ms-auto mb-2 mb-md-0">
-          {{#if user.isAdmin}}
-          <li class="nav-item">
-            <a href="/admin" class="nav-link">Admin 後台</a>
-          </li>
-          {{/if}}
-          <li class="nav-item d-inline-flex align-items-center">
+          <li class="nav-item d-inline-flex align-items-center me-2">
             <span class="text-white nav-link">Hi, {{ user.name }}</span>
           </li>
+          {{#if user.isAdmin}}
+          <li class="nav-item me-2">
+            <a href="/admin" class="btn btn-outline-secondary my-2">Admin 後台</a>
+          </li>
+          {{/if}}
           <li class="nav-item">
-            <a href="/users/logout"><button class="btn btn-outline-secondary my-sm-0 my-2">登出</button></a>
+            <a href="/users/logout"><button class="btn btn-outline-secondary my-2">登出</button></a>
           </li>
         </ul>
       </div>
@@ -30,10 +30,10 @@
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav ms-auto mb-2 mb-md-0">
           <li class="nav-item me-2">
-            <a href="/users/login"><button class="btn btn-secondary my-sm-0 my-2">登入</button></a>
+            <a href="/users/login"><button class="btn btn-secondary my-2">登入</button></a>
           </li>
           <li class="nav-item me-2">
-            <a href="/users/register"><button class="btn btn-secondary my-sm-0 my-2">註冊</button></a>
+            <a href="/users/register"><button class="btn btn-secondary my-2">註冊</button></a>
           </li>
         </ul>
       </div>

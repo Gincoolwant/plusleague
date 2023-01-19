@@ -1,8 +1,11 @@
 const passport = require('passport')
 const LocalStrategy = require('passport-local')
-const GoogleStrategy = require('passport-google-oauth20')
 const { User } = require('../models')
 const bcrypt = require('bcryptjs')
+
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
 
 module.exports = app => {
   app.use(passport.initialize())
@@ -39,32 +42,6 @@ module.exports = app => {
   //     .then(user => cb(null, user.toJSON()))
   //     .catch(err => cb(err))
   // }))
-
-  passport.use(new GoogleStrategy({
-    clientID: process.env.GOOGLE_CLIENT_ID,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: process.env.GOOGLE_CALLBACK_URL,
-    profileFields: ['email', 'displayName']
-  }, (accessToken, refreshToken, profile, done) => {
-    const { name, email } = profile._json
-    return User.findOne({ email })
-      .then(user => {
-        if (user) return done(null, user)
-        // 密碼必填，產生一組隨機密碼for auth登入者
-        const randomPassword = Math.random().toString(36).slice(-8)
-        return bcrypt.genSalt(10)
-          .then(salt => bcrypt.hash(randomPassword, salt))
-          .then(hash => {
-            return User.create({ name, email, password: hash })
-              .then(() => done(null, user))
-              .catch(err => done(err))
-          })
-          .then(user => done(null, user))
-          .catch(err => done(err))
-      })
-      .catch(err => done(err))
-  })
-  )
 
   passport.serializeUser((user, done) => {
     return done(null, user.id)

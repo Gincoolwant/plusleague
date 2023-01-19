@@ -28,10 +28,18 @@ module.exports = {
         type: Sequelize.STRING
       },
       guest_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Teams',
+          key: 'id'
+        }
       },
       home_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Teams',
+          key: 'id'
+        }
       },
       created_at: {
         allowNull: false,
