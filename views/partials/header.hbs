@@ -12,11 +12,11 @@
           <li class="nav-item d-inline-flex align-items-center me-2">
             <span class="text-white nav-link">Hi, {{ user.name }}</span>
           </li>
-          {{#if user.isAdmin}}
+          {{#ifCond user.isAdmin 'admin'}}
           <li class="nav-item me-2">
             <a href="/admin/matches" class="btn btn-secondary my-2">Admin後台</a>
           </li>
-          {{/if}}
+          {{/ifCond}}
           <li class="nav-item">
             <a href="/users/logout"><button class="btn btn-danger my-2">登出</button></a>
           </li>

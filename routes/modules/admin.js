@@ -30,7 +30,7 @@ router.get('/users', (req, res) => {
     raw: true
   })
     .then(users => {
-      res.send(users)
+      res.render('admin/users', { users })
     })
     .catch((err) => console.log(err))
 })

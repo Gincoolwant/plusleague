@@ -19,7 +19,8 @@ module.exports = {
         type: Sequelize.STRING
       },
       is_admin: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        defaultValue: 'user'
       },
       created_at: {
         allowNull: false,

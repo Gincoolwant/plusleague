@@ -1,0 +1,20 @@
+<a href="/admin/matches" class="btn btn-outline-secondary fw-bold me-1">賽程管理</a>
+<a href="/admin/users" class="btn btn-outline-secondary fw-bold">使用者清單</a>
+<div class="row mt-3">
+  {{#each users}}
+  <div class="col-md-4 col-lg-3">
+    <div class="card mb-4 shadow-sm">
+      <div class="card-body">
+        <span class="float-end badge bg-secondary">會員號碼#{{this.id}}</span>
+        <h1 class="fw-bold">{{this.name}}</h1>
+        <h5 class="text-muted">
+          {{#ifCond this.isAdmin 'admin'}}<span class="text-primary"><i class="fa-solid fa-user-gear me-1"></i>{{this.isAdmin}}</span>
+          {{else}}<i class="fa-solid fa-basketball me-1"></i>{{this.isAdmin}}
+          {{/ifCond}}
+        </h5>
+        <span class="text-muted">{{relativeTimeFromNow this.created_at}}</span>
+      </div>
+    </div>
+  </div>
+  {{/each}}
+</div>
