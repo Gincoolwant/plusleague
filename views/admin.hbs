@@ -1,7 +1,9 @@
+<a href="/admin/matches" class="btn btn-outline-secondary fw-bold me-1">賽程管理</a>
+<a href="/admin/users" class="btn btn-outline-secondary fw-bold">使用者清單</a>
 {{> message}}
 <div class="row mt-3">
   {{#each matches}}
-  <div class="col-md-3">
+  <div class="col-md-4 col-lg-3">
     <div class="card mb-4 shadow-sm">
       <div class="card-body">
         <span class="float-end badge bg-secondary">G{{this.game_id}}</span>
@@ -23,11 +25,19 @@
         <div class="float-start"><i class="fa-solid fa-location-dot me-1"></i><span
             class="text-muted">{{this.arena}}</span></div>
         <br>
-        <form action="/auth/matches/delete/{{this.game_id}}" method="post">
+        {{#if this.deleted_at}}
+        <form action="/admin/matches/{{this.game_id}}?_method=patch" method="post">
+          <button type="submit" class="mt-1 btn btn-success">
+            上架比賽
+          </button>
+        </form>
+        {{else}}
+        <form action="/admin/matches/{{this.game_id}}?_method=delete" method="post">
           <button type="submit" class="mt-1 btn btn-danger">
             下架比賽
           </button>
         </form>
+        {{/if}}
       </div>
     </div>
   </div>

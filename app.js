@@ -5,6 +5,7 @@ const usePassport = require('./config/passport')
 const session = require('express-session')
 const handlebarsHelpers = require('./helpers/handlebars-helper')
 const routes = require('./routes/index')
+const methodOverride = require('method-override')
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
@@ -17,6 +18,7 @@ app.set('view engine', 'hbs')
 app.use(express.urlencoded({ extended: true }))
 app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: true }))
 app.use(flash())
+app.use(methodOverride('_method'))
 usePassport(app)
 app.use((req, res, next) => {
   res.locals.success_messages = req.flash('success_messages')
