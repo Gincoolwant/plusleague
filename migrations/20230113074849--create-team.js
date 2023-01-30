@@ -9,6 +9,9 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      team_id: {
+        type: Sequelize.INTEGER
+      },
       logo: {
         type: Sequelize.STRING
       },

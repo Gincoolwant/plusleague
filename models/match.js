@@ -18,9 +18,6 @@ module.exports = (sequelize, DataTypes) => {
   Match.init({
     gameId: DataTypes.INTEGER,
     gameTime: DataTypes.DATE,
-    // date: DataTypes.STRING,
-    // time: DataTypes.STRING,
-    // day: DataTypes.STRING,
     arena: DataTypes.STRING,
     guestId: DataTypes.INTEGER,
     homeId: DataTypes.INTEGER
