@@ -34,8 +34,7 @@ async function crawlMatches (url) {
   try {
     const response = await axios.get(url, {
       headers: {
-        Accept: "application/json"
-        'User-Agent': "axios 0.21.1"
+        'User-Agent': 'axios 0.21.1'
       }
     })
     console.log('response ok')
