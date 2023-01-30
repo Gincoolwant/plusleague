@@ -32,11 +32,7 @@ function parseTeamId (teamName) {
 
 async function crawlMatches (url) {
   try {
-    const response = await axios.get(url, {
-      headers: {
-        'User-Agent': 'axios 0.21.1'
-      }
-    })
+    const response = await axios.get(url)
     console.log('response ok')
     const html = response.data
     const $ = cheerio.load(html)
