@@ -6,10 +6,11 @@ const admin = require('./modules/admin')
 const { Match, sequelize } = require('../models')
 const { Op } = require('sequelize')
 const dayjs = require('dayjs')
+const { authenticated, authenticatedAdmin } = require('../middleware/auth')
 
-router.use('/auth', auth)
 router.use('/users', users)
-router.use('/admin', admin)
+router.use('/auth', authenticated, auth)
+router.use('/admin', authenticated, authenticatedAdmin, admin)
 router.get('/', (req, res) => {
   return Match.findAll({
     where: { gameTime: { [Op.gte]: dayjs() } },
