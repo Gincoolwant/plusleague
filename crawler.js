@@ -2,9 +2,9 @@ const axios = require('axios')
 const cheerio = require('cheerio')
 const dayjs = require('dayjs')
 const utc = require('dayjs/plugin/utc')
+const fs = require('fs')
 dayjs.extend(utc)
 
-// const urlMatches = 'https://pleagueofficial.com/schedule-regular-season/2022-23'
 function parseGameTime (match) {
   const gameTime = dayjs(`2022/${match.date} ${match.time}`, 'YYYY/MM/DD HH:mm')
   if (gameTime.isBefore('2022-10-01')) {
@@ -32,22 +32,7 @@ function parseTeamId (teamName) {
 
 async function crawlMatches (url) {
   try {
-    const response = await axios.get(url, {
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:98.0) Gecko/20100101 Firefox/98.0',
-        Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
-        'Accept-Language': 'en-US,en;q=0.5',
-        'Accept-Encoding': 'gzip, deflate',
-        Connection: 'keep-alive',
-        'Upgrade-Insecure-Requests': '1',
-        'Sec-Fetch-Dest': 'document',
-        'Sec-Fetch-Mode': 'navigate',
-        'Sec-Fetch-Site': 'none',
-        'Sec-Fetch-User': '?1',
-        'Cache-Control': 'max-age=0'
-      }
-    })
-    console.log('response ok')
+    const response = await axios.get(url)
     const html = response.data
     const $ = cheerio.load(html)
     const matches = $('.match_row').map((index, el) => {
@@ -73,20 +58,16 @@ async function crawlMatches (url) {
     const MatchList = matches.map(match => ({
       game_id: match.id,
       game_time: parseGameTime(match),
-      // date: match.date,
-      // time: match.time,
-      // day: match.day,
       arena: match.arena,
       guest_id: parseTeamId(match.guest.name),
-      home_id: parseTeamId(match.home.name),
-      created_at: new Date(),
-      updated_at: new Date()
+      home_id: parseTeamId(match.home.name)
     }))
-    return MatchList
+    fs.writeFileSync('regular-season.json', JSON.stringify(MatchList, 0, 2))
   } catch (err) {
     console.log(err)
   }
 }
 
-// crawlMatches(urlMatches)
+const urlMatches = 'https://pleagueofficial.com/schedule-regular-season/2022-23'
+crawlMatches(urlMatches)
 module.exports = { crawlMatches }
