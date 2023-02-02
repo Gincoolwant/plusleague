@@ -21,6 +21,7 @@ app.use(flash())
 app.use(methodOverride('_method'))
 usePassport(app)
 app.use((req, res, next) => {
+  res.locals.auth_messages = req.flash('auth_messages')
   res.locals.success_messages = req.flash('success_messages')
   res.locals.error_messages = req.flash('error_messages')
   res.locals.warning_messages = req.flash('warning_messages')

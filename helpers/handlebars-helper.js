@@ -12,7 +12,7 @@ module.exports = {
   parseDate: (time) => dayjs(time).tz('Asia/Taipei').format('MM/DD'),
   parseDay: (time) => dayjs(time).tz('Asia/Taipei').locale('zh-cn').format('dd'),
   parseTime: (time) => dayjs(time).tz('Asia/Taipei').format('HH:mm'),
-  relativeTimeFromNow: time => dayjs(time).fromNow(),
+  relativeTimeFromNow: time => dayjs(time).tz('Asia/Taipei').fromNow(),
   ifCond: function (a, b, options) {
     return a === b ? options.fn(this) : options.inverse(this)
   }

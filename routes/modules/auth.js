@@ -17,10 +17,10 @@ const scopes = [
   'https://www.googleapis.com/auth/calendar'
 ]
 
-router.post('/schedule/:gameId', (req, res) => {
+router.post('/schedule/:game_id', (req, res) => {
   if (oauth2Client.credentials.access_token) {
     return Match.findOne({
-      where: { gameId: req.params.gameId },
+      where: { gameId: req.params.game_id },
       attributes: [
         'game_id', 'game_time', 'arena',
         [sequelize.literal('(SELECT logo FROM Teams WHERE Teams.id = Match.guest_id)'), 'g_logo'],
@@ -75,7 +75,7 @@ router.post('/schedule/:gameId', (req, res) => {
 router.get('/google/callback', async (req, res) => {
   const { tokens } = await oauth2Client.getToken(req.query.code)
   oauth2Client.setCredentials(tokens)
-  req.flash('success_messages', '成功授權，歡迎使用加入行事曆功能。')
+  req.flash('auth_messages', '成功授權，歡迎使用加入行事曆功能。')
   res.redirect('/')
 })
 
