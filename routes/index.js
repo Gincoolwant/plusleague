@@ -12,8 +12,8 @@ router.use('/users', users)
 router.use('/auth', authenticated, auth)
 router.use('/admin', authenticated, authenticatedAdmin, admin)
 router.get('/', (req, res) => {
-  const teamId = Number(req.query.teamId) || ''
-  const arena = req.query.arena || ''
+  const teamId = Number(req.query.searchTeamId) || ''
+  const arena = req.query.searchArena || ''
   return Promise.all([
     Team.findAll({ raw: true }),
     Match.findAll({
@@ -37,7 +37,7 @@ router.get('/', (req, res) => {
     sequelize.query('SELECT DISTINCT arena FROM Matches', { type: QueryTypes.SELECT })
   ])
     .then(([teams, matches, arenas]) => {
-      res.render('index', { teams, matches, arenas, teamId: Number(req.query.teamId), arena: req.query.arena })
+      res.render('index', { teams, matches, arenas, searchTeamId: Number(req.query.searchTeamId), searchArena: req.query.searchArena })
     })
     .catch((err) => console.log(err))
 })

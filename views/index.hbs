@@ -2,18 +2,18 @@
 <form action="/" method="get">
   <div class="row g-3 align-items-center">
     <div class="col">
-      <select class="form-select form-select-sm" aria-label="Default select example" name="teamId">
-        <option value="" {{#unless teamId}}selected{{/unless}}>全部球隊</option>
+      <select class="form-select form-select-sm" aria-label="Default select example" name="searchTeamId">
+        <option value="" {{#unless teamFilter}}selected{{/unless}}>全部球隊</option>
         {{#each teams}}
-        <option value="{{this.id}}" {{#ifCond teamId ../this.teamId}}selected{{/ifCond}}>{{this.name}}</option>
+        <option value="{{this.id}}" {{#ifCond ../searchTeamId this.id}}selected{{/ifCond}}>{{this.name}}</option>
         {{/each}}
       </select>
     </div>
     <div class="col">
-      <select class="form-select form-select-sm" aria-label="Default select example" name="arena">
+      <select class="form-select form-select-sm" aria-label="Default select example" name="searchArena">
         <option value="" {{#unless arena}}selected{{/unless}}>全部場地</option>
         {{#each arenas}}
-        <option value="{{this.arena}}" {{#ifCond arena ../this.arena}}selected{{/ifCond}}>{{this.arena}}</option>
+        <option value="{{this.arena}}" {{#ifCond ../searchArena this.arena}}selected{{/ifCond}}>{{this.arena}}</option>
         {{/each}}
       </select>
     </div>
