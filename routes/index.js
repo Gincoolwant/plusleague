@@ -26,10 +26,10 @@ router.get('/', (req, res) => {
       },
       attributes: [
         'game_id', 'game_time', 'arena',
-        [sequelize.literal('(SELECT logo FROM Teams WHERE Teams.team_id = Match.guest_id)'), 'g_logo'],
-        [sequelize.literal('(SELECT name FROM Teams WHERE Teams.team_id = Match.guest_id)'), 'g_name'],
-        [sequelize.literal('(SELECT logo FROM Teams WHERE Teams.team_id = Match.home_id)'), 'h_logo'],
-        [sequelize.literal('(SELECT name FROM Teams WHERE Teams.team_id = Match.home_id)'), 'h_name']
+        [sequelize.literal('(SELECT logo FROM Teams WHERE Teams.id = Match.guest_id)'), 'g_logo'],
+        [sequelize.literal('(SELECT name FROM Teams WHERE Teams.id = Match.guest_id)'), 'g_name'],
+        [sequelize.literal('(SELECT logo FROM Teams WHERE Teams.id = Match.home_id)'), 'h_logo'],
+        [sequelize.literal('(SELECT name FROM Teams WHERE Teams.id = Match.home_id)'), 'h_name']
       ],
       order: [['game_time', 'ASC']],
       raw: true
@@ -37,6 +37,7 @@ router.get('/', (req, res) => {
     sequelize.query('SELECT DISTINCT arena FROM Matches', { type: QueryTypes.SELECT })
   ])
     .then(([teams, matches, arenas]) => {
+      console.log(matches)
       res.render('index', { teams, matches, arenas, teamId: Number(req.query.teamId), arena: req.query.arena })
     })
     .catch((err) => console.log(err))
