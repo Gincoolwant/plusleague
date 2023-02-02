@@ -37,7 +37,6 @@ router.get('/', (req, res) => {
     sequelize.query('SELECT DISTINCT arena FROM Matches', { type: QueryTypes.SELECT })
   ])
     .then(([teams, matches, arenas]) => {
-      console.log(matches)
       res.render('index', { teams, matches, arenas, teamId: Number(req.query.teamId), arena: req.query.arena })
     })
     .catch((err) => console.log(err))

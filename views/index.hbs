@@ -5,7 +5,7 @@
       <select class="form-select form-select-sm" aria-label="Default select example" name="teamId">
         <option value="" {{#unless teamId}}selected{{/unless}}>全部球隊</option>
         {{#each teams}}
-        <option value="{{this.teamId}}" {{#ifCond teamId ../this.teamId}}selected{{/ifCond}}>{{this.name}}</option>
+        <option value="{{this.id}}" {{#ifCond teamId ../this.teamId}}selected{{/ifCond}}>{{this.name}}</option>
         {{/each}}
       </select>
     </div>
