@@ -1,6 +1,4 @@
 const { google } = require('googleapis')
-const dayjs = require('dayjs')
-
 const scopes = [
   'https://www.googleapis.com/auth/calendar'
 ]
@@ -59,32 +57,11 @@ const checkCalendar = (oauth2Client) => {
 
 const insertEvent = (oauth2Client) => {
   return (req, res, next) => {
-    const startTime = dayjs(req.match.game_time).format()
-    const endTime = dayjs(req.match.game_time).add(2, 'hour').format()
-    const event = {
-      summary: `G${req.match.game_id}${req.match.g_name} vs ${req.match.h_name}`,
-      description: `賽事編號G${req.match.game_id} @ ${req.match.arena}`,
-      start: {
-        dateTime: `${startTime}`,
-        timeZone: 'Asia/Taipei'
-      },
-      end: {
-        dateTime: `${endTime}`,
-        timeZone: 'Asia/Taipei'
-      },
-      reminders: {
-        useDefault: false,
-        overrides: [
-          { method: 'popup', minutes: 120 }
-        ]
-      }
-    }
-
     const calendar = google.calendar({ version: 'v3', auth: oauth2Client })
     return calendar.events.insert({
       // calendarId: req.calendarId,
       calendarId: 'primary',
-      resource: event
+      resource: req.event
     })
       .then(() => {
         return next()
