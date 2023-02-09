@@ -51,7 +51,7 @@ router.post('/schedule/:game_id', checkOauth, (req, res, next) => {
 
 router.get('/google/callback', setCredentials, (req, res) => {
   req.flash('auth_messages', '成功授權，歡迎使用加入行事曆功能。')
-  res.redirect('back')
+  res.redirect('/')
 })
 
 module.exports = router
