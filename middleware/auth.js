@@ -4,7 +4,11 @@ const authenticated = (req, res, next) => {
   passport.authenticate('jwt', { session: false }, (err, user) => {
     if (err) {
       req.flash('warning_messages', '錯誤發生...請聯絡開發者。')
-      res.status(401).redirect('/')
+      res.status(404).redirect('/')
+    }
+    if (!user) {
+      req.flash('warning_messages', '請登入使用。')
+      return res.status(401).redirect('/users/login')
     }
     req.user = user
     next()
