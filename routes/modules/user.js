@@ -3,15 +3,20 @@ const router = express.Router()
 const { User } = require('../../models')
 const passport = require('passport')
 const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
+const { authenticated } = require('../../middleware/auth')
 
 router.get('/login', (req, res) => {
   res.render('login')
 })
 
-router.post('/login', passport.authenticate('local', {
-  successRedirect: '/',
-  failureRedirect: '/users/login'
-}))
+router.post('/login', passport.authenticate('local'), (req, res) => {
+  const userData = req.user.toJSON()
+  delete userData.password
+  const token = jwt.sign(userData, process.env.JWT_SECRET, { expiresIn: '1d' })
+  res.cookie('jwt', token)
+  res.redirect('/')
+})
 
 router.get('/register', (req, res) => {
   res.render('register')
@@ -67,7 +72,7 @@ router.get('/logout', (req, res) => {
   })
 })
 
-router.get('/demoCalendar', (req, res) => {
+router.get('/demoCalendar', authenticated, (req, res) => {
   res.render('user1-calendar')
 })
 

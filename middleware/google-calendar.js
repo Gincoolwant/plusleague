@@ -13,7 +13,9 @@ const oauth2Client = new google.auth.OAuth2(
 
 const checkOauth = async (req, res, next) => {
   if (req.user.gToken) {
-    oauth2Client.setCredentials({ access_token: req.user.gToken })
+    const gToken = jwt.verify(req.user.gToken, process.env.GOOGLE_CLIENT_SECRET)
+    console.log('check:', gToken)
+    oauth2Client.setCredentials(gToken)
     return next()
   }
   const data = {
@@ -33,15 +35,20 @@ const updateToken = async (req, res, next) => {
   const data = jwt.verify(req.query.state, process.env.GOOGLE_CLIENT_SECRET)
   req.gameId = data.gameId
   const { tokens } = await oauth2Client.getToken(req.query.code)
-  await User.update(
-    { gToken: tokens.access_token },
-    {
-      where: {
-        id: data.userId
-      },
-      raw: true
-    })
-  next()
+  const gToken = jwt.sign(tokens, process.env.GOOGLE_CLIENT_SECRET, { expiresIn: '30d' })
+  try {
+    await User.update(
+      { gToken },
+      {
+        where: {
+          id: data.userId
+        },
+        raw: true
+      })
+    next()
+  } catch (err) {
+    console.log(err)
+  }
 }
 
 const insertEvent = (req, res, next) => {

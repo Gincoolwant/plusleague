@@ -2,6 +2,7 @@ const passport = require('passport')
 const LocalStrategy = require('passport-local')
 const { User } = require('../models')
 const bcrypt = require('bcryptjs')
+const JwtStrategy = require('passport-jwt').Strategy
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
@@ -32,16 +33,16 @@ module.exports = app => {
     }
   ))
 
-  // const jwtOptions = {
-  //   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-  //   secretOrKey: process.env.JWT_SECRET
-  // }
+  const jwtOptions = {
+    jwtFromRequest: cookieExtractor,
+    secretOrKey: process.env.JWT_SECRET
+  }
 
-  // passport.use(new JwtStrategy(jwtOptions, (jwtPayload, cb) => {
-  //   User.findByPk(jwtPayload.id)
-  //     .then(user => cb(null, user.toJSON()))
-  //     .catch(err => cb(err))
-  // }))
+  passport.use(new JwtStrategy(jwtOptions, (jwtPayload, cb) => {
+    User.findByPk(jwtPayload.id)
+      .then(user => cb(null, user.toJSON()))
+      .catch(err => cb(err))
+  }))
 
   passport.serializeUser((user, done) => {
     return done(null, user.id)
@@ -52,4 +53,12 @@ module.exports = app => {
       .then(user => done(null, user.toJSON()))
       .catch(err => done(err))
   })
+}
+
+const cookieExtractor = (req) => {
+  let token = null
+  if (req && req.cookies) {
+    token = req.cookies.jwt
+  }
+  return token
 }
