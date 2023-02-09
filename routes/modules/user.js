@@ -3,6 +3,7 @@ const router = express.Router()
 const { User } = require('../../models')
 const passport = require('passport')
 const bcrypt = require('bcryptjs')
+const { resetCredentials } = require('../../middleware/google-calendar.js')
 
 router.get('/login', (req, res) => {
   res.render('login')
@@ -59,7 +60,7 @@ router.post('/register', (req, res) => {
     .catch(err => console.log(err))
 })
 
-router.get('/logout', (req, res) => {
+router.get('/logout', resetCredentials, (req, res) => {
   req.logout((err) => {
     if (err) console.log(err)
     req.flash('success_msg', '你已成功登出。')
