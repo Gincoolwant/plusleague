@@ -1,4 +1,6 @@
 const { google } = require('googleapis')
+const { User } = require('../models')
+const jwt = require('jsonwebtoken')
 const scopes = [
   'https://www.googleapis.com/auth/calendar'
 ]
@@ -9,58 +11,44 @@ const oauth2Client = new google.auth.OAuth2(
   process.env.GOOGLE_REDIRECT_URL
 )
 
-const checkOauth = (req, res, next) => {
+const checkOauth = async (req, res, next) => {
+  const accessToken = await User.findByPk(req.user.id, { raw: true })
+  if (accessToken.gToken) {
+    oauth2Client.setCredentials({ access_token: accessToken.gToken })
+    return next()
+  }
+  const data = {
+    userId: req.user.id,
+    gameId: req.params.game_id
+  }
+  const state = jwt.sign(data, process.env.GOOGLE_CLIENT_SECRET, { expiresIn: '1m' })
   if (oauth2Client.credentials.access_token) return next()
   const url = oauth2Client.generateAuthUrl({
     access_type: 'offline',
-    scope: scopes
+    scope: scopes,
+    state
   })
   res.redirect(url)
 }
 
-const setCredentials = async (req, res, next) => {
+const updateToken = async (req, res, next) => {
+  const data = jwt.verify(req.query.state, process.env.GOOGLE_CLIENT_SECRET)
+  req.gameId = data.gameId
   const { tokens } = await oauth2Client.getToken(req.query.code)
-  oauth2Client.setCredentials(tokens)
+  await User.update(
+    { gToken: tokens.access_token },
+    {
+      where: {
+        id: data.userId
+      },
+      raw: true
+    })
   next()
 }
-
-// const checkCalendar = (oauth2Client) => {
-//   return (req, res, next) => {
-//     const calendar = google.calendar({ version: 'v3', auth: oauth2Client })
-//     return calendar.calendars.get({
-//       calendarId: '0tcv5ugkuss95ng6nch1l8is4o@group.calendar.google.com'
-//     })
-//       .then(res => {
-//         req.calendarId = '0tcv5ugkuss95ng6nch1l8is4o@group.calendar.google.com'
-//         return next()
-//       })
-//       .catch(err => {
-//         if (err.code === 404) {
-//           const calendar = google.calendar({ version: 'v3', auth: oauth2Client })
-//           return calendar.calendars.insert({
-//             resource: {
-//               kind: 'calendar#calendar',
-//               summary: 'P+報哩災',
-//               description: 'New calendar for P+報哩災',
-//               location: 'P+報哩災',
-//               timeZone: 'Asia/Taipei'
-//             }
-//           })
-//         }
-//         console.log(err)
-//       })
-//       .then(clientCalendar => {
-//         req.calendarId = clientCalendar.data.id
-//         return next()
-//       })
-//       .catch(err => console.log(err))
-//   }
-// }
 
 const insertEvent = (req, res, next) => {
   const calendar = google.calendar({ version: 'v3', auth: oauth2Client })
   return calendar.events.insert({
-    // calendarId: req.calendarId,
     calendarId: 'primary',
     resource: req.event
   })
@@ -70,15 +58,8 @@ const insertEvent = (req, res, next) => {
     .catch(err => console.log(err))
 }
 
-const resetCredentials = (req, res, next) => {
-  oauth2Client.setCredentials({})
-  next()
-}
-
 module.exports = {
   checkOauth,
-  setCredentials,
-  // checkCalendar,
-  insertEvent,
-  resetCredentials
+  updateToken,
+  insertEvent
 }

@@ -2,6 +2,9 @@
   <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark px-4">
     <div class="container-fluid">
       <a class="navbar-brand" href="/">P+報哩災</a>
+      {{#ifCond user.email 'user1@example.com'}}
+      <a class="btn btn-warning" href="/users/demoCalendar">user1的demo日曆</a>
+      {{/ifCond}}
       {{#if user}}
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
         aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">

@@ -1,14 +1,14 @@
 const express = require('express')
 const router = express.Router()
 const { Match, sequelize } = require('../../models')
-const { checkOauth, setCredentials, insertEvent } = require('../../middleware/google-calendar.js')
+const { checkOauth, updateToken, insertEvent } = require('../../middleware/google-calendar.js')
 const dayjs = require('dayjs')
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
 
-router.post('/schedule/:game_id', checkOauth, (req, res, next) => {
+router.get('/schedule/:game_id', checkOauth, (req, res, next) => {
   return Match.findOne({
     where: { gameId: req.params.game_id },
     attributes: [
@@ -46,12 +46,11 @@ router.post('/schedule/:game_id', checkOauth, (req, res, next) => {
     .catch(err => console.log(err))
 }, insertEvent, (req, res) => {
   req.flash('success_messages', '已成功加入您的行事曆。')
-  res.redirect('back')
+  res.redirect('/')
 })
 
-router.get('/google/callback', setCredentials, (req, res) => {
-  req.flash('auth_messages', '成功授權，歡迎使用加入行事曆功能。')
-  res.redirect('/')
+router.get('/google/callback', updateToken, (req, res) => {
+  res.redirect(`/auth/schedule/${req.gameId}`)
 })
 
 module.exports = router

@@ -49,7 +49,7 @@
             class="text-muted">{{this.arena}}</span></div>
         {{#if ../user}}
         <br>
-        <form action="/auth/schedule/{{this.game_id}}" method="post">
+        <form action="/auth/schedule/{{this.game_id}}" method="get">
           <button type="submit" class="px-0 btn float-start btn-link text-decoration-none">
             <i class="fa-regular fa-calendar-plus me-1"></i><span class="text-muted">加入行事曆</span>
           </button>
