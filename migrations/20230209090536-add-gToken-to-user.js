@@ -5,7 +5,7 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.addColumn('Users', 'g_token', {
-      type: Sequelize.STRING,
+      type: Sequelize.TEXT('long'),
       defaultValue: null
     })
   },
