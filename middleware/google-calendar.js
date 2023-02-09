@@ -12,9 +12,8 @@ const oauth2Client = new google.auth.OAuth2(
 )
 
 const checkOauth = async (req, res, next) => {
-  const accessToken = await User.findByPk(req.user.id, { raw: true })
-  if (accessToken.gToken) {
-    oauth2Client.setCredentials({ access_token: accessToken.gToken })
+  if (req.user.gToken) {
+    oauth2Client.setCredentials({ access_token: req.user.gToken })
     return next()
   }
   const data = {
@@ -22,7 +21,6 @@ const checkOauth = async (req, res, next) => {
     gameId: req.params.game_id
   }
   const state = jwt.sign(data, process.env.GOOGLE_CLIENT_SECRET, { expiresIn: '1m' })
-  if (oauth2Client.credentials.access_token) return next()
   const url = oauth2Client.generateAuthUrl({
     access_type: 'offline',
     scope: scopes,
