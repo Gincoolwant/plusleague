@@ -10,7 +10,7 @@ router.get('/login', (req, res) => {
   res.render('login')
 })
 
-router.post('/login', passport.authenticate('local'), (req, res) => {
+router.post('/login', passport.authenticate('local', { failureRedirect: '/users/login' }), (req, res) => {
   const userData = req.user.toJSON()
   delete userData.password
   const token = jwt.sign(userData, process.env.JWT_SECRET, { expiresIn: '1d' })
@@ -39,9 +39,8 @@ router.post('/register', (req, res) => {
     errors.push({ message: '兩次密碼輸入不相符。' })
   }
   if (errors.length) {
-    res.render('register', { name, email, password, confirmPassword, errors })
+    return res.render('register', { name, email, password, confirmPassword, errors })
   }
-
   // 確認email是否註冊，是: 提示已註冊，否: 創建使用者
   return User.findOne({ where: { email } })
     .then(user => {
@@ -65,6 +64,7 @@ router.post('/register', (req, res) => {
 })
 
 router.get('/logout', (req, res) => {
+  res.clearCookie('jwt')
   req.logout((err) => {
     if (err) console.log(err)
     req.flash('success_msg', '你已成功登出。')
