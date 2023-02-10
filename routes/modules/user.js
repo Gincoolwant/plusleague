@@ -14,7 +14,7 @@ router.post('/login', passport.authenticate('local', { failureRedirect: '/users/
   const userData = req.user.toJSON()
   delete userData.password
   const token = jwt.sign(userData, process.env.JWT_SECRET, { expiresIn: '1d' })
-  res.cookie('jwt', token, { maxAge: 15 * 60 * 1000, httpOnly: true })
+  res.cookie('jwt', token, { maxAge: 15 * 60 * 1000, httpOnly: true, signed: true })
   res.redirect('/')
 })
 

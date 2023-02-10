@@ -19,7 +19,7 @@ app.set('view engine', 'hbs')
 app.use(express.urlencoded({ extended: true }))
 app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: true }))
 app.use(flash())
-app.use(cookieParser())
+app.use(cookieParser(process.env.SESSION_SECRET))
 app.use(methodOverride('_method'))
 usePassport(app)
 app.use((req, res, next) => {
