@@ -57,8 +57,8 @@ module.exports = app => {
 
 const cookieExtractor = (req) => {
   let token = null
-  if (req && req.cookies) {
-    token = req.cookies.jwt
+  if (req?.signedCookies) {
+    token = req.signedCookies.jwt
   }
   return token
 }
