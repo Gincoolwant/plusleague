@@ -19,7 +19,9 @@ const checkOauth = async (req, res, next) => {
   if (req.user.gToken) {
     const gToken = jwt.verify(req.user.gToken, process.env.GOOGLE_CLIENT_SECRET)
     delete gToken.iat
+    console.log(gToken)
     oauth2Client.setCredentials(gToken)
+    console.log(oauth2Client.isTokenExpiring())
     if (oauth2Client.isTokenExpiring()) {
       await oauth2Client.refreshAccessToken()
       return next()
