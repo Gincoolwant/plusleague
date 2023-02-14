@@ -19,7 +19,10 @@ const checkOauth = async (req, res, next) => {
   if (req.user.gToken) {
     const gToken = jwt.verify(req.user.gToken, process.env.GOOGLE_CLIENT_SECRET)
     delete gToken.iat
-    oauth2Client.setCredentials({ refresh_token: gToken.refresh_token })
+    oauth2Client.setCredentials({
+      access_token: gToken.access_token,
+      refresh_token: gToken.refresh_token
+    })
     return next()
   }
   const data = {
