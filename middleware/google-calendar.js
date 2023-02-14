@@ -19,10 +19,11 @@ const checkOauth = async (req, res, next) => {
   if (req.user.gToken) {
     const gToken = jwt.verify(req.user.gToken, process.env.GOOGLE_CLIENT_SECRET)
     delete gToken.iat
-    oauth2Client.setCredentials({
-      ...gToken,
-      forceRefreshOnFailure: true
-    })
+    oauth2Client.setCredentials(gToken)
+    if (oauth2Client.isTokenExpiring()) {
+      await oauth2Client.refreshAccessToken()
+      return next()
+    }
     return next()
   }
   const data = {
@@ -32,6 +33,7 @@ const checkOauth = async (req, res, next) => {
   const state = jwt.sign(data, process.env.GOOGLE_CLIENT_SECRET, { expiresIn: '1m' })
   const url = oauth2Client.generateAuthUrl({
     access_type: 'offline',
+    prompt: 'consent',
     scope: scopes,
     state
   })
@@ -42,6 +44,7 @@ const updateToken = async (req, res, next) => {
   const data = jwt.verify(req.query.state, process.env.GOOGLE_CLIENT_SECRET)
   req.gameId = data.gameId
   const { tokens } = await oauth2Client.getToken(req.query.code)
+  console.log(tokens)
   const gToken = jwt.sign(tokens, process.env.GOOGLE_CLIENT_SECRET)
   try {
     await User.update(
