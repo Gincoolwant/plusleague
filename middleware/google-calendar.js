@@ -5,6 +5,10 @@ const scopes = [
   'https://www.googleapis.com/auth/calendar'
 ]
 
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
+
 const oauth2Client = new google.auth.OAuth2(
   process.env.GOOGLE_CLIENT_ID,
   process.env.GOOGLE_CLIENT_SECRET,
