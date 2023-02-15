@@ -22,8 +22,8 @@ P+報哩災為使用Node.js、Express、Handlebars、MySQL打造的1人全端專
 ### 後台管理 - 使用者清單
 ![filter By Team](./public/README-images/userlist.png)
 
-# 測試帳號
-## 前台
+## 測試帳號
+### 前台
 
 **`為方便demo，測試帳號已與特定google帳號連結，若需加入個人google行事曆服務，請註冊新會員並透過Oauth2.0授權後方可使用)`**
 
@@ -31,32 +31,32 @@ P+報哩災為使用Node.js、Express、Handlebars、MySQL打造的1人全端專
 帳號: user1@example.com
 密碼: 123
 ```
-## 後台(前台僅有瀏覽權限)
+### 後台(前台僅有瀏覽權限)
 ```
 帳號: root@example.com
 密碼: 123
 ```
 
-# 功能介紹
-## 賽程來源
+## 功能介紹
+### 賽程來源
 + 使用axios與cheerio套件與P+官網介接爬蟲取得。
 
 (考量權限與網路爬蟲道德，目前無定期爬蟲，透過本地端運行爬蟲程式一次抓取賽程資訊後以JSON格式保存，再透過種子資料migrate至資料庫。)
-## 登入及註冊
+### 登入及註冊
 + 使用者註冊及登入功能(flash message提示錯誤訊息)。
 + 使用bcrypt儲存使用者密碼。
 + 使用passport實作登入驗證。
 + 登入後，使用cookie實作JWT權限驗證。
-## 前台 - 使用者權限功能
+### 前台 - 使用者權限功能
 + 可透過球隊或比賽場館篩選對戰
 + 授權Oauth2.0後，可將賽程加入個人google行事曆中。(Oauth2.0授權+JWT存取google token實作)
 + 可點選logout登出使用狀態。
-## 後台 - 管理者權限功能
+### 後台 - 管理者權限功能
 + 可上/下架賽程(下架後，前台不顯示直至重新上架)
 + 瀏覽全部註冊的使用者清單
 
-# 安裝執行
-## 安裝執行應用程式
+## 安裝執行
+### 安裝執行應用程式
 1. 確認安裝node.js & npm。
 2. 開啟Terminal將專案 clone 至本地位置：
 ```
@@ -108,7 +108,7 @@ npm run start
 ```
 
 成功連線時，終端機會看見訊息： `App is listening on port 3000!`，請開啟瀏覽器輸入網址 http://localhost:3000 進入首頁。
-## 爬蟲
+### 爬蟲
 若需重新抓取官網賽程資訊，請執行crawler.js腳本
 ```
 node ./crawler/crawler.js
@@ -119,7 +119,7 @@ npx sequelize db:seed --name 20230117111427-matches-seed-file
 ```
 
 
-# 開發環境與工具
+## 開發環境與工具
 + [Visual Studio Code](https://visualstudio.microsoft.com/zh-hant/)
 + [Node.js](https://nodejs.org/en/)
 + [Express](https://www.npmjs.com/package/express)
@@ -141,6 +141,6 @@ npx sequelize db:seed --name 20230117111427-matches-seed-file
 + [express-session](https://www.npmjs.com/package/express-session)
 
 
-# 開發人員
+## 開發人員
 + [CK](https://github.com/Gincoolwant)
 + E-Mail： soulbox790326@gmail.com
