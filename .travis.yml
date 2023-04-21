@@ -1,0 +1,36 @@
+language: node_js
+
+node_js:
+  - "14"
+
+services:
+  - mysql
+  - docker
+
+env:
+  - NODE_ENV=travis
+
+before_install:
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS plus_league_test default character set utf8mb4 collate utf8mb4_unicode_ci;'
+  # - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  # - docker login --username=_ --password=$HEROKU_TOKEN registry.heroku.com
+
+install:
+  - npm install
+
+before_script:
+  - sequelize db:migrate
+
+script:
+  - npm run test
+  # - docker build -t $DOCKER_USERNAME/$DOCKER_REPO .
+  # - docker tag $DOCKER_USERNAME/$DOCK_REPO registry.heroku.com/$HEROKU_APP_NAME/web
+
+# deploy:
+#   provider: script
+#   script: 
+#     docker push $DOCKER_USERNAME/$DOCKER_REPO;
+#     docker push registry.heroku.com/$HEROKU_APP_NAME/web;
+#     heroku container:release web --app $HEROKU_APP_NAME
+#   on:
+#     branch: main
