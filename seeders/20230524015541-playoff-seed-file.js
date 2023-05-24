@@ -1,5 +1,5 @@
 'use strict'
-let matches = require('../regular-season.json')
+let matches = require('../crawler/playoffs.json')
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
@@ -7,7 +7,7 @@ module.exports = {
       'SELECT id, team_id FROM Teams;',
       { type: queryInterface.sequelize.QueryTypes.SELECT })
     matches = matches.map(match => ({
-      type: 'regular',
+      type: 'playoffs',
       game_id: match.game_id,
       game_time: match.game_time,
       arena: match.arena,

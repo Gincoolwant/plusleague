@@ -9,8 +9,11 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      type: {
+        type: Sequelize.STRING
+      },
       game_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       game_time: {
         type: Sequelize.DATE

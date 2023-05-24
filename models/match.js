@@ -16,7 +16,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Match.init({
-    gameId: DataTypes.INTEGER,
+    type: DataTypes.STRING,
+    gameId: DataTypes.STRING,
     gameTime: DataTypes.DATE,
     arena: DataTypes.STRING,
     guestId: DataTypes.INTEGER,
