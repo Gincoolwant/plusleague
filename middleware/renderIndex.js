@@ -17,7 +17,7 @@ async function renderIndex (req, res, next) {
           ]
         },
         attributes: [
-          'game_id', 'game_time', 'arena',
+          'type', 'game_id', 'game_time', 'arena',
           [sequelize.literal('(SELECT logo FROM Teams WHERE Teams.id = Match.guest_id)'), 'g_logo'],
           [sequelize.literal('(SELECT name FROM Teams WHERE Teams.id = Match.guest_id)'), 'g_name'],
           [sequelize.literal('(SELECT logo FROM Teams WHERE Teams.id = Match.home_id)'), 'h_logo'],

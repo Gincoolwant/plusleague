@@ -12,7 +12,7 @@ router.get('/schedule/:game_id', checkOauth, (req, res, next) => {
   return Match.findOne({
     where: { gameId: req.params.game_id },
     attributes: [
-      'game_id', 'game_time', 'arena',
+      'type', 'game_id', 'game_time', 'arena',
       [sequelize.literal('(SELECT logo FROM Teams WHERE Teams.id = Match.guest_id)'), 'g_logo'],
       [sequelize.literal('(SELECT name FROM Teams WHERE Teams.id = Match.guest_id)'), 'g_name'],
       [sequelize.literal('(SELECT logo FROM Teams WHERE Teams.id = Match.home_id)'), 'h_logo'],
@@ -24,8 +24,8 @@ router.get('/schedule/:game_id', checkOauth, (req, res, next) => {
       const startTime = dayjs(match.game_time).format()
       const endTime = dayjs(match.game_time).add(2, 'hour').format()
       req.event = {
-        summary: `G${match.game_id}${match.g_name} vs ${match.h_name}`,
-        description: `賽事編號G${match.game_id} @ ${match.arena}`,
+        summary: `${match.game_id}${match.g_name} vs ${match.h_name}`,
+        description: `${match.type} - 賽事編號${match.game_id} @ ${match.arena}`,
         start: {
           dateTime: `${startTime}`,
           timeZone: 'Asia/Taipei'

@@ -7,7 +7,7 @@ module.exports = {
       'SELECT id, team_id FROM Teams;',
       { type: queryInterface.sequelize.QueryTypes.SELECT })
     matches = matches.map(match => ({
-      type: 'playoffs',
+      type: match.type,
       game_id: match.game_id,
       game_time: match.game_time,
       arena: match.arena,

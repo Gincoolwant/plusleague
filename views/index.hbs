@@ -29,7 +29,9 @@
   <div class="col-sm-6 col-md-6 col-lg-3">
     <div class="card mb-4 shadow-sm">
       <div class="card-body">
-        <span class="float-end badge bg-secondary">G{{this.game_id}}</span>
+        <span class="float-end badge {{#ifCond this.type 'PLAYOFFS'}}bg-primary{{else}}bg-secondary{{/ifCond}}">
+          {{this.type}}<br>{{this.game_id}}
+        </span>
         <h5 class="card-title fw-bolder">{{parseDate this.game_time}} ({{parseDay this.game_time}})</h5>
         <h6 class="card-subtitle mb-2 fw-bold text-muted">{{parseTime this.game_time}}</h6>
         <div class="text-center d-flex justify-content-center align-items-center mb-3">

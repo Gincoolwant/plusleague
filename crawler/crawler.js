@@ -37,38 +37,8 @@ async function crawlMatches (url, fileName) {
     const $ = cheerio.load(html)
     const matches = $('.match_row').map((index, el) => {
       const result = {
-        id: $(el).find('.fs14.mb-2').text(),
-        date: $(el).find('.match_row_datetime').find('h5').eq(0).text(),
-        day: $(el).find('.match_row_datetime').find('h5').eq(1).text(),
-        time: $(el).find('.match_row_datetime').find('h6').text(),
-        arena: $(el).find('.fs12.mb-0').text(),
-        guest: {
-          logo: $(el).find('.px-0').eq(0).find('img').attr('src'),
-          name: $(el).find('.px-0').eq(0).find('.PC_only.fs14').text(),
-          englishName: $(el).find('.px-0').eq(0).find('.fs12.PC_only').eq(1).text()
-        },
-        home: {
-          logo: $(el).find('.px-0').eq(2).find('img').attr('src'),
-          name: $(el).find('.px-0').eq(2).find('.PC_only.fs14').text(),
-          englishName: $(el).find('.px-0').eq(2).find('.fs12.PC_only').eq(1).text()
-        }
-      }
-      return result
-    }).get()
-    writeFile(matches, fileName)
-  } catch (err) {
-    console.log(err)
-  }
-}
-
-async function crawlPlayoffs (url, fileName) {
-  try {
-    const response = await axios.get(url)
-    const html = response.data
-    const $ = cheerio.load(html)
-    const matches = $('.match_row').map((index, el) => {
-      const result = {
-        id: $(el).find('.fs14.mb-2').text().slice(-3),
+        type: fileName,
+        id: fileName === 'REGULAR' ? $(el).find('.fs14.mb-2').text() : $(el).find('.fs14.mb-2').text().slice(-3),
         date: $(el).find('.match_row_datetime').find('h5').eq(0).text(),
         day: $(el).find('.match_row_datetime').find('h5').eq(1).text(),
         time: $(el).find('.match_row_datetime').find('h6').text(),
@@ -94,6 +64,7 @@ async function crawlPlayoffs (url, fileName) {
 
 function writeFile (matches, fileName) {
   const matchList = matches.map(match => ({
+    type: match.type,
     game_id: match.id,
     game_time: parseGameTime(match),
     arena: match.arena,
@@ -101,10 +72,10 @@ function writeFile (matches, fileName) {
     home_id: parseTeamId(match.home.name)
   }))
 
-  fs.writeFileSync(fileName, JSON.stringify(matchList, 0, 2))
+  fs.writeFileSync(`${fileName}.json`, JSON.stringify(matchList, 0, 2))
 }
 
 const urlRegular = 'https://pleagueofficial.com/schedule-regular-season/2022-23'
 const urlPlayoffs = 'https://pleagueofficial.com/schedule-playoffs/2022-23'
-crawlMatches(urlRegular, 'regular-season.json')
-crawlPlayoffs(urlPlayoffs, 'playoffs.json')
+crawlMatches(urlRegular, 'REGULAR')
+crawlMatches(urlPlayoffs, 'PLAYOFFS')
