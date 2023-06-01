@@ -77,5 +77,7 @@ function writeFile (matches, fileName) {
 
 const urlRegular = 'https://pleagueofficial.com/schedule-regular-season/2022-23'
 const urlPlayoffs = 'https://pleagueofficial.com/schedule-playoffs/2022-23'
+const urlFinals = 'https://pleagueofficial.com/schedule-finals/2022-23'
 crawlMatches(urlRegular, 'REGULAR')
 crawlMatches(urlPlayoffs, 'PLAYOFFS')
+crawlMatches(urlFinals, 'FINALS')

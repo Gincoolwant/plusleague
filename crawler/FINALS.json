@@ -1,0 +1,58 @@
+[
+  {
+    "type": "FINALS",
+    "game_id": "SG1",
+    "game_time": "2023-06-03 09:00:00",
+    "arena": "新北市立新莊體育館",
+    "guest_id": 1,
+    "home_id": 6
+  },
+  {
+    "type": "FINALS",
+    "game_id": "SG2",
+    "game_time": "2023-06-05 11:00:00",
+    "arena": "新北市立新莊體育館",
+    "guest_id": 1,
+    "home_id": 6
+  },
+  {
+    "type": "FINALS",
+    "game_id": "SG3",
+    "game_time": "2023-06-08 11:00:00",
+    "arena": "臺北和平籃球館",
+    "guest_id": 6,
+    "home_id": 1
+  },
+  {
+    "type": "FINALS",
+    "game_id": "SG4",
+    "game_time": "2023-06-10 09:00:00",
+    "arena": "臺北和平籃球館",
+    "guest_id": 6,
+    "home_id": 1
+  },
+  {
+    "type": "FINALS",
+    "game_id": "SG5",
+    "game_time": "2023-06-12 11:00:00",
+    "arena": "新北市立新莊體育館",
+    "guest_id": 1,
+    "home_id": 6
+  },
+  {
+    "type": "FINALS",
+    "game_id": "SG6",
+    "game_time": "2023-06-14 11:00:00",
+    "arena": "臺北和平籃球館",
+    "guest_id": 6,
+    "home_id": 1
+  },
+  {
+    "type": "FINALS",
+    "game_id": "SG7",
+    "game_time": "2023-06-16 11:00:00",
+    "arena": "新北市立新莊體育館",
+    "guest_id": 1,
+    "home_id": 6
+  }
+]
