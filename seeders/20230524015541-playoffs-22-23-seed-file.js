@@ -1,5 +1,5 @@
 'use strict'
-let matches = require('../crawler/FINALS.json')
+let matches = require('../crawler/playoffs22-23.json')
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {

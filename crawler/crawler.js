@@ -3,11 +3,12 @@ const cheerio = require('cheerio')
 const dayjs = require('dayjs')
 const utc = require('dayjs/plugin/utc')
 const fs = require('fs')
+const path = require('path')
 dayjs.extend(utc)
 
 function parseGameTime (match) {
-  const gameTime = dayjs(`2022/${match.date} ${match.time}`, 'YYYY/MM/DD HH:mm')
-  if (gameTime.isBefore('2022-10-01')) {
+  const gameTime = dayjs(`2023/${match.date} ${match.time}`, 'YYYY/MM/DD HH:mm')
+  if (gameTime.isBefore('2023-10-01')) {
     return gameTime.add(1, 'year').utc().format('YYYY-MM-DD HH:mm:ss')
   }
   return gameTime.utc().format('YYYY-MM-DD HH:mm:ss')
@@ -72,12 +73,13 @@ function writeFile (matches, fileName) {
     home_id: parseTeamId(match.home.name)
   }))
 
-  fs.writeFileSync(`${fileName}.json`, JSON.stringify(matchList, 0, 2))
+  const directory = path.join(__dirname, `${fileName}.json`)
+  fs.writeFileSync(directory, JSON.stringify(matchList, 0, 2))
 }
 
-const urlRegular = 'https://pleagueofficial.com/schedule-regular-season/2022-23'
-const urlPlayoffs = 'https://pleagueofficial.com/schedule-playoffs/2022-23'
-const urlFinals = 'https://pleagueofficial.com/schedule-finals/2022-23'
-crawlMatches(urlRegular, 'REGULAR')
-crawlMatches(urlPlayoffs, 'PLAYOFFS')
-crawlMatches(urlFinals, 'FINALS')
+const urlRegular = 'https://pleagueofficial.com/schedule-regular-season/2023-24'
+// const urlPlayoffs = 'https://pleagueofficial.com/schedule-playoffs/2022-23'
+// const urlFinals = 'https://pleagueofficial.com/schedule-finals/2022-23'
+crawlMatches(urlRegular, 'regular23-24')
+// crawlMatches(urlPlayoffs, 'PLAYOFFS')
+// crawlMatches(urlFinals, 'FINALS')
