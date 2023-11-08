@@ -54,7 +54,7 @@ router.get('/schedule/:type/:game_id', checkOauth, (req, res, next) => {
 })
 
 router.get('/google/callback', updateToken, (req, res) => {
-  res.redirect(`/auth/schedule/${req.gameId}`)
+  res.redirect(`/auth/schedule/${req.type}/${req.gameId}`)
 })
 
 module.exports = router

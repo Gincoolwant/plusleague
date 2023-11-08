@@ -28,6 +28,7 @@ const checkOauth = async (req, res, next) => {
   }
   const data = {
     userId: req.user.id,
+    type: req.params.type,
     gameId: req.params.game_id
   }
   const state = jwt.sign(data, process.env.GOOGLE_CLIENT_SECRET, { expiresIn: '1m' })
