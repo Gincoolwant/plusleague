@@ -67,8 +67,11 @@ const insertEvent = (req, res, next) => {
     calendarId: 'primary',
     resource: req.event
   })
-    .then(() => {
-      next()
+    .then((event) => {
+      if (event.data.status === 'confirmed') {
+        req.event.htmlLink = event.data.htmlLink
+        next()
+      }
     })
     .catch(err => console.log(err))
 }

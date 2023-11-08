@@ -8,9 +8,12 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
 
-router.get('/schedule/:game_id', checkOauth, (req, res, next) => {
+router.get('/schedule/:type/:game_id', checkOauth, (req, res, next) => {
   return Match.findOne({
-    where: { gameId: req.params.game_id },
+    where: {
+      type: req.params.type,
+      gameId: req.params.game_id
+    },
     attributes: [
       'type', 'game_id', 'game_time', 'arena',
       [sequelize.literal('(SELECT logo FROM Teams WHERE Teams.id = Match.guest_id)'), 'g_logo'],
@@ -45,7 +48,8 @@ router.get('/schedule/:game_id', checkOauth, (req, res, next) => {
     })
     .catch(err => console.log(err))
 }, insertEvent, (req, res) => {
-  req.flash('success_messages', '已成功加入您的行事曆。')
+  req.flash('success_messages', `${req.event.summary}，已成功加入您的行事曆。`)
+  req.flash('event_link', `${req.event.htmlLink}`)
   res.redirect('/')
 })
 
