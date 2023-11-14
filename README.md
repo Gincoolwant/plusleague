@@ -1,5 +1,5 @@
 # P+報哩災
-## 網站入口：[P+報哩災](https://visualstudio.microsoft.com/zh-hant/)
+## 網站入口：[P+報哩災](https://plusleague.herokuapp.com/)
 ![cover](./public/README-images/cover.png)
 P+報哩災為使用Node.js、Express、Handlebars、MySQL打造的1人全端專案，提供國內職籃Plus League賽程資訊，會員可將賽程加入個人google行事曆，並提供後台提供上下架對戰服務。
 
