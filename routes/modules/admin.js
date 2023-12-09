@@ -8,7 +8,7 @@ router.get('/matches', (req, res) => {
   return Match.findAll({
     where: { gameTime: { [Op.gte]: dayjs() } },
     attributes: [
-      'game_id', 'game_time', 'arena',
+      'id', 'type', 'game_id', 'game_time', 'arena',
       [sequelize.literal('(SELECT logo FROM Teams WHERE Teams.id = Match.guest_id)'), 'g_logo'],
       [sequelize.literal('(SELECT name FROM Teams WHERE Teams.id = Match.guest_id)'), 'g_name'],
       [sequelize.literal('(SELECT logo FROM Teams WHERE Teams.id = Match.home_id)'), 'h_logo'],
@@ -35,26 +35,28 @@ router.get('/users', (req, res) => {
     .catch((err) => console.log(err))
 })
 
-router.delete('/matches/:game_id', (req, res) => {
+router.delete('/matches/:match_id', (req, res) => {
   return Match.findOne({
-    where: { gameId: req.params.game_id }
+    where: { id: req.params.match_id }
   })
     .then(match => match.destroy())
     .then(match => {
-      req.flash('error_messages', `G${match.toJSON().gameId}已成功下架。`)
+      req.flash('error_messages', `${match.toJSON().gameId}已成功下架。`)
       res.redirect('/admin/matches')
     })
     .catch((err) => console.log(err))
 })
 
-router.patch('/matches/:game_id', (req, res) => {
+router.patch('/matches/:match_id', (req, res) => {
+  console.log(req.params.match_id)
   return Match.findOne({
-    where: { gameId: req.params.game_id },
+    where: { id: req.params.match_id },
     paranoid: false
   })
     .then(match => match.restore())
     .then(match => {
-      req.flash('success_messages', `G${match.toJSON().gameId}已成功上架。`)
+      console.log(match.toJSON())
+      req.flash('success_messages', `${match.toJSON().gameId}已成功上架。`)
       res.redirect('/admin/matches')
     })
     .catch((err) => console.log(err))

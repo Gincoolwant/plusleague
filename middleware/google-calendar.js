@@ -8,7 +8,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 const checkJwtAccessToken = (req, res, next) => {
-  if (!req.jwt.accessToken) {
+  if (!req.jwt?.accessToken && !req.user?.gToken) {
     return res.redirect('/auth/google')
   }
   next()
@@ -38,7 +38,8 @@ const coverToCalendarFormat = (req, res, next) => {
 
 const insertCalendarEvent = (req, res, next) => {
   const accessToken = req.jwt.accessToken
-  const refreshToken = req.jwt.gToken
+  const refreshToken = req.jwt.gToken || req.user.gToken
+
   const oauth2Client = new google.auth.OAuth2(
     process.env.GOOGLE_CLIENT_ID,
     process.env.GOOGLE_CLIENT_SECRET,

@@ -6,7 +6,15 @@
   <div class="col-md-4 col-lg-3">
     <div class="card mb-4 shadow-sm">
       <div class="card-body">
-        <span class="float-end badge bg-secondary">G{{this.game_id}}</span>
+        <span class="float-end badge
+                {{#ifCond this.type 'FINALS'}}bg-warning text-danger
+                {{else}}
+                  {{#ifCond this.type 'PLAYOFFS'}}bg-primary
+                    {{else}}bg-secondary
+                  {{/ifCond}}
+                {{/ifCond}}">
+          {{this.type}}<br>{{this.game_id}}
+        </span>
         <h5 class="card-title fw-bolder">{{parseDate this.game_time}} ({{parseDay this.game_time}})</h5>
         <h6 class="card-subtitle mb-2 fw-bold text-muted">{{parseTime this.game_time}}</h6>
         <div class="text-center d-flex justify-content-center align-items-center mb-3">
@@ -26,13 +34,13 @@
             class="text-muted">{{this.arena}}</span></div>
         <br>
         {{#if this.deleted_at}}
-        <form action="/admin/matches/{{this.game_id}}?_method=patch" method="post">
+        <form action="/admin/matches/{{this.id}}?_method=patch" method="post">
           <button type="submit" class="mt-1 btn btn-success">
             上架比賽
           </button>
         </form>
         {{else}}
-        <form action="/admin/matches/{{this.game_id}}?_method=delete" method="post">
+        <form action="/admin/matches/{{this.id}}?_method=delete" method="post">
           <button type="submit" class="mt-1 btn btn-danger">
             下架比賽
           </button>

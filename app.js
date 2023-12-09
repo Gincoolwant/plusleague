@@ -28,6 +28,7 @@ app.use((req, res, next) => {
   res.locals.error_messages = req.flash('error_messages')
   res.locals.warning_messages = req.flash('warning_messages')
   res.locals.event_link = req.flash('event_link')
+  res.locals.insertCalendar_success_messages = req.flash('insertCalendar_success_messages')
   res.locals.user = req.user
   next()
 })

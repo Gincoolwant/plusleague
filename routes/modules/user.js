@@ -8,13 +8,17 @@ const { authenticated } = require('../../middleware/auth')
 
 const router = express.Router()
 
+// login頁面
 router.get('/login', (req, res) => {
   res.render('login')
 })
 
+// 驗證login資訊
 router.post('/login', passport.authenticate('local', { failureRedirect: '/users/login' }), (req, res) => {
+  // 通過驗證，製作jwt token並存到browser cookie
   const userData = req.user.toJSON()
   delete userData.password
+  delete userData.gToken
   const userDataToken = jwt.sign(userData, process.env.JWT_SECRET, { expiresIn: '15m' })
   res.cookie('pleagueJWT', userDataToken, { maxAge: 30 * 60 * 1000, httpOnly: true, signed: true })
   res.redirect('/')
