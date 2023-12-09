@@ -33,7 +33,7 @@ P+報哩災為使用Node.js、Express、Handlebars、MySQL打造的1人全端專
 ```
 ### 後台(前台僅有瀏覽權限)
 ```
-帳號: root@example.com
+帳號: admin@example.com
 密碼: 123
 ```
 
