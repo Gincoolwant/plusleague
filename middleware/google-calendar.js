@@ -1,68 +1,73 @@
 const { google } = require('googleapis')
-const { User } = require('../models')
-const jwt = require('jsonwebtoken')
-const scopes = [
-  'https://www.googleapis.com/auth/calendar'
-]
+const dayjs = require('dayjs')
+
+const { Match, sequelize } = require('../models')
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
 
-const oauth2Client = new google.auth.OAuth2(
-  process.env.GOOGLE_CLIENT_ID,
-  process.env.GOOGLE_CLIENT_SECRET,
-  process.env.GOOGLE_REDIRECT_URL
-)
+const checkJwtAccessToken = (req, res, next) => {
+  if (!req.jwt.accessToken) {
+    return res.redirect('/auth/google')
+  }
+  next()
+}
 
-const checkOauth = async (req, res, next) => {
-  if (req.user.gToken) {
-    const gToken = jwt.verify(req.user.gToken, process.env.GOOGLE_CLIENT_SECRET)
-    delete gToken.iat
-    oauth2Client.setCredentials(gToken)
-    if (oauth2Client.isTokenExpiring()) {
-      await oauth2Client.refreshAccessToken()
-      return next()
-    }
-    return next()
-  }
-  const data = {
-    userId: req.user.id,
-    type: req.params.type,
-    gameId: req.params.game_id
-  }
-  const state = jwt.sign(data, process.env.GOOGLE_CLIENT_SECRET, { expiresIn: '1m' })
-  const url = oauth2Client.generateAuthUrl({
-    access_type: 'offline',
-    prompt: 'consent',
-    scope: scopes,
-    state
+const coverToCalendarFormat = (req, res, next) => {
+  return Match.findOne({
+    where: {
+      type: req.params.type,
+      gameId: req.params.game_id
+    },
+    attributes: [
+      'type', 'game_id', 'game_time', 'arena',
+      [sequelize.literal('(SELECT logo FROM Teams WHERE Teams.id = Match.guest_id)'), 'g_logo'],
+      [sequelize.literal('(SELECT name FROM Teams WHERE Teams.id = Match.guest_id)'), 'g_name'],
+      [sequelize.literal('(SELECT logo FROM Teams WHERE Teams.id = Match.home_id)'), 'h_logo'],
+      [sequelize.literal('(SELECT name FROM Teams WHERE Teams.id = Match.home_id)'), 'h_name']
+    ],
+    raw: true
   })
-  res.redirect(url)
-}
-
-const updateToken = async (req, res, next) => {
-  const data = jwt.verify(req.query.state, process.env.GOOGLE_CLIENT_SECRET)
-  req.gameId = data.gameId
-  const { tokens } = await oauth2Client.getToken(req.query.code)
-  console.log(tokens)
-  const gToken = jwt.sign(tokens, process.env.GOOGLE_CLIENT_SECRET)
-  try {
-    await User.update(
-      { gToken },
-      {
-        where: {
-          id: data.userId
+    .then(match => {
+      const startTime = dayjs(match.game_time).format()
+      const endTime = dayjs(match.game_time).add(2, 'hour').format()
+      req.event = {
+        summary: `${match.game_id}${match.g_name} vs ${match.h_name}`,
+        description: `${match.type} - 賽事編號${match.game_id} @ ${match.arena}`,
+        start: {
+          dateTime: `${startTime}`,
+          timeZone: 'Asia/Taipei'
         },
-        raw: true
-      })
-    next()
-  } catch (err) {
-    console.log(err)
-  }
+        end: {
+          dateTime: `${endTime}`,
+          timeZone: 'Asia/Taipei'
+        },
+        reminders: {
+          useDefault: false,
+          overrides: [
+            { method: 'popup', minutes: 120 }
+          ]
+        }
+      }
+      next()
+    })
+    .catch(err => console.log(err))
 }
 
-const insertEvent = (req, res, next) => {
+const insertCalendarEvent = (req, res, next) => {
+  const accessToken = req.jwt.accessToken
+  const refreshToken = req.jwt.gToken
+  const oauth2Client = new google.auth.OAuth2(
+    process.env.GOOGLE_CLIENT_ID,
+    process.env.GOOGLE_CLIENT_SECRET,
+    process.env.GOOGLE_REDIRECT_URL
+  )
+
+  oauth2Client.setCredentials({
+    access_token: accessToken,
+    refresh_token: refreshToken
+  })
   const calendar = google.calendar({ version: 'v3', auth: oauth2Client })
   return calendar.events.insert({
     calendarId: 'primary',
@@ -78,7 +83,7 @@ const insertEvent = (req, res, next) => {
 }
 
 module.exports = {
-  checkOauth,
-  updateToken,
-  insertEvent
+  checkJwtAccessToken,
+  coverToCalendarFormat,
+  insertCalendarEvent
 }

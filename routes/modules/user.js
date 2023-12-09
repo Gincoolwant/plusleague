@@ -1,10 +1,12 @@
 const express = require('express')
-const router = express.Router()
-const { User } = require('../../models')
 const passport = require('passport')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+
+const { User } = require('../../models')
 const { authenticated } = require('../../middleware/auth')
+
+const router = express.Router()
 
 router.get('/login', (req, res) => {
   res.render('login')
@@ -13,8 +15,8 @@ router.get('/login', (req, res) => {
 router.post('/login', passport.authenticate('local', { failureRedirect: '/users/login' }), (req, res) => {
   const userData = req.user.toJSON()
   delete userData.password
-  const token = jwt.sign(userData, process.env.JWT_SECRET, { expiresIn: '1d' })
-  res.cookie('jwt', token, { maxAge: 15 * 60 * 1000, httpOnly: true, signed: true })
+  const userDataToken = jwt.sign(userData, process.env.JWT_SECRET, { expiresIn: '15m' })
+  res.cookie('pleagueJWT', userDataToken, { maxAge: 30 * 60 * 1000, httpOnly: true, signed: true })
   res.redirect('/')
 })
 
@@ -64,7 +66,7 @@ router.post('/register', (req, res) => {
 })
 
 router.get('/logout', (req, res) => {
-  res.clearCookie('jwt')
+  res.clearCookie('pleagueJWT')
   req.logout((err) => {
     if (err) console.log(err)
     req.flash('success_msg', '你已成功登出。')

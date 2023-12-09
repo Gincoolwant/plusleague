@@ -10,7 +10,7 @@ const authenticated = (req, res, next) => {
       req.flash('warning_messages', '請登入使用。')
       return res.status(401).redirect('/users/login')
     }
-    req.user = user
+    req.jwt = user
     next()
   })(req, res, next)
 }

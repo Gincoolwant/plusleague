@@ -1,8 +1,10 @@
 const passport = require('passport')
 const LocalStrategy = require('passport-local')
-const { User } = require('../models')
-const bcrypt = require('bcryptjs')
+const GoogleStrategy = require('passport-google-oauth20').Strategy
 const JwtStrategy = require('passport-jwt').Strategy
+const bcrypt = require('bcryptjs')
+
+const { User } = require('../models')
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
@@ -39,10 +41,24 @@ module.exports = app => {
   }
 
   passport.use(new JwtStrategy(jwtOptions, (jwtPayload, cb) => {
-    User.findByPk(jwtPayload.id)
-      .then(user => cb(null, user.toJSON()))
-      .catch(err => cb(err))
+    return cb(null, jwtPayload)
   }))
+
+  passport.use(new GoogleStrategy({
+    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    callbackURL: process.env.GOOGLE_REDIRECT_URL
+  },
+  (accessToken, refreshToken, profile, cb) => {
+    const personalInformation = profile._json
+    const googleInformation = {
+      accessToken,
+      refreshToken,
+      personalInformation
+    }
+    return cb(null, googleInformation)
+  }
+  ))
 
   passport.serializeUser((user, done) => {
     return done(null, user.id)
@@ -58,7 +74,7 @@ module.exports = app => {
 const cookieExtractor = (req) => {
   let token = null
   if (req?.signedCookies) {
-    token = req.signedCookies.jwt
+    token = req.signedCookies.pleagueJWT
   }
   return token
 }
