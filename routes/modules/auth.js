@@ -25,7 +25,7 @@ router.get('/google/callback', passport.authenticate('google', { session: false,
   const refreshToken = req.user.refreshToken
   const accessToken = req.user.accessToken
 
-  return User.update({ gToken: refreshToken }, {
+  User.update({ gToken: refreshToken }, {
     where: {
       id: req.jwt.id
     }
@@ -34,7 +34,9 @@ router.get('/google/callback', passport.authenticate('google', { session: false,
       return User.findByPk(req.jwt.id, { raw: true })
     })
     .then(user => {
+      console.log(user)
       delete user.password
+      delete user.gToken
       const userData = {
         ...user,
         accessToken
