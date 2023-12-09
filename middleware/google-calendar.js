@@ -1,7 +1,7 @@
 const { google } = require('googleapis')
-const dayjs = require('dayjs')
 
 const { Match, sequelize } = require('../models')
+const { matchFormater } = require('../helpers/matchFormat')
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
@@ -30,26 +30,7 @@ const coverToCalendarFormat = (req, res, next) => {
     raw: true
   })
     .then(match => {
-      const startTime = dayjs(match.game_time).format()
-      const endTime = dayjs(match.game_time).add(2, 'hour').format()
-      req.event = {
-        summary: `${match.game_id}${match.g_name} vs ${match.h_name}`,
-        description: `${match.type} - 賽事編號${match.game_id} @ ${match.arena}`,
-        start: {
-          dateTime: `${startTime}`,
-          timeZone: 'Asia/Taipei'
-        },
-        end: {
-          dateTime: `${endTime}`,
-          timeZone: 'Asia/Taipei'
-        },
-        reminders: {
-          useDefault: false,
-          overrides: [
-            { method: 'popup', minutes: 120 }
-          ]
-        }
-      }
+      req.event = matchFormater(match)
       next()
     })
     .catch(err => console.log(err))
@@ -68,6 +49,7 @@ const insertCalendarEvent = (req, res, next) => {
     access_token: accessToken,
     refresh_token: refreshToken
   })
+
   const calendar = google.calendar({ version: 'v3', auth: oauth2Client })
   return calendar.events.insert({
     calendarId: 'primary',
