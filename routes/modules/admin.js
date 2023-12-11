@@ -20,7 +20,7 @@ router.get('/matches', (req, res) => {
     raw: true
   })
     .then(matches => {
-      res.render('admin', { matches })
+      res.render('admin/admin', { matches })
     })
     .catch((err) => console.log(err))
 })
