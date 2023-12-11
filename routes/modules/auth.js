@@ -10,7 +10,7 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
 
-router.get('/schedule/:type/:game_id', checkJwtAccessToken, coverToCalendarFormat, insertCalendarEvent, (req, res) => {
+router.post('/schedule/:type/:game_id', checkJwtAccessToken, coverToCalendarFormat, insertCalendarEvent, (req, res) => {
   req.flash('insertCalendar_success_messages', `${req.event.summary}，已成功加入您的行事曆。`)
   req.flash('event_link', `${req.event.htmlLink}`)
   res.redirect('/')
