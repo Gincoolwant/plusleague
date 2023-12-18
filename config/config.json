@@ -6,6 +6,13 @@
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
+    "docker": {
+    "username": "root",
+    "password": "secret",
+    "database": "plus_league",
+    "host": "db",
+    "dialect": "mysql"
+  },
   "test": {
     "username": "root",
     "password": "password",

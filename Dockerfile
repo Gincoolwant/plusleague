@@ -3,9 +3,9 @@ FROM node:14
 WORKDIR /app
 COPY package*.json ./
 
-RUN npm install
+RUN ["npm", "install"]
 COPY . .
 
 EXPOSE 3000
-
-CMD [ "npm", "start" ]
+COPY ./wait-for-it.sh /usr/wait-for-it.sh
+RUN ["chmod", "+x", "/usr/wait-for-it.sh"]
