@@ -14,9 +14,9 @@ services:
   db:
     image: "mysql:latest"
     environment:
-      - MYSQL_ROOT_PASSWORD=secret
+      - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
       - MYSQL_DATABASE=plus_league
-      - MYSQL_USER=ck
-      - MYSQL_PASSWORD=password
+      - MYSQL_USER=$MYSQL_USER
+      - MYSQL_PASSWORD=$MYSQL_PASSWORD
     volumes:
       - ./mysql:/var/lib/mysql

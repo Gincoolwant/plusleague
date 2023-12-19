@@ -109,7 +109,7 @@ npm run start
 
 成功連線時，終端機會看見訊息： `App is listening on port 3000!`，請開啟瀏覽器輸入網址 http://localhost:3000 進入首頁。
 ### 爬蟲
-若需重新抓取官網賽程資訊，請執行crawler.js腳本
+抓取官網賽程資訊，請執行crawler.js
 ```
 node ./crawler/crawler.js
 ```

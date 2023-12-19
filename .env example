@@ -4,3 +4,5 @@ GOOGLE_REDIRECT_URL = #google oauth2 redirect url
 SESSION_SECRET = #session secret for passport(local) authenticate
 JWT_SECRET = #your jwt secret for passport(jwt) authenticate
 PORT = #local port allowed, default:3000
+MYSQL_USERNAME = #your mysql username
+MYSQL_PASSWORD = #your mysql password

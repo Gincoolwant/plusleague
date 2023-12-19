@@ -81,5 +81,5 @@ const urlRegular = 'https://pleagueofficial.com/schedule-regular-season/2023-24'
 // const urlPlayoffs = 'https://pleagueofficial.com/schedule-playoffs/2022-23'
 // const urlFinals = 'https://pleagueofficial.com/schedule-finals/2022-23'
 crawlMatches(urlRegular, 'regular23-24')
-// crawlMatches(urlPlayoffs, 'PLAYOFFS')
-// crawlMatches(urlFinals, 'FINALS')
+// crawlMatches(urlPlayoffs, 'playoffs23-24')
+// crawlMatches(urlFinals, 'finals23-24')

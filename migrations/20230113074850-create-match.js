@@ -18,15 +18,6 @@ module.exports = {
       game_time: {
         type: Sequelize.DATE
       },
-      // date: {
-      //   type: Sequelize.STRING
-      // },
-      // time: {
-      //   type: Sequelize.STRING
-      // },
-      // day: {
-      //   type: Sequelize.STRING
-      // },
       arena: {
         type: Sequelize.STRING
       },

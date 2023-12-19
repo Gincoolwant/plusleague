@@ -1,0 +1,20 @@
+version: '3.8'
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      - NODE_ENV=docker
+    command: bash -c "/usr/wait-for-it.sh --timeout=0 db:3306 && npx sequelize db:migrate && npx sequelize db:seed:all && npm start"
+  db:
+    image: "mysql:latest"
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=plus_league
+    volumes:
+      - ./mysql:/var/lib/mysql

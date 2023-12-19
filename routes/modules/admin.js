@@ -48,14 +48,12 @@ router.delete('/matches/:match_id', (req, res) => {
 })
 
 router.patch('/matches/:match_id', (req, res) => {
-  console.log(req.params.match_id)
   return Match.findOne({
     where: { id: req.params.match_id },
     paranoid: false
   })
     .then(match => match.restore())
     .then(match => {
-      console.log(match.toJSON())
       req.flash('success_messages', `${match.toJSON().gameId}已成功上架。`)
       res.redirect('/admin/matches')
     })
