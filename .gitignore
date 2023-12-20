@@ -90,8 +90,6 @@ typings/
 # DynamoDB Local files
 .dynamodb/
 
-# docker volume for mysql
+# docker
 mysql
-
-# config
-.yml
+docker-compose.yml
