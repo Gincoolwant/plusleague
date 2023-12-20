@@ -1,3 +1,7 @@
+const dayjs = require('dayjs')
+const utc = require('dayjs/plugin/utc')
+dayjs.extend(utc)
+
 const { Team, Match } = require('../models')
 const request = require('supertest')
 const app = require('../app')
@@ -13,9 +17,9 @@ const mockTeamList = [
 ]
 
 const mockMatchList = [
-  { gameId: 1, type: 'REGULAR', gameTime: '2020-01-01 15:00:00', arena: '測試體育館1', guestId: mockTeamList[1].teamId, homeId: mockTeamList[0].teamId },
-  { gameId: 2, type: 'PLAYOFFS', gameTime: '2020-01-02 07:00:00', arena: '測試體育館2', guestId: mockTeamList[1].teamId, homeId: mockTeamList[0].teamId },
-  { gameId: 3, type: 'FINALS', gameTime: '2020-01-03 12:00:00', arena: '測試體育館1', guestId: mockTeamList[1].teamId, homeId: mockTeamList[0].teamId }
+  { gameId: 1, type: 'REGULAR', gameTime: dayjs('2020-01-01 15:00:00').utc().format('YYYY-MM-DD HH:mm:ss'), arena: '測試體育館1', guestId: mockTeamList[1].teamId, homeId: mockTeamList[0].teamId },
+  { gameId: 2, type: 'PLAYOFFS', gameTime: dayjs('2020-01-02 07:00:00').utc().format('YYYY-MM-DD HH:mm:ss'), arena: '測試體育館2', guestId: mockTeamList[1].teamId, homeId: mockTeamList[0].teamId },
+  { gameId: 3, type: 'FINALS', gameTime: dayjs('2020-01-03 12:00:00').utc().format('YYYY-MM-DD HH:mm:ss'), arena: '測試體育館1', guestId: mockTeamList[1].teamId, homeId: mockTeamList[0].teamId }
 ]
 
 describe('Index Router: Get index', () => {

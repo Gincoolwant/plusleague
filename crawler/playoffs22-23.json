@@ -1,56 +1,56 @@
 [
   {
-    "type": "PLAYOFFS",
+    "type": "playoffs22-23",
     "game_id": "AG1",
-    "game_time": "2023-05-19 11:00:00",
+    "game_time": "2024-05-19 19:00:00",
     "arena": "新北市立新莊體育館",
     "guest_id": 4,
     "home_id": 6
   },
   {
-    "type": "PLAYOFFS",
+    "type": "playoffs22-23",
     "game_id": "BG1",
-    "game_time": "2023-05-20 09:00:00",
+    "game_time": "2024-05-20 17:00:00",
     "arena": "臺北和平籃球館",
     "guest_id": 2,
     "home_id": 1
   },
   {
-    "type": "PLAYOFFS",
+    "type": "playoffs22-23",
     "game_id": "AG2",
-    "game_time": "2023-05-21 09:00:00",
+    "game_time": "2024-05-21 17:00:00",
     "arena": "新北市立新莊體育館",
     "guest_id": 4,
     "home_id": 6
   },
   {
-    "type": "PLAYOFFS",
+    "type": "playoffs22-23",
     "game_id": "BG2",
-    "game_time": "2023-05-22 11:00:00",
+    "game_time": "2024-05-22 19:00:00",
     "arena": "臺北和平籃球館",
     "guest_id": 2,
     "home_id": 1
   },
   {
-    "type": "PLAYOFFS",
+    "type": "playoffs22-23",
     "game_id": "AG3",
-    "game_time": "2023-05-25 11:00:00",
+    "game_time": "2024-05-25 19:00:00",
     "arena": "臺中洲際迷你蛋",
     "guest_id": 6,
     "home_id": 4
   },
   {
-    "type": "PLAYOFFS",
+    "type": "playoffs22-23",
     "game_id": "BG3",
-    "game_time": "2023-05-26 11:00:00",
+    "game_time": "2024-05-26 19:00:00",
     "arena": "桃園市立綜合體育館",
     "guest_id": 1,
     "home_id": 2
   },
   {
-    "type": "PLAYOFFS",
+    "type": "playoffs22-23",
     "game_id": "AG4",
-    "game_time": "2023-05-27 09:00:00",
+    "game_time": "2024-05-27 17:00:00",
     "arena": "臺中洲際迷你蛋",
     "guest_id": 6,
     "home_id": 4

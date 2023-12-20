@@ -2,7 +2,7 @@
   {
     "type": "regular23-24",
     "game_id": "G01",
-    "game_time": "2023-11-11 09:00:00",
+    "game_time": "2023-11-11 17:00:00",
     "arena": "臺北和平籃球館",
     "guest_id": 6,
     "home_id": 1
@@ -10,7 +10,7 @@
   {
     "type": "regular23-24",
     "game_id": "G02",
-    "game_time": "2023-11-12 09:00:00",
+    "game_time": "2023-11-12 17:00:00",
     "arena": "臺北和平籃球館",
     "guest_id": 5,
     "home_id": 1
@@ -18,7 +18,7 @@
   {
     "type": "regular23-24",
     "game_id": "G03",
-    "game_time": "2023-11-18 06:30:00",
+    "game_time": "2023-11-18 14:30:00",
     "arena": "彰化體育館",
     "guest_id": 5,
     "home_id": 4
@@ -26,7 +26,7 @@
   {
     "type": "regular23-24",
     "game_id": "G04",
-    "game_time": "2023-11-18 09:00:00",
+    "game_time": "2023-11-18 17:00:00",
     "arena": "新北市立新莊體育館",
     "guest_id": 3,
     "home_id": 6
@@ -34,7 +34,7 @@
   {
     "type": "regular23-24",
     "game_id": "G05",
-    "game_time": "2023-11-19 06:30:00",
+    "game_time": "2023-11-19 14:30:00",
     "arena": "彰化體育館",
     "guest_id": 1,
     "home_id": 4
@@ -42,7 +42,7 @@
   {
     "type": "regular23-24",
     "game_id": "G06",
-    "game_time": "2023-11-19 09:00:00",
+    "game_time": "2023-11-19 17:00:00",
     "arena": "新北市立新莊體育館",
     "guest_id": 2,
     "home_id": 6
@@ -50,7 +50,7 @@
   {
     "type": "regular23-24",
     "game_id": "G07",
-    "game_time": "2023-11-25 06:30:00",
+    "game_time": "2023-11-25 14:30:00",
     "arena": "新北市立新莊體育館",
     "guest_id": 2,
     "home_id": 6
@@ -58,7 +58,7 @@
   {
     "type": "regular23-24",
     "game_id": "G08",
-    "game_time": "2023-11-25 09:00:00",
+    "game_time": "2023-11-25 17:00:00",
     "arena": "新竹縣體育館",
     "guest_id": 4,
     "home_id": 3
@@ -66,7 +66,7 @@
   {
     "type": "regular23-24",
     "game_id": "G09",
-    "game_time": "2023-11-26 06:30:00",
+    "game_time": "2023-11-26 14:30:00",
     "arena": "新北市立新莊體育館",
     "guest_id": 5,
     "home_id": 6
@@ -74,7 +74,7 @@
   {
     "type": "regular23-24",
     "game_id": "G10",
-    "game_time": "2023-11-26 09:00:00",
+    "game_time": "2023-11-26 17:00:00",
     "arena": "新竹縣體育館",
     "guest_id": 1,
     "home_id": 3
@@ -82,7 +82,7 @@
   {
     "type": "regular23-24",
     "game_id": "G11",
-    "game_time": "2023-12-02 06:30:00",
+    "game_time": "2023-12-02 14:30:00",
     "arena": "臺中洲際迷你蛋",
     "guest_id": 1,
     "home_id": 4
@@ -90,7 +90,7 @@
   {
     "type": "regular23-24",
     "game_id": "G12",
-    "game_time": "2023-12-02 09:00:00",
+    "game_time": "2023-12-02 17:00:00",
     "arena": "高雄市鳳山體育館",
     "guest_id": 2,
     "home_id": 5
@@ -98,7 +98,7 @@
   {
     "type": "regular23-24",
     "game_id": "G13",
-    "game_time": "2023-12-03 06:30:00",
+    "game_time": "2023-12-03 14:30:00",
     "arena": "臺中洲際迷你蛋",
     "guest_id": 3,
     "home_id": 4
@@ -106,7 +106,7 @@
   {
     "type": "regular23-24",
     "game_id": "G14",
-    "game_time": "2023-12-03 09:00:00",
+    "game_time": "2023-12-03 17:00:00",
     "arena": "高雄市鳳山體育館",
     "guest_id": 6,
     "home_id": 5
@@ -114,7 +114,7 @@
   {
     "type": "regular23-24",
     "game_id": "G15",
-    "game_time": "2023-12-09 06:30:00",
+    "game_time": "2023-12-09 14:30:00",
     "arena": "高雄市鳳山體育館",
     "guest_id": 1,
     "home_id": 5
@@ -122,7 +122,7 @@
   {
     "type": "regular23-24",
     "game_id": "G16",
-    "game_time": "2023-12-09 09:00:00",
+    "game_time": "2023-12-09 17:00:00",
     "arena": "桃園市立綜合體育館",
     "guest_id": 6,
     "home_id": 2
@@ -130,7 +130,7 @@
   {
     "type": "regular23-24",
     "game_id": "G17",
-    "game_time": "2023-12-10 06:30:00",
+    "game_time": "2023-12-10 14:30:00",
     "arena": "高雄市鳳山體育館",
     "guest_id": 4,
     "home_id": 5
@@ -138,7 +138,7 @@
   {
     "type": "regular23-24",
     "game_id": "G18",
-    "game_time": "2023-12-10 09:00:00",
+    "game_time": "2023-12-10 17:00:00",
     "arena": "桃園市立綜合體育館",
     "guest_id": 3,
     "home_id": 2
@@ -146,7 +146,7 @@
   {
     "type": "regular23-24",
     "game_id": "G19",
-    "game_time": "2023-12-16 06:30:00",
+    "game_time": "2023-12-16 14:30:00",
     "arena": "桃園市立綜合體育館",
     "guest_id": 4,
     "home_id": 2
@@ -154,7 +154,7 @@
   {
     "type": "regular23-24",
     "game_id": "G20",
-    "game_time": "2023-12-16 09:00:00",
+    "game_time": "2023-12-16 17:00:00",
     "arena": "臺北和平籃球館",
     "guest_id": 5,
     "home_id": 1
@@ -162,7 +162,7 @@
   {
     "type": "regular23-24",
     "game_id": "G21",
-    "game_time": "2023-12-17 06:30:00",
+    "game_time": "2023-12-17 14:30:00",
     "arena": "桃園市立綜合體育館",
     "guest_id": 6,
     "home_id": 2
@@ -170,7 +170,7 @@
   {
     "type": "regular23-24",
     "game_id": "G22",
-    "game_time": "2023-12-17 09:00:00",
+    "game_time": "2023-12-17 17:00:00",
     "arena": "臺北和平籃球館",
     "guest_id": 3,
     "home_id": 1
@@ -178,7 +178,7 @@
   {
     "type": "regular23-24",
     "game_id": "G23",
-    "game_time": "2023-12-19 11:00:00",
+    "game_time": "2023-12-19 19:00:00",
     "arena": "桃園市立綜合體育館",
     "guest_id": 5,
     "home_id": 2
@@ -186,7 +186,7 @@
   {
     "type": "regular23-24",
     "game_id": "G24",
-    "game_time": "2023-12-22 11:00:00",
+    "game_time": "2023-12-22 19:00:00",
     "arena": "臺中洲際迷你蛋",
     "guest_id": 5,
     "home_id": 4
@@ -194,7 +194,7 @@
   {
     "type": "regular23-24",
     "game_id": "G25",
-    "game_time": "2023-12-23 06:30:00",
+    "game_time": "2023-12-23 14:30:00",
     "arena": "新北市立新莊體育館",
     "guest_id": 1,
     "home_id": 6
@@ -202,7 +202,7 @@
   {
     "type": "regular23-24",
     "game_id": "G26",
-    "game_time": "2023-12-23 09:00:00",
+    "game_time": "2023-12-23 17:00:00",
     "arena": "新竹縣體育館",
     "guest_id": 2,
     "home_id": 3
@@ -210,7 +210,7 @@
   {
     "type": "regular23-24",
     "game_id": "G27",
-    "game_time": "2023-12-24 06:30:00",
+    "game_time": "2023-12-24 14:30:00",
     "arena": "新北市立新莊體育館",
     "guest_id": 4,
     "home_id": 6
@@ -218,7 +218,7 @@
   {
     "type": "regular23-24",
     "game_id": "G28",
-    "game_time": "2023-12-24 09:00:00",
+    "game_time": "2023-12-24 17:00:00",
     "arena": "新竹縣體育館",
     "guest_id": 5,
     "home_id": 3
@@ -226,7 +226,7 @@
   {
     "type": "regular23-24",
     "game_id": "G29",
-    "game_time": "2023-12-30 06:30:00",
+    "game_time": "2023-12-30 14:30:00",
     "arena": "高雄市鳳山體育館",
     "guest_id": 2,
     "home_id": 5
@@ -234,7 +234,7 @@
   {
     "type": "regular23-24",
     "game_id": "G30",
-    "game_time": "2023-12-30 09:00:00",
+    "game_time": "2023-12-30 17:00:00",
     "arena": "新北市立新莊體育館",
     "guest_id": 3,
     "home_id": 6
@@ -242,7 +242,7 @@
   {
     "type": "regular23-24",
     "game_id": "G31",
-    "game_time": "2023-12-31 06:30:00",
+    "game_time": "2023-12-31 14:30:00",
     "arena": "高雄市鳳山體育館",
     "guest_id": 4,
     "home_id": 5
@@ -250,7 +250,7 @@
   {
     "type": "regular23-24",
     "game_id": "G32",
-    "game_time": "2023-12-31 09:00:00",
+    "game_time": "2023-12-31 17:00:00",
     "arena": "新北市立新莊體育館",
     "guest_id": 1,
     "home_id": 6
@@ -258,7 +258,7 @@
   {
     "type": "regular23-24",
     "game_id": "G33",
-    "game_time": "2024-01-06 06:30:00",
+    "game_time": "2024-01-06 14:30:00",
     "arena": "彰化體育館",
     "guest_id": 6,
     "home_id": 4
@@ -266,7 +266,7 @@
   {
     "type": "regular23-24",
     "game_id": "G34",
-    "game_time": "2024-01-06 09:00:00",
+    "game_time": "2024-01-06 17:00:00",
     "arena": "桃園市立綜合體育館",
     "guest_id": 5,
     "home_id": 2
@@ -274,7 +274,7 @@
   {
     "type": "regular23-24",
     "game_id": "G35",
-    "game_time": "2024-01-07 06:30:00",
+    "game_time": "2024-01-07 14:30:00",
     "arena": "彰化體育館",
     "guest_id": 3,
     "home_id": 4
@@ -282,7 +282,7 @@
   {
     "type": "regular23-24",
     "game_id": "G36",
-    "game_time": "2024-01-07 09:00:00",
+    "game_time": "2024-01-07 17:00:00",
     "arena": "桃園市立綜合體育館",
     "guest_id": 1,
     "home_id": 2
@@ -290,7 +290,7 @@
   {
     "type": "regular23-24",
     "game_id": "G37",
-    "game_time": "2024-01-09 06:30:00",
+    "game_time": "2024-01-09 19:00:00",
     "arena": "桃園市立綜合體育館",
     "guest_id": 1,
     "home_id": 2
@@ -298,7 +298,7 @@
   {
     "type": "regular23-24",
     "game_id": "G38",
-    "game_time": "2024-01-12 11:00:00",
+    "game_time": "2024-01-12 19:00:00",
     "arena": "新竹縣體育館",
     "guest_id": 6,
     "home_id": 3
@@ -306,7 +306,7 @@
   {
     "type": "regular23-24",
     "game_id": "G39",
-    "game_time": "2024-01-14 06:30:00",
+    "game_time": "2024-01-14 14:30:00",
     "arena": "桃園市立綜合體育館",
     "guest_id": 5,
     "home_id": 2
@@ -314,7 +314,7 @@
   {
     "type": "regular23-24",
     "game_id": "G40",
-    "game_time": "2024-01-14 09:00:00",
+    "game_time": "2024-01-14 17:00:00",
     "arena": "臺中洲際迷你蛋",
     "guest_id": 1,
     "home_id": 4
@@ -322,7 +322,7 @@
   {
     "type": "regular23-24",
     "game_id": "G41",
-    "game_time": "2024-01-16 11:00:00",
+    "game_time": "2024-01-16 19:00:00",
     "arena": "桃園市立綜合體育館",
     "guest_id": 3,
     "home_id": 2
@@ -330,7 +330,7 @@
   {
     "type": "regular23-24",
     "game_id": "G42",
-    "game_time": "2024-01-20 06:30:00",
+    "game_time": "2024-01-20 14:30:00",
     "arena": "新竹縣體育館",
     "guest_id": 1,
     "home_id": 3
@@ -338,7 +338,7 @@
   {
     "type": "regular23-24",
     "game_id": "G43",
-    "game_time": "2024-01-20 09:00:00",
+    "game_time": "2024-01-20 17:00:00",
     "arena": "新北市立新莊體育館",
     "guest_id": 4,
     "home_id": 6
@@ -346,7 +346,7 @@
   {
     "type": "regular23-24",
     "game_id": "G44",
-    "game_time": "2024-01-21 06:30:00",
+    "game_time": "2024-01-21 14:30:00",
     "arena": "新竹縣體育館",
     "guest_id": 2,
     "home_id": 3
@@ -354,7 +354,7 @@
   {
     "type": "regular23-24",
     "game_id": "G45",
-    "game_time": "2024-01-21 09:00:00",
+    "game_time": "2024-01-21 17:00:00",
     "arena": "新北市立新莊體育館",
     "guest_id": 5,
     "home_id": 6
@@ -362,7 +362,7 @@
   {
     "type": "regular23-24",
     "game_id": "G46",
-    "game_time": "2024-01-27 06:30:00",
+    "game_time": "2024-01-27 14:30:00",
     "arena": "高雄市鳳山體育館",
     "guest_id": 3,
     "home_id": 5
@@ -370,7 +370,7 @@
   {
     "type": "regular23-24",
     "game_id": "G47",
-    "game_time": "2024-01-27 09:00:00",
+    "game_time": "2024-01-27 17:00:00",
     "arena": "臺北和平籃球館",
     "guest_id": 4,
     "home_id": 1
@@ -378,7 +378,7 @@
   {
     "type": "regular23-24",
     "game_id": "G48",
-    "game_time": "2024-01-28 06:30:00",
+    "game_time": "2024-01-28 14:30:00",
     "arena": "高雄市鳳山體育館",
     "guest_id": 6,
     "home_id": 5
@@ -386,7 +386,7 @@
   {
     "type": "regular23-24",
     "game_id": "G49",
-    "game_time": "2024-01-28 09:00:00",
+    "game_time": "2024-01-28 17:00:00",
     "arena": "臺北和平籃球館",
     "guest_id": 2,
     "home_id": 1
@@ -394,7 +394,7 @@
   {
     "type": "regular23-24",
     "game_id": "G50",
-    "game_time": "2024-01-30 11:00:00",
+    "game_time": "2024-01-31 19:00:00",
     "arena": "臺北和平籃球館",
     "guest_id": 4,
     "home_id": 1
@@ -402,7 +402,7 @@
   {
     "type": "regular23-24",
     "game_id": "G51",
-    "game_time": "2024-02-03 06:30:00",
+    "game_time": "2024-02-03 14:30:00",
     "arena": "彰化體育館",
     "guest_id": 6,
     "home_id": 4
@@ -410,7 +410,7 @@
   {
     "type": "regular23-24",
     "game_id": "G52",
-    "game_time": "2024-02-03 09:00:00",
+    "game_time": "2024-02-03 17:00:00",
     "arena": "臺北和平籃球館",
     "guest_id": 5,
     "home_id": 1
@@ -418,7 +418,7 @@
   {
     "type": "regular23-24",
     "game_id": "G53",
-    "game_time": "2024-02-04 06:30:00",
+    "game_time": "2024-02-04 14:30:00",
     "arena": "彰化體育館",
     "guest_id": 2,
     "home_id": 4
@@ -426,7 +426,7 @@
   {
     "type": "regular23-24",
     "game_id": "G54",
-    "game_time": "2024-02-04 09:00:00",
+    "game_time": "2024-02-04 17:00:00",
     "arena": "臺北和平籃球館",
     "guest_id": 3,
     "home_id": 1
@@ -434,7 +434,7 @@
   {
     "type": "regular23-24",
     "game_id": "G55",
-    "game_time": "2024-02-06 11:00:00",
+    "game_time": "2024-02-06 19:00:00",
     "arena": "新北市立新莊體育館",
     "guest_id": 5,
     "home_id": 6
@@ -442,7 +442,7 @@
   {
     "type": "regular23-24",
     "game_id": "G56",
-    "game_time": "2024-02-16 11:00:00",
+    "game_time": "2024-02-16 19:00:00",
     "arena": "新北市立新莊體育館",
     "guest_id": 3,
     "home_id": 6
@@ -450,7 +450,7 @@
   {
     "type": "regular23-24",
     "game_id": "G57",
-    "game_time": "2024-02-17 09:00:00",
+    "game_time": "2024-02-17 17:00:00",
     "arena": "臺北和平籃球館",
     "guest_id": 4,
     "home_id": 1
@@ -458,7 +458,7 @@
   {
     "type": "regular23-24",
     "game_id": "G58",
-    "game_time": "2024-02-18 06:30:00",
+    "game_time": "2024-02-18 14:30:00",
     "arena": "新北市立新莊體育館",
     "guest_id": 2,
     "home_id": 6
@@ -466,7 +466,7 @@
   {
     "type": "regular23-24",
     "game_id": "G59",
-    "game_time": "2024-02-18 09:00:00",
+    "game_time": "2024-02-18 17:00:00",
     "arena": "臺北和平籃球館",
     "guest_id": 3,
     "home_id": 1
@@ -474,7 +474,7 @@
   {
     "type": "regular23-24",
     "game_id": "G60",
-    "game_time": "2024-02-27 11:00:00",
+    "game_time": "2024-02-27 19:00:00",
     "arena": "高雄市鳳山體育館",
     "guest_id": 1,
     "home_id": 5
@@ -482,7 +482,7 @@
   {
     "type": "regular23-24",
     "game_id": "G61",
-    "game_time": "2024-02-28 06:30:00",
+    "game_time": "2024-02-28 14:30:00",
     "arena": "新竹縣體育館",
     "guest_id": 6,
     "home_id": 3
@@ -490,7 +490,7 @@
   {
     "type": "regular23-24",
     "game_id": "G62",
-    "game_time": "2024-02-28 09:00:00",
+    "game_time": "2024-02-28 17:00:00",
     "arena": "桃園市立綜合體育館",
     "guest_id": 4,
     "home_id": 2
@@ -498,7 +498,7 @@
   {
     "type": "regular23-24",
     "game_id": "G63",
-    "game_time": "2024-03-02 06:30:00",
+    "game_time": "2024-03-02 14:30:00",
     "arena": "高雄市鳳山體育館",
     "guest_id": 3,
     "home_id": 5
@@ -506,7 +506,7 @@
   {
     "type": "regular23-24",
     "game_id": "G64",
-    "game_time": "2024-03-02 09:00:00",
+    "game_time": "2024-03-02 17:00:00",
     "arena": "桃園市立綜合體育館",
     "guest_id": 6,
     "home_id": 2
@@ -514,7 +514,7 @@
   {
     "type": "regular23-24",
     "game_id": "G65",
-    "game_time": "2024-03-03 06:30:00",
+    "game_time": "2024-03-03 14:30:00",
     "arena": "高雄市鳳山體育館",
     "guest_id": 4,
     "home_id": 5
@@ -522,7 +522,7 @@
   {
     "type": "regular23-24",
     "game_id": "G66",
-    "game_time": "2024-03-03 09:00:00",
+    "game_time": "2024-03-03 17:00:00",
     "arena": "桃園市立綜合體育館",
     "guest_id": 1,
     "home_id": 2
@@ -530,7 +530,7 @@
   {
     "type": "regular23-24",
     "game_id": "G67",
-    "game_time": "2024-03-09 06:30:00",
+    "game_time": "2024-03-09 14:30:00",
     "arena": "臺中洲際迷你蛋",
     "guest_id": 3,
     "home_id": 4
@@ -538,7 +538,7 @@
   {
     "type": "regular23-24",
     "game_id": "G68",
-    "game_time": "2024-03-10 06:30:00",
+    "game_time": "2024-03-10 14:30:00",
     "arena": "臺中洲際迷你蛋",
     "guest_id": 2,
     "home_id": 4
@@ -546,7 +546,7 @@
   {
     "type": "regular23-24",
     "game_id": "G69",
-    "game_time": "2024-03-16 06:30:00",
+    "game_time": "2024-03-16 14:30:00",
     "arena": "新竹縣體育館",
     "guest_id": 5,
     "home_id": 3
@@ -554,7 +554,7 @@
   {
     "type": "regular23-24",
     "game_id": "G70",
-    "game_time": "2024-03-16 09:00:00",
+    "game_time": "2024-03-16 17:00:00",
     "arena": "臺北和平籃球館",
     "guest_id": 2,
     "home_id": 1
@@ -562,7 +562,7 @@
   {
     "type": "regular23-24",
     "game_id": "G71",
-    "game_time": "2024-03-17 06:30:00",
+    "game_time": "2024-03-17 14:30:00",
     "arena": "新竹縣體育館",
     "guest_id": 4,
     "home_id": 3
@@ -570,7 +570,7 @@
   {
     "type": "regular23-24",
     "game_id": "G72",
-    "game_time": "2024-03-17 09:00:00",
+    "game_time": "2024-03-17 17:00:00",
     "arena": "臺北和平籃球館",
     "guest_id": 6,
     "home_id": 1
@@ -578,7 +578,7 @@
   {
     "type": "regular23-24",
     "game_id": "G73",
-    "game_time": "2024-03-19 11:00:00",
+    "game_time": "2024-03-19 19:00:00",
     "arena": "高雄市鳳山體育館",
     "guest_id": 2,
     "home_id": 5
@@ -586,7 +586,7 @@
   {
     "type": "regular23-24",
     "game_id": "G74",
-    "game_time": "2024-03-23 06:30:00",
+    "game_time": "2024-03-23 14:30:00",
     "arena": "桃園市立綜合體育館",
     "guest_id": 4,
     "home_id": 2
@@ -594,7 +594,7 @@
   {
     "type": "regular23-24",
     "game_id": "G75",
-    "game_time": "2024-03-23 09:00:00",
+    "game_time": "2024-03-23 17:00:00",
     "arena": "高雄市鳳山體育館",
     "guest_id": 6,
     "home_id": 5
@@ -602,7 +602,7 @@
   {
     "type": "regular23-24",
     "game_id": "G76",
-    "game_time": "2024-03-24 06:30:00",
+    "game_time": "2024-03-24 14:30:00",
     "arena": "桃園市立綜合體育館",
     "guest_id": 1,
     "home_id": 2
@@ -610,7 +610,7 @@
   {
     "type": "regular23-24",
     "game_id": "G77",
-    "game_time": "2024-03-24 09:00:00",
+    "game_time": "2024-03-24 17:00:00",
     "arena": "高雄市鳳山體育館",
     "guest_id": 3,
     "home_id": 5
@@ -618,7 +618,7 @@
   {
     "type": "regular23-24",
     "game_id": "G78",
-    "game_time": "2024-03-26 11:00:00",
+    "game_time": "2024-03-26 19:00:00",
     "arena": "新北市立新莊體育館",
     "guest_id": 4,
     "home_id": 6
@@ -626,7 +626,7 @@
   {
     "type": "regular23-24",
     "game_id": "G79",
-    "game_time": "2024-03-29 11:00:00",
+    "game_time": "2024-03-29 19:00:00",
     "arena": "臺中洲際迷你蛋",
     "guest_id": 5,
     "home_id": 4
@@ -634,7 +634,7 @@
   {
     "type": "regular23-24",
     "game_id": "G80",
-    "game_time": "2024-03-30 06:30:00",
+    "game_time": "2024-03-30 14:30:00",
     "arena": "桃園市立綜合體育館",
     "guest_id": 3,
     "home_id": 2
@@ -642,7 +642,7 @@
   {
     "type": "regular23-24",
     "game_id": "G81",
-    "game_time": "2024-03-30 09:00:00",
+    "game_time": "2024-03-30 17:00:00",
     "arena": "新北市立新莊體育館",
     "guest_id": 1,
     "home_id": 6
@@ -650,7 +650,7 @@
   {
     "type": "regular23-24",
     "game_id": "G82",
-    "game_time": "2024-03-31 06:30:00",
+    "game_time": "2024-03-31 14:30:00",
     "arena": "桃園市立綜合體育館",
     "guest_id": 5,
     "home_id": 2
@@ -658,7 +658,7 @@
   {
     "type": "regular23-24",
     "game_id": "G83",
-    "game_time": "2024-03-31 09:00:00",
+    "game_time": "2024-03-31 17:00:00",
     "arena": "新北市立新莊體育館",
     "guest_id": 4,
     "home_id": 6
@@ -666,7 +666,7 @@
   {
     "type": "regular23-24",
     "game_id": "G84",
-    "game_time": "2024-04-02 11:00:00",
+    "game_time": "2024-04-02 19:00:00",
     "arena": "臺北和平籃球館",
     "guest_id": 3,
     "home_id": 1
@@ -674,7 +674,7 @@
   {
     "type": "regular23-24",
     "game_id": "G85",
-    "game_time": "2024-04-05 09:00:00",
+    "game_time": "2024-04-05 17:00:00",
     "arena": "桃園市立綜合體育館",
     "guest_id": 4,
     "home_id": 2
@@ -682,7 +682,7 @@
   {
     "type": "regular23-24",
     "game_id": "G86",
-    "game_time": "2024-04-06 06:30:00",
+    "game_time": "2024-04-06 14:30:00",
     "arena": "新竹縣體育館",
     "guest_id": 5,
     "home_id": 3
@@ -690,7 +690,7 @@
   {
     "type": "regular23-24",
     "game_id": "G87",
-    "game_time": "2024-04-06 09:00:00",
+    "game_time": "2024-04-06 17:00:00",
     "arena": "臺北和平籃球館",
     "guest_id": 6,
     "home_id": 1
@@ -698,7 +698,7 @@
   {
     "type": "regular23-24",
     "game_id": "G88",
-    "game_time": "2024-04-07 06:30:00",
+    "game_time": "2024-04-07 14:30:00",
     "arena": "新竹縣體育館",
     "guest_id": 4,
     "home_id": 3
@@ -706,7 +706,7 @@
   {
     "type": "regular23-24",
     "game_id": "G89",
-    "game_time": "2024-04-07 09:00:00",
+    "game_time": "2024-04-07 17:00:00",
     "arena": "臺北和平籃球館",
     "guest_id": 2,
     "home_id": 1
@@ -714,7 +714,7 @@
   {
     "type": "regular23-24",
     "game_id": "G90",
-    "game_time": "2024-04-13 06:30:00",
+    "game_time": "2024-04-13 14:30:00",
     "arena": "彰化體育館",
     "guest_id": 6,
     "home_id": 4
@@ -722,7 +722,7 @@
   {
     "type": "regular23-24",
     "game_id": "G91",
-    "game_time": "2024-04-13 09:00:00",
+    "game_time": "2024-04-13 17:00:00",
     "arena": "高雄市鳳山體育館",
     "guest_id": 3,
     "home_id": 5
@@ -730,7 +730,7 @@
   {
     "type": "regular23-24",
     "game_id": "G92",
-    "game_time": "2024-04-14 06:30:00",
+    "game_time": "2024-04-14 14:30:00",
     "arena": "彰化體育館",
     "guest_id": 2,
     "home_id": 4
@@ -738,7 +738,7 @@
   {
     "type": "regular23-24",
     "game_id": "G93",
-    "game_time": "2024-04-14 09:00:00",
+    "game_time": "2024-04-14 17:00:00",
     "arena": "高雄市鳳山體育館",
     "guest_id": 1,
     "home_id": 5
@@ -746,7 +746,7 @@
   {
     "type": "regular23-24",
     "game_id": "G94",
-    "game_time": "2024-04-19 11:00:00",
+    "game_time": "2024-04-19 19:00:00",
     "arena": "臺中洲際迷你蛋",
     "guest_id": 6,
     "home_id": 4
@@ -754,7 +754,7 @@
   {
     "type": "regular23-24",
     "game_id": "G95",
-    "game_time": "2024-04-20 06:30:00",
+    "game_time": "2024-04-20 14:30:00",
     "arena": "高雄市鳳山體育館",
     "guest_id": 1,
     "home_id": 5
@@ -762,7 +762,7 @@
   {
     "type": "regular23-24",
     "game_id": "G96",
-    "game_time": "2024-04-20 09:00:00",
+    "game_time": "2024-04-20 17:00:00",
     "arena": "新竹縣體育館",
     "guest_id": 2,
     "home_id": 3
@@ -770,7 +770,7 @@
   {
     "type": "regular23-24",
     "game_id": "G97",
-    "game_time": "2024-04-21 06:30:00",
+    "game_time": "2024-04-21 14:30:00",
     "arena": "高雄市鳳山體育館",
     "guest_id": 4,
     "home_id": 5
@@ -778,7 +778,7 @@
   {
     "type": "regular23-24",
     "game_id": "G98",
-    "game_time": "2024-04-21 09:00:00",
+    "game_time": "2024-04-21 17:00:00",
     "arena": "新竹縣體育館",
     "guest_id": 6,
     "home_id": 3
@@ -786,7 +786,7 @@
   {
     "type": "regular23-24",
     "game_id": "G99",
-    "game_time": "2024-04-27 06:30:00",
+    "game_time": "2024-04-27 14:30:00",
     "arena": "臺中洲際迷你蛋",
     "guest_id": 3,
     "home_id": 4
@@ -794,7 +794,7 @@
   {
     "type": "regular23-24",
     "game_id": "100",
-    "game_time": "2024-04-27 09:00:00",
+    "game_time": "2024-04-27 17:00:00",
     "arena": "新北市立新莊體育館",
     "guest_id": 1,
     "home_id": 6
@@ -802,7 +802,7 @@
   {
     "type": "regular23-24",
     "game_id": "101",
-    "game_time": "2024-04-28 06:30:00",
+    "game_time": "2024-04-28 14:30:00",
     "arena": "臺中洲際迷你蛋",
     "guest_id": 5,
     "home_id": 4
@@ -810,7 +810,7 @@
   {
     "type": "regular23-24",
     "game_id": "102",
-    "game_time": "2024-04-28 09:00:00",
+    "game_time": "2024-04-28 17:00:00",
     "arena": "新北市立新莊體育館",
     "guest_id": 2,
     "home_id": 6
@@ -818,7 +818,7 @@
   {
     "type": "regular23-24",
     "game_id": "103",
-    "game_time": "2024-04-30 11:00:00",
+    "game_time": "2024-04-30 19:00:00",
     "arena": "新竹縣體育館",
     "guest_id": 1,
     "home_id": 3
@@ -826,7 +826,7 @@
   {
     "type": "regular23-24",
     "game_id": "104",
-    "game_time": "2024-05-01 09:00:00",
+    "game_time": "2024-05-01 17:00:00",
     "arena": "新竹縣體育館",
     "guest_id": 5,
     "home_id": 3
@@ -834,7 +834,7 @@
   {
     "type": "regular23-24",
     "game_id": "105",
-    "game_time": "2024-05-04 06:30:00",
+    "game_time": "2024-05-04 14:30:00",
     "arena": "新竹縣體育館",
     "guest_id": 6,
     "home_id": 3
@@ -842,7 +842,7 @@
   {
     "type": "regular23-24",
     "game_id": "106",
-    "game_time": "2024-05-04 09:00:00",
+    "game_time": "2024-05-04 17:00:00",
     "arena": "臺北和平籃球館",
     "guest_id": 5,
     "home_id": 1
@@ -850,7 +850,7 @@
   {
     "type": "regular23-24",
     "game_id": "107",
-    "game_time": "2024-05-05 06:30:00",
+    "game_time": "2024-05-05 14:30:00",
     "arena": "新竹縣體育館",
     "guest_id": 2,
     "home_id": 3
@@ -858,7 +858,7 @@
   {
     "type": "regular23-24",
     "game_id": "108",
-    "game_time": "2024-05-05 09:00:00",
+    "game_time": "2024-05-05 17:00:00",
     "arena": "臺北和平籃球館",
     "guest_id": 4,
     "home_id": 1
@@ -866,7 +866,7 @@
   {
     "type": "regular23-24",
     "game_id": "109",
-    "game_time": "2024-05-07 11:00:00",
+    "game_time": "2024-05-07 19:00:00",
     "arena": "臺北和平籃球館",
     "guest_id": 6,
     "home_id": 1
@@ -874,7 +874,7 @@
   {
     "type": "regular23-24",
     "game_id": "110",
-    "game_time": "2024-05-10 11:00:00",
+    "game_time": "2024-05-10 19:00:00",
     "arena": "桃園市立綜合體育館",
     "guest_id": 3,
     "home_id": 2
@@ -882,7 +882,7 @@
   {
     "type": "regular23-24",
     "game_id": "111",
-    "game_time": "2024-05-11 06:30:00",
+    "game_time": "2024-05-11 14:30:00",
     "arena": "彰化體育館",
     "guest_id": 1,
     "home_id": 4
@@ -890,7 +890,7 @@
   {
     "type": "regular23-24",
     "game_id": "112",
-    "game_time": "2024-05-11 09:00:00",
+    "game_time": "2024-05-11 17:00:00",
     "arena": "新北市立新莊體育館",
     "guest_id": 5,
     "home_id": 6
@@ -898,7 +898,7 @@
   {
     "type": "regular23-24",
     "game_id": "113",
-    "game_time": "2024-05-12 06:30:00",
+    "game_time": "2024-05-12 14:30:00",
     "arena": "彰化體育館",
     "guest_id": 2,
     "home_id": 4
@@ -906,7 +906,7 @@
   {
     "type": "regular23-24",
     "game_id": "114",
-    "game_time": "2024-05-12 09:00:00",
+    "game_time": "2024-05-12 17:00:00",
     "arena": "新北市立新莊體育館",
     "guest_id": 3,
     "home_id": 6
@@ -914,7 +914,7 @@
   {
     "type": "regular23-24",
     "game_id": "115",
-    "game_time": "2024-05-14 11:00:00",
+    "game_time": "2024-05-15 19:00:00",
     "arena": "桃園市立綜合體育館",
     "guest_id": 6,
     "home_id": 2
@@ -922,7 +922,7 @@
   {
     "type": "regular23-24",
     "game_id": "116",
-    "game_time": "2024-05-17 11:00:00",
+    "game_time": "2024-05-17 19:00:00",
     "arena": "臺北和平籃球館",
     "guest_id": 2,
     "home_id": 1
@@ -930,7 +930,7 @@
   {
     "type": "regular23-24",
     "game_id": "117",
-    "game_time": "2024-05-18 06:30:00",
+    "game_time": "2024-05-18 14:30:00",
     "arena": "高雄市鳳山體育館",
     "guest_id": 6,
     "home_id": 5
@@ -938,7 +938,7 @@
   {
     "type": "regular23-24",
     "game_id": "118",
-    "game_time": "2024-05-18 09:00:00",
+    "game_time": "2024-05-18 17:00:00",
     "arena": "新竹縣體育館",
     "guest_id": 4,
     "home_id": 3
@@ -946,7 +946,7 @@
   {
     "type": "regular23-24",
     "game_id": "119",
-    "game_time": "2024-05-19 06:30:00",
+    "game_time": "2024-05-19 14:30:00",
     "arena": "高雄市鳳山體育館",
     "guest_id": 2,
     "home_id": 5
@@ -954,7 +954,7 @@
   {
     "type": "regular23-24",
     "game_id": "120",
-    "game_time": "2024-05-19 09:00:00",
+    "game_time": "2024-05-19 17:00:00",
     "arena": "新竹縣體育館",
     "guest_id": 1,
     "home_id": 3

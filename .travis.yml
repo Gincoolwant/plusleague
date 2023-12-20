@@ -10,8 +10,8 @@ services:
 env:
   - NODE_ENV=test
 
-# before_install:
-  # - mysql -e 'CREATE DATABASE IF NOT EXISTS plus_league_test default character set utf8mb4 collate utf8mb4_unicode_ci;'
+before_install:
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS plus_league_test default character set utf8mb4 collate utf8mb4_unicode_ci;'
   # - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   # - docker login --username=_ --password=$HEROKU_TOKEN registry.heroku.com
 
