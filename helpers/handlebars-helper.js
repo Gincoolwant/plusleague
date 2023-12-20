@@ -10,7 +10,7 @@ dayjs.extend(timezone)
 module.exports = {
   currentYear: () => dayjs().year(),
   currentMonth: () => dayjs().month() + 1,
-  parseTimeFormat: (time) => dayjs(time).tz('Asia/Taipei').format('YYYY-MM-DD HH:mm:ss'),
+  utcTimeFormat: (time) => dayjs(time).utc().format(),
   parseDate: (time) => dayjs(time).tz('Asia/Taipei').format('MM/DD'),
   parseDay: (time) => dayjs(time).tz('Asia/Taipei').locale('zh-cn').format('dd'),
   parseTime: (time) => dayjs(time).tz('Asia/Taipei').format('HH:mm'),

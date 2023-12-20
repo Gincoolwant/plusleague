@@ -1,12 +1,14 @@
 const dayjs = require('dayjs')
 const utc = require('dayjs/plugin/utc')
+const timezone = require('dayjs/plugin/timezone')
 dayjs.extend(utc)
+dayjs.extend(timezone)
 
 const { Team, Match } = require('../models')
 const request = require('supertest')
 const app = require('../app')
 const db = require('../models')
-const { parseTimeFormat } = require('../helpers/handlebars-helper.js')
+const { utcTimeFormat } = require('../helpers/handlebars-helper.js')
 
 const SECONDS = 1000
 jest.setTimeout(70 * SECONDS)
@@ -17,9 +19,9 @@ const mockTeamList = [
 ]
 
 const mockMatchList = [
-  { gameId: 1, type: 'REGULAR', gameTime: dayjs('2020-01-01 15:00:00').utc().format('YYYY-MM-DD HH:mm:ss'), arena: '測試體育館1', guestId: mockTeamList[1].teamId, homeId: mockTeamList[0].teamId },
-  { gameId: 2, type: 'PLAYOFFS', gameTime: dayjs('2020-01-02 07:00:00').utc().format('YYYY-MM-DD HH:mm:ss'), arena: '測試體育館2', guestId: mockTeamList[1].teamId, homeId: mockTeamList[0].teamId },
-  { gameId: 3, type: 'FINALS', gameTime: dayjs('2020-01-03 12:00:00').utc().format('YYYY-MM-DD HH:mm:ss'), arena: '測試體育館1', guestId: mockTeamList[1].teamId, homeId: mockTeamList[0].teamId }
+  { gameId: 1, type: 'REGULAR', gameTime: utcTimeFormat('2020-01-01 15:00:00'), arena: '測試體育館1', guestId: mockTeamList[1].teamId, homeId: mockTeamList[0].teamId },
+  { gameId: 2, type: 'PLAYOFFS', gameTime: utcTimeFormat('2020-01-02 07:00:00'), arena: '測試體育館2', guestId: mockTeamList[1].teamId, homeId: mockTeamList[0].teamId },
+  { gameId: 3, type: 'FINALS', gameTime: utcTimeFormat('2020-01-03 12:00:00'), arena: '測試體育館1', guestId: mockTeamList[1].teamId, homeId: mockTeamList[0].teamId }
 ]
 
 describe('Index Router: Get index', () => {
@@ -60,7 +62,7 @@ describe('Index Router: Get index', () => {
       expect(matchList[i]).toHaveProperty('homeId', mockMatchList[i].homeId)
       expect(matchList[i]).toHaveProperty('type', mockMatchList[i].type)
       expect(matchList[i]).toHaveProperty('arena', mockMatchList[i].arena)
-      expect(parseTimeFormat(matchList[i].gameTime)).toBe(mockMatchList[i].gameTime)
+      expect(utcTimeFormat(matchList[i].gameTime)).toBe(mockMatchList[i].gameTime)
     }
   })
 
