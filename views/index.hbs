@@ -1,27 +1,36 @@
 {{#if user}}
 <form action="/" method="get">
   <div class="row g-3 align-items-center">
-    <div class="col">
-      <select class="form-select form-select-sm" aria-label="Default select example" name="searchTeamId">
-        <option value="" {{#unless teamFilter}}selected{{/unless}}>全部球隊</option>
+    <div class="col-2">
+      <select class="form-select form-select-sm" aria-label="select month" name="searchYearMonth" onchange="this.form.submit()">
+        <option value="" {{#unless searchYearMonth}}selected{{/unless}}>全部月份</option>
+        {{#each yearMonthCombs}}
+        <option value="{{this.year}}-{{this.month}}" {{#compareMonthYear ../searchYearMonth this.year this.month}}selected{{/compareMonthYear}}>{{this.year}}-{{this.month}}月</option>
+        {{/each}}
+      </select>
+    </div>
+    <div class="col-4">
+      <select class="form-select form-select-sm" aria-label="select team" name="searchTeamId" onchange="this.form.submit()">
+        <option value="" {{#unless searchTeamId}}selected{{/unless}}>全部球隊</option>
         {{#each teams}}
         <option value="{{this.id}}" {{#ifCond ../searchTeamId this.id}}selected{{/ifCond}}>{{this.name}}</option>
         {{/each}}
       </select>
     </div>
-    <div class="col">
-      <select class="form-select form-select-sm" aria-label="Default select example" name="searchArena">
-        <option value="" {{#unless arena}}selected{{/unless}}>全部場地</option>
+    <div class="col-4">
+      <select class="form-select form-select-sm" aria-label="select arena" name="searchArena" onchange="this.form.submit()">
+        <option value="" {{#unless searchArena}}selected{{/unless}}>全部場地</option>
         {{#each arenas}}
         <option value="{{this.arena}}" {{#ifCond ../searchArena this.arena}}selected{{/ifCond}}>{{this.arena}}</option>
         {{/each}}
       </select>
     </div>
-    <div class="col">
-      <button type="submit" class="btn btn-secondary">查詢</button>
-    </div>
   </div>
+
+
 </form>
+
+
 {{/if}}
 {{> message}}
 <div class="row mt-3">

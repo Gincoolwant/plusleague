@@ -17,5 +17,9 @@ module.exports = {
   relativeTimeFromNow: time => dayjs(time).tz('Asia/Taipei').fromNow(),
   ifCond: function (a, b, options) {
     return a === b ? options.fn(this) : options.inverse(this)
+  },
+  compareMonthYear: function (a, b, c, options) {
+    return a === b + '-' + c ? options.fn(this) : options.inverse(this)
   }
+
 }
