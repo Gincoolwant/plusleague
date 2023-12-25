@@ -115,7 +115,7 @@ node ./crawler/crawler.js
 ```
 並更新資料庫
 ```
-npx sequelize db:seed --name 20230117111427-matches-seed-file
+npx sequelize db:seed --seed 20230117111426-teams-seed-file --seed 20231108065559-regular23-24-seed-file
 ```
 
 
