@@ -69,10 +69,12 @@ router.post('/register', (req, res) => {
     .catch(err => console.log(err))
 })
 
-router.get('/logout', (req, res) => {
+router.get('/logout', (req, res, next) => {
   res.clearCookie('pleagueJWT')
   req.logout((err) => {
-    if (err) console.log(err)
+    if (err) {
+      return next(err)
+    }
     req.flash('success_msg', '你已成功登出。')
     res.redirect('/')
   })

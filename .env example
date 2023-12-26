@@ -6,3 +6,5 @@ JWT_SECRET = #your jwt secret for passport(jwt) authenticate
 PORT = #local port allowed, default:3000
 MYSQL_USERNAME = #your mysql username
 MYSQL_PASSWORD = #your mysql password
+MYSQL_DATABASE = #database name of mysql
+MYSQL_DATABASE_TEST = #database name of mysql for local testing
