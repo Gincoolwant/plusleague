@@ -9,6 +9,7 @@
         {{/each}}
       </select>
     </div>
+    
     <div class="col-4">
       <select class="form-select form-select-sm" aria-label="select team" name="searchTeamId" onchange="this.form.submit()">
         <option value="" {{#unless searchTeamId}}selected{{/unless}}>全部球隊</option>
@@ -17,6 +18,7 @@
         {{/each}}
       </select>
     </div>
+
     <div class="col-4">
       <select class="form-select form-select-sm" aria-label="select arena" name="searchArena" onchange="this.form.submit()">
         <option value="" {{#unless searchArena}}selected{{/unless}}>全部場地</option>
@@ -26,12 +28,9 @@
       </select>
     </div>
   </div>
-
-
 </form>
-
-
 {{/if}}
+
 {{> message}}
 <div class="row mt-3">
   {{#each matches}}
