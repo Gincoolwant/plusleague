@@ -6,12 +6,12 @@ const { createClient } = require('redis')
 async function renderIndex (req, res, next) {
   try {
     const client = await createClient({
-      url: process.env.REDIS_URL
+      url: process.env.NODE_ENV === 'production' ? process.env.REDIS_URL : ''
     }).connect()
     client.on('error', err => {
       throw new Error(`Redis Client Error: ${err}`)
     })
-
+    console.log('redis ok')
     const { searchTeamId, searchArena, searchYearMonth } = req.query
     const splitYearMonth = searchYearMonth ? searchYearMonth.split('-') : ''
     const year = splitYearMonth ? Number(splitYearMonth[0]) : ''

@@ -6,6 +6,7 @@ node_js:
 services:
   - mysql
   - docker
+  - redis-server
 
 env:
   - NODE_ENV=test
