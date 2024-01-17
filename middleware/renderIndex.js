@@ -5,7 +5,9 @@ const { createClient } = require('redis')
 
 async function renderIndex (req, res, next) {
   try {
-    const client = await createClient().connect()
+    const client = await createClient({
+      url: process.env.REDIS_URL
+    }).connect()
     client.on('error', err => {
       throw new Error(`Redis Client Error: ${err}`)
     })
