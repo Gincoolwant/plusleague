@@ -10,11 +10,11 @@ services:
       - db
     environment:
       - NODE_ENV=docker
-    command: bash -c "/usr/wait-for-it.sh --timeout=0 db:3306 && npx sequelize db:migrate && npx sequelize db:seed:all && npm start"
+    command: bash -c "/usr/wait-for-it.sh --timeout=0 db:3306 && npx sequelize db:migrate && npx sequelize db:seed --seed 20230117111426-teams-seed-file --seed 20231108065559-regular23-24-seed-file --seed 20231226141028-user-list-seed-file && npm start"
   db:
     image: "mysql:latest"
     environment:
       - MYSQL_ROOT_PASSWORD=$MYSQL_PASSWORD
       - MYSQL_DATABASE=$MYSQL_DATABASE
     volumes:
-      - ./mysql:/var/lib/mysql
+      - ./mysql:/var/lib/mysq
