@@ -4,7 +4,7 @@ const dayjs = require('dayjs')
 const utc = require('dayjs/plugin/utc')
 dayjs.extend(utc)
 
-let matches = require('../crawler/regular23-24.json')
+let matches = require('../crawler/schedule/regular23-24.json')
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
