@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Match.init({
+    season: DataTypes.INTEGER,
     type: DataTypes.STRING,
     gameId: DataTypes.STRING,
     gameTime: DataTypes.DATE,

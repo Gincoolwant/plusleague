@@ -1,3 +1,10 @@
+// 'easl23-24' 'https://pleagueofficial.com/easl-season'
+// 'regular23-24' 'https://pleagueofficial.com/schedule-regular-season/2023-24'
+// 'playoffs23-24' 'https://pleagueofficial.com/schedule-playoffs/2023-24'
+// 'regular22-23' 'https://pleagueofficial.com/schedule-regular-season/2022-23'
+// 'playoffs22-23' 'https://pleagueofficial.com/schedule-playoffs/2022-23'
+// 'finals22-23' 'https://pleagueofficial.com/schedule-finals/2022-23'
+
 const axios = require('axios')
 const cheerio = require('cheerio')
 const path = require('path')
@@ -5,24 +12,34 @@ const fs = require('fs')
 const dayjs = require('dayjs')
 const utc = require('dayjs/plugin/utc')
 
-const teamList = require('../crawler/src/team')
+const teamList = require('./teams')
 
 dayjs.extend(utc)
 
-async function crawlMatches (url, fileName) {
+const arg = process.argv.splice(2)
+if (arg.length !== 3) {
+  console.error('Invalid input length')
+} else {
+  const seasonBeginYear = Number(arg[0])
+  const seasonType = arg[1]
+  const url = arg[2]
+  crawlService(seasonBeginYear, seasonType, url)
+}
+
+async function crawlService (seasonBeginYear, seasonType, url) {
   try {
     const response = await axios.get(url)
     const html = response.data
-    const matchList = extractMatchInformation(html)
-    writeFile(matchList, fileName)
+    const matchList = extractMatchInformation(seasonBeginYear, seasonType, html)
+    writeFile(seasonBeginYear, seasonType, matchList)
   } catch (err) {
     console.log(err)
   }
 }
 
-function parseGameTime (match) {
-  const gameTime = dayjs(`2023/${match.date} ${match.time}`, 'YYYY/MM/DD HH:mm')
-  if (gameTime.isBefore('2023-10-01')) {
+function parseGameTime (seasonBeginYear, match) {
+  const gameTime = dayjs(`${seasonBeginYear}/${match.date} ${match.time}`, 'YYYY/MM/DD HH:mm')
+  if (gameTime.isBefore(`${seasonBeginYear}-10-01`)) {
     return gameTime.add(1, 'year').format('YYYY-MM-DD HH:mm:ss')
   }
   return gameTime.format('YYYY-MM-DD HH:mm:ss')
@@ -71,12 +88,13 @@ function teamNameParseId (teamName) {
   }
 }
 
-function extractMatchInformation (data) {
+function extractMatchInformation (seasonBeginYear, seasonType, data) {
   const $ = cheerio.load(data)
   const matches = $('.match_row').map((_, el) => {
     const result = {
-      type: fileName,
-      id: fileName.includes('regular') || fileName.includes('easl') ? $(el).find('.fs14.mb-2').text() : $(el).find('.fs14.mb-2').text().slice(-3),
+      season: seasonBeginYear,
+      seasonType,
+      gameId: seasonType === 'regular' || seasonType === 'easl' ? $(el).find('.fs14.mb-2').text() : $(el).find('.fs14.mb-2').text().slice(-3),
       date: $(el).find('.match_row_datetime').find('h5').eq(0).text(),
       day: $(el).find('.match_row_datetime').find('h5').eq(1).text(),
       time: $(el).find('.match_row_datetime').find('h6').text(),
@@ -98,25 +116,17 @@ function extractMatchInformation (data) {
   return matches
 }
 
-function writeFile (matches, fileName) {
+function writeFile (seasonBeginYear, seasonType, matches) {
   const matchList = matches.map(match => ({
-    type: match.type,
-    game_id: match.id,
-    game_time: parseGameTime(match),
+    season: seasonBeginYear,
+    type: match.seasonType,
+    game_id: match.gameId,
+    game_time: parseGameTime(seasonBeginYear, match),
     arena: match.arena,
     guest_id: teamNameParseId(match.guest.name),
     home_id: teamNameParseId(match.home.name)
   }))
 
-  const directory = path.join(__dirname, `${fileName}.json`)
+  const directory = path.join(__dirname, '../schedule', `${seasonBeginYear + seasonType}.json`)
   fs.writeFileSync(directory, JSON.stringify(matchList, 0, 2))
 }
-
-const fileName = 'easl23-24'
-const url = 'https://pleagueofficial.com/easl-season'
-// const fileName = 'regular23-24'
-// const url = 'https://pleagueofficial.com/schedule-regular-season/2023-24'
-// const fileName = 'playoffs23-24'
-// const url = 'https://pleagueofficial.com/schedule-playoffs/2023-24'
-
-crawlMatches(url, fileName)

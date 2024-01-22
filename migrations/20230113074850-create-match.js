@@ -9,6 +9,9 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      season: {
+        type: Sequelize.NUMBER
+      },
       type: {
         type: Sequelize.STRING
       },
