@@ -1,24 +1,22 @@
-const { Team, Match, sequelize } = require('../models')
 const { Op, QueryTypes } = require('sequelize')
 const dayjs = require('dayjs')
-const { createClient } = require('redis')
+
+const { Team, Match, sequelize } = require('../models')
+const { connectRedis, getRedisString, setRedisExpireString } = require('../helpers/redis-helper')
 
 async function renderIndex (req, res, next) {
   try {
-    const client = await createClient({
-      url: process.env.NODE_ENV === 'production' ? process.env.REDIS_URL : ''
-    }).connect()
-    client.on('error', err => {
-      throw new Error(`Redis Client Error: ${err}`)
-    })
-    console.log('redis ok')
+    const redisClient = await connectRedis()
+
     const { searchTeamId, searchArena, searchYearMonth } = req.query
     const splitYearMonth = searchYearMonth ? searchYearMonth.split('-') : ''
     const year = splitYearMonth ? Number(splitYearMonth[0]) : ''
     const month = splitYearMonth ? Number(splitYearMonth[1]) : ''
     const teamId = Number(searchTeamId) || ''
     const arena = searchArena || ''
-    const cacheMatches = await client.get(`matches?${searchTeamId}${searchArena}${searchYearMonth}`)
+
+    const cacheMatches = await getRedisString(redisClient, `matches?${searchTeamId}${searchArena}${searchYearMonth}`)
+
     if (cacheMatches !== null) {
       const [teams, arenas, yearMonthCombs] = await Promise.all([
         Team.findAll({ raw: true }),
@@ -37,7 +35,7 @@ async function renderIndex (req, res, next) {
             [Op.and]: [
               { gameTime: { [Op.gte]: dayjs() } },
               month ? sequelize.where(sequelize.fn('MONTH', sequelize.col('game_time')), '=', month) : '',
-              month ? sequelize.where(sequelize.fn('YEAR', sequelize.col('game_time')), '=', year) : '',
+              year ? sequelize.where(sequelize.fn('YEAR', sequelize.col('game_time')), '=', year) : '',
               teamId ? { [Op.or]: [{ guestId: teamId }, { homeId: teamId }] } : '',
               arena ? { arena } : ''
             ]
@@ -61,8 +59,8 @@ async function renderIndex (req, res, next) {
         sequelize.query('SELECT DISTINCT YEAR(game_time) AS year, MONTH(game_time) AS month FROM Matches WHERE game_time >= :now',
           { replacements: { now: dayjs().format() }, type: QueryTypes.SELECT })
       ])
-      await client.setEx(`matches?${searchTeamId}${searchArena}${searchYearMonth}`, 60 * 60, JSON.stringify(matches))
 
+      await setRedisExpireString(redisClient, `matches?${searchTeamId}${searchArena}${searchYearMonth}`, 60 * 60, matches)
       return res.status(200).render('index', { teams, matches, arenas, yearMonthCombs, searchTeamId: Number(searchTeamId), searchArena, searchYearMonth })
     }
   } catch (err) {
