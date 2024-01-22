@@ -1,20 +1,20 @@
 const { google } = require('googleapis')
 
 const { Match, sequelize } = require('../models')
-const { matchFormater } = require('../helpers/matchFormat')
+const { matchToCalendarFormat } = require('../helpers/matchFormat-helper')
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
 
 const checkJwtAccessToken = (req, res, next) => {
-  if (!req.jwt?.accessToken && !req.user?.gToken) {
+  if (!req.jwt?.accessToken || !req.user?.gToken) {
     return res.redirect('/auth/google')
   }
   next()
 }
 
-const coverToCalendarFormat = (req, res, next) => {
+const matchFormatService = (req, res, next) => {
   return Match.findOne({
     where: {
       type: req.params.type,
@@ -30,7 +30,7 @@ const coverToCalendarFormat = (req, res, next) => {
     raw: true
   })
     .then(match => {
-      req.event = matchFormater(match)
+      req.event = matchToCalendarFormat(match)
       next()
     })
     .catch(err => console.log(err))
@@ -67,6 +67,6 @@ const insertCalendarEvent = (req, res, next) => {
 
 module.exports = {
   checkJwtAccessToken,
-  coverToCalendarFormat,
+  matchFormatService,
   insertCalendarEvent
 }
