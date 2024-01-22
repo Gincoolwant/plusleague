@@ -1,0 +1,218 @@
+[
+  {
+    "season": 2023,
+    "type": "easl-regular",
+    "game_id": "G01",
+    "game_time": "2023-10-11 19:00:00",
+    "arena": "Funabashi Arena",
+    "guest_id": 10,
+    "home_id": 11
+  },
+  {
+    "season": 2023,
+    "type": "easl-regular",
+    "game_id": "G02",
+    "game_time": "2023-10-18 19:00:00",
+    "arena": "Okinawa Arena",
+    "guest_id": 8,
+    "home_id": 9
+  },
+  {
+    "season": 2023,
+    "type": "easl-regular",
+    "game_id": "G03",
+    "game_time": "2023-10-18 19:00:00",
+    "arena": "NTU Sports Center",
+    "guest_id": 11,
+    "home_id": 1
+  },
+  {
+    "season": 2023,
+    "type": "easl-regular",
+    "game_id": "G04",
+    "game_time": "2023-10-25 19:00:00",
+    "arena": "Anyang Gymnasium",
+    "guest_id": 1,
+    "home_id": 7
+  },
+  {
+    "season": 2023,
+    "type": "easl-regular",
+    "game_id": "G05",
+    "game_time": "2023-11-01 19:00:00",
+    "arena": "Goyang Sono Arena",
+    "guest_id": 9,
+    "home_id": 8
+  },
+  {
+    "season": 2023,
+    "type": "easl-regular",
+    "game_id": "G06",
+    "game_time": "2023-11-01 19:00:00",
+    "arena": "Sta. Rosa Sports Complex",
+    "guest_id": 11,
+    "home_id": 10
+  },
+  {
+    "season": 2023,
+    "type": "easl-regular",
+    "game_id": "G07",
+    "game_time": "2023-11-08 19:00:00",
+    "arena": "",
+    "guest_id": 8,
+    "home_id": 6
+  },
+  {
+    "season": 2023,
+    "type": "easl-regular",
+    "game_id": "G08",
+    "game_time": "2023-11-15 19:00:00",
+    "arena": "Okinawa Arena",
+    "guest_id": 12,
+    "home_id": 9
+  },
+  {
+    "season": 2023,
+    "type": "easl-regular",
+    "game_id": "G09",
+    "game_time": "2023-11-15 19:00:00",
+    "arena": "Taipei Heping Basketball Gymnasium",
+    "guest_id": 10,
+    "home_id": 1
+  },
+  {
+    "season": 2023,
+    "type": "easl-regular",
+    "game_id": "G10",
+    "game_time": "2023-11-29 19:00:00",
+    "arena": "",
+    "guest_id": 12,
+    "home_id": 6
+  },
+  {
+    "season": 2023,
+    "type": "easl-regular",
+    "game_id": "G11",
+    "game_time": "2023-12-06 19:00:00",
+    "arena": "Anyang Gymnasium",
+    "guest_id": 10,
+    "home_id": 7
+  },
+  {
+    "season": 2023,
+    "type": "easl-regular",
+    "game_id": "G12",
+    "game_time": "2023-12-13 19:00:00",
+    "arena": "Anyang Gymnasium",
+    "guest_id": 11,
+    "home_id": 7
+  },
+  {
+    "season": 2023,
+    "type": "easl-regular",
+    "game_id": "G13",
+    "game_time": "2023-12-13 19:00:00",
+    "arena": "Studio City Event Center",
+    "guest_id": 9,
+    "home_id": 12
+  },
+  {
+    "season": 2023,
+    "type": "easl-regular",
+    "game_id": "G14",
+    "game_time": "2023-12-20 19:00:00",
+    "arena": "Sta. Rosa Sports Complex",
+    "guest_id": 1,
+    "home_id": 10
+  },
+  {
+    "season": 2023,
+    "type": "easl-regular",
+    "game_id": "G15",
+    "game_time": "2023-12-27 19:00:00",
+    "arena": "Funabashi Arena",
+    "guest_id": 1,
+    "home_id": 11
+  },
+  {
+    "season": 2023,
+    "type": "easl-regular",
+    "game_id": "G16",
+    "game_time": "2023-12-27 19:00:00",
+    "arena": "PhilSports Arena",
+    "guest_id": 8,
+    "home_id": 12
+  },
+  {
+    "season": 2023,
+    "type": "easl-regular",
+    "game_id": "G17",
+    "game_time": "2024-01-03 19:00:00",
+    "arena": "PhilSports Arena",
+    "guest_id": 6,
+    "home_id": 12
+  },
+  {
+    "season": 2023,
+    "type": "easl-regular",
+    "game_id": "G18",
+    "game_time": "2024-01-10 19:00:00",
+    "arena": "Funabashi Arena",
+    "guest_id": 7,
+    "home_id": 11
+  },
+  {
+    "season": 2023,
+    "type": "easl-regular",
+    "game_id": "G19",
+    "game_time": "2024-01-10 19:00:00",
+    "arena": "",
+    "guest_id": 9,
+    "home_id": 6
+  },
+  {
+    "season": 2023,
+    "type": "easl-regular",
+    "game_id": "G20",
+    "game_time": "2024-01-24 19:00:00",
+    "arena": "Okinawa Arena",
+    "guest_id": 6,
+    "home_id": 9
+  },
+  {
+    "season": 2023,
+    "type": "easl-regular",
+    "game_id": "G21",
+    "game_time": "2024-01-24 19:00:00",
+    "arena": "PhilSports Arena",
+    "guest_id": 7,
+    "home_id": 10
+  },
+  {
+    "season": 2023,
+    "type": "easl-regular",
+    "game_id": "G22",
+    "game_time": "2024-01-31 19:00:00",
+    "arena": "Jamsil Student's Gymnasium",
+    "guest_id": 6,
+    "home_id": 8
+  },
+  {
+    "season": 2023,
+    "type": "easl-regular",
+    "game_id": "G23",
+    "game_time": "2024-02-07 19:00:00",
+    "arena": "Jamsil Student's Gymnasium",
+    "guest_id": 12,
+    "home_id": 8
+  },
+  {
+    "season": 2023,
+    "type": "easl-regular",
+    "game_id": "G24",
+    "game_time": "2024-02-07 19:00:00",
+    "arena": "Taipei Heping Basketball Gymnasium",
+    "guest_id": 7,
+    "home_id": 1
+  }
+]

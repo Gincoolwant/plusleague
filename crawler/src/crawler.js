@@ -94,7 +94,7 @@ function extractMatchInformation (seasonBeginYear, seasonType, data) {
     const result = {
       season: seasonBeginYear,
       seasonType,
-      gameId: seasonType === 'regular' || seasonType === 'easl' ? $(el).find('.fs14.mb-2').text() : $(el).find('.fs14.mb-2').text().slice(-3),
+      gameId: seasonType.includes('regular') || seasonType.includes('easl') ? $(el).find('.fs14.mb-2').text() : $(el).find('.fs14.mb-2').text().slice(-3),
       date: $(el).find('.match_row_datetime').find('h5').eq(0).text(),
       day: $(el).find('.match_row_datetime').find('h5').eq(1).text(),
       time: $(el).find('.match_row_datetime').find('h6').text(),

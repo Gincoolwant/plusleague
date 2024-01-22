@@ -4,7 +4,7 @@ const dayjs = require('dayjs')
 const utc = require('dayjs/plugin/utc')
 dayjs.extend(utc)
 
-let matches = require('../crawler/schedule/finals22-23.json')
+let matches = require('../crawler/schedule/2022plg-finals.json')
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
@@ -12,6 +12,7 @@ module.exports = {
       'SELECT id, team_id FROM Teams;',
       { type: queryInterface.sequelize.QueryTypes.SELECT })
     matches = matches.map(match => ({
+      season: match.season,
       type: match.type,
       game_id: match.game_id,
       game_time: dayjs(match.game_time).utc().format('YYYY-MM-DD HH:mm:ss'),
