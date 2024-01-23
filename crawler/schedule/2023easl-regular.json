@@ -58,7 +58,7 @@
     "type": "easl-regular",
     "game_id": "G07",
     "game_time": "2023-11-08 19:00:00",
-    "arena": "",
+    "arena": "New Taipei Xinzhunag Gymnasium",
     "guest_id": 8,
     "home_id": 6
   },
@@ -85,7 +85,7 @@
     "type": "easl-regular",
     "game_id": "G10",
     "game_time": "2023-11-29 19:00:00",
-    "arena": "",
+    "arena": "New Taipei Xinzhunag Gymnasium",
     "guest_id": 12,
     "home_id": 6
   },
@@ -166,7 +166,7 @@
     "type": "easl-regular",
     "game_id": "G19",
     "game_time": "2024-01-10 19:00:00",
-    "arena": "",
+    "arena": "New Taipei Xinzhunag Gymnasium",
     "guest_id": 9,
     "home_id": 6
   },
