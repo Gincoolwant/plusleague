@@ -1,11 +1,12 @@
-<center># 🏀P+報哩災(P+ Schedule Explorer)</a>
+# <div align='center'>🏀 <a href="https://plusleague.herokuapp.com/">P+報哩災(P+ Schedule Explorer)</a></div>
+<div align='center'>
 <p>
     <a href="https://plusleague.herokuapp.com/"><img src="https://www.herokucdn.com/deploy/button.svg"/></a>
 <p>
     <a href="https://plusleague.herokuapp.com/"><img src="https://img.shields.io/website-up-down-green-red/http/monip.org.svg"/></a>
     <img src="https://img.shields.io/badge/Node.js-v14.16.0-green"/>
 </p>
-</center>
+</div>
 <p>
 P+ Schedule Explorer allows users to quickly query schedule information based on specified conditions and seamlessly add events to their personal Google Calendar.
 
@@ -62,11 +63,21 @@ Once authorized, the selected match will be added to your personal Google Calend
 + View a list of all registered users.
 
 ## ⚙️Install
-### Clone the repository
+### 1. Quick start - Docker compose
+1. Quick start by docker compose
+If you want to use the following command line to quick start, you have to install ![Docker](https://www.docker.com/)
+```zsh
+$ docker compose up
+```
+2. Close docker compose
+```zsh
+$ docker compose down
+```
+### 2. Clone the repository
 ```zsh
 $ git clone https://github.com/Gincoolwant/plusleague.git
 
-Go into the repository
+# Go into the repository
 $ cd plusleague
 
 # Remove current origin repository
@@ -95,33 +106,6 @@ MYSQL_DATABASE = #database name of mysql
 
 REDIS_URL = # redis url
 ```
-
-### Web Scraping
-How to scrap the new season matches?  
-Taking 2023-2024 regular season for example.
-
-1. Scraping form the official page
-```zsh
-node ./crawler/src/crawler.js 2023 plg-regular 'https://pleagueofficial.com/schedule-regular-season/2023-24'
-
-#node ./crawler/src/crawler.js ${arg0} ${arg1} ${arg2}
-#arg0 = ${starting_year} ex: 2023
-#arg1 = ${matches_type} ex: plg-regular
-#arg2 = ${url} ex: 'https://pleagueofficial.com/schedule-regular-season/2023-24'
-```
-2. Creating new seeder file.
-```zsh
-npx sequelize db:seed:generate --name regular23-24-seed-file
-```
-You will get a new seeder file.  
-(ex: 20231108065559-regular23-24-seed-file)
-
-3. Inserting the seeder to DB.
-```zsh
-npx sequelize db:seed --seed 20231108065559-regular23-24-seed-file
-```
-
-4. You are ready to go!
 
 ### Setup DB
 In MySQL Workbench, create a database naming the exactly name in .env file.
@@ -155,17 +139,49 @@ When the app is successfully connected, you will see the message: App is listeni
 ### Stop server
 Pressing Ctrl + C twice stopping server.
 
+### Web Scraping
+How to scrap the new season matches?  
+Taking 2023-2024 regular season for example.
+
+1. Scraping form the official page
+```zsh
+node ./crawler/src/crawler.js 2023 plg-regular 'https://pleagueofficial.com/schedule-regular-season/2023-24'
+
+# node ./crawler/src/crawler.js ${arg0} ${arg1} ${arg2}
+# arg0 = ${starting_year} ex: 2023
+# arg1 = ${matches_type} ex: plg-regular
+# arg2 = ${url} ex: 'https://pleagueofficial.com/schedule-regular-season/2023-24'
+```
+2. Creating new seeder file.
+```zsh
+npx sequelize db:seed:generate --name regular23-24-seed-file
+```
+You will get a new seeder file.  
+(ex: 20231108065559-regular23-24-seed-file)
+Refering to the other files, complete the seed file.
+
+3. Inserting the seeder to DB.
+```zsh
+npx sequelize db:seed --seed 20231108065559-regular23-24-seed-file
+```
+
+4. You are ready to go!
 
 ## 🛠️ Technologies
+<div>
 <img src="https://img.shields.io/badge/javascript%20-%23323330.svg?&style=for-the-badge&logo=javascript&logoColor=%23F7DF1E"/>
 <img src="https://img.shields.io/badge/html5%20-%23E34F26.svg?&style=for-the-badge&logo=html5&logoColor=white"/>
 <img src="https://img.shields.io/badge/css3%20-%231572B6.svg?&style=for-the-badge&logo=css3&logoColor=white"/>
 <img src="https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white">
+</div>
+<div>
 <img src="https://img.shields.io/badge/node.js%20-%2343853D.svg?&style=for-the-badge&logo=node.js&logoColor=white"/>
 <img src="https://img.shields.io/badge/Express.js-404D59?style=for-the-badge"/>
 <img src="https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white"/>
 <img src="https://img.shields.io/badge/redis-%23DD0031.svg?&style=for-the-badge&logo=redis&logoColor=white"/>
+</div>
 <img src="https://img.shields.io/badge/Visual_Studio_Code-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white"/>
+</div>
 
 Source
 + [Plus League Official](https://pleagueofficial.com/)
@@ -176,6 +192,7 @@ NPM Packages
 + [passport](https://www.npmjs.com/package/passport) - authentication middleware for Node.js.
 + [Sequelize](https://sequelize.org/) - ORM for SQL query builder
 + [googleapis](https://www.npmjs.com/package/googleapis) - Node.js client library for using Google APIs. Support for authorization and authentication with OAuth 2.0, API Keys and JWT tokens is included.
++ [redis](https://www.npmjs.com/package/redis) - Redis client for Node.js.
 + [bcryptjs](https://www.npmjs.com/package/bcryptjs) - store hashed password in the database
 + [dayjs](https://day.js.org/en/) - JavaScript library that parses, validates, manipulates, and displays dates and times.
 
