@@ -1,146 +1,188 @@
-# P+報哩災
-## 網站入口：[P+報哩災](https://plusleague.herokuapp.com/)
-![cover](./public/README-images/cover.png)
-P+報哩災為使用Node.js、Express、Handlebars、MySQL打造的1人全端專案，提供國內職籃Plus League賽程資訊，會員可透過Oauth2.0授權將賽程加入個人google行事曆，並提供後台提供上、下架對戰服務。
+<center># 🏀P+報哩災(P+ Schedule Explorer)</a>
+<p>
+    <a href="https://plusleague.herokuapp.com/"><img src="https://www.herokucdn.com/deploy/button.svg"/></a>
+<p>
+    <a href="https://plusleague.herokuapp.com/"><img src="https://img.shields.io/website-up-down-green-red/http/monip.org.svg"/></a>
+    <img src="https://img.shields.io/badge/Node.js-v14.16.0-green"/>
+</p>
+</center>
+<p>
+P+ Schedule Explorer allows users to quickly query schedule information based on specified conditions and seamlessly add events to their personal Google Calendar.
 
-### 添加賽程至個人行事曆
+A full-fledged application featuring user registration and login systems. The frontend is built with HTML and Bootstrap using the Handlebars view engine. The backend server is powered by Node.js and Express.js, with MySQL as the database for matches and users information. The application is deployed on Heroku.
+</p>
+
+![cover](./public/README-images/cover.png)
+
 ![calendar](./public/README-images/project_plusleague.gif)
 
-### 首頁
-![index](./public/README-images/index.png)
+<p><strong><a href="https://plusleague.herokuapp.com/">
+Click here for Live demo</a></strong>
+</p>
 
-### 登入與註冊
-![login](./public/README-images/login.png)
+| Role | Account | Password |
+| :----:| :----: | :----: |
+| User | user1@example.com | 123 |
+| Admin | admin@example.com | 123 |
 
-### 依球隊與比賽地點篩選
-![filter](./public/README-images/filter.png)
-![filter By Team](./public/README-images/filterByTeam.png)
+**For demo convenience, the user account are linked to specific Google accounts. To use the Google Calendar service, please register a new account and authorize OAuth2.0.**
 
-### 後台管理 - 賽程上下架
-![filter By Team](./public/README-images/delete_upload.png)
+## 📕 How to Use the App
+1. Sign Up / Log In:  
+If you're a new user, sign up with your email and password.  
+If you're a returning user, log in with your credentials.
 
-### 後台管理 - 使用者清單
-![filter By Team](./public/README-images/userlist.png)
+2. Find the Match:  
+Navigate to the app's home page.
+Browse or search for the desired match.
 
-## 測試帳號
-### 前台
+3. Add to Calendar:  
+Click on the match you're interested in.
+Look for the "加入行事曆" (Add to Calendar) button.
 
-**`為方便demo，測試帳號已與特定google帳號連結，若需加入個人google行事曆服務，請註冊新會員並透過Oauth2.0授權後方可使用)`**
+4. Google OAuth2.0 Authorize:  
+You will be prompted to log in to your Google account for authorization. Authorize the app to access your Google Calendar.
 
-``` 
-帳號: user1@example.com
-密碼: 123
-```
-### 後台(前台僅有瀏覽權限)
-```
-帳號: admin@example.com
-密碼: 123
+5. Added Events to Your Google Calendar:  
+Once authorized, the selected match will be added to your personal Google Calendar.
+
+## 🌟Features
+### Schedule Source
++ Utilizes Axios and Cheerio for web scraping from the Plus League official website.
+### Login and Registration
++ User registration and login functionality with flash message error prompts.
++ Secure password storage using bcrypt.
++ Passport.js implementation for login authentication.
++ Supporting JWT authentication.
+### User Privileges 
++ Filter matches by month or team or venue.
++ Added Matches as Events to Your Google Calendar
+### Admin Privileges
++ Ability to launched/discontinued schedules.
++ View a list of all registered users.
+
+## ⚙️Install
+### Clone the repository
+```zsh
+$ git clone https://github.com/Gincoolwant/plusleague.git
+
+Go into the repository
+$ cd plusleague
+
+# Remove current origin repository
+$ git remote remove origin
 ```
 
-## 功能介紹
-### 賽程來源
-+ 使用axios與cheerio套件與P+官網介接爬蟲取得。
-
-(考量權限與網路爬蟲道德，目前無定期爬蟲，透過本地端運行爬蟲程式一次抓取賽程資訊後以JSON格式保存，再透過種子資料migrate至資料庫。)
-### 登入及註冊
-+ 使用者註冊及登入功能(flash message提示錯誤訊息)。
-+ 使用bcrypt儲存使用者密碼。
-+ 使用passport實作登入驗證。
-+ 登入後，使用cookie實作JWT權限驗證。
-### 前台 - 使用者權限功能
-+ 可透過球隊或比賽場館篩選對戰
-+ 授權Oauth2.0後，可將賽程加入個人google行事曆中。(Oauth2.0授權+JWT存取google token實作)
-+ 可點選logout登出使用狀態。
-### 後台 - 管理者權限功能
-+ 可上/下架賽程(下架後，前台不顯示直至重新上架)
-+ 瀏覽全部註冊的使用者清單
-
-## 安裝執行
-### 安裝執行應用程式
-1. 確認安裝node.js & npm。
-2. 開啟Terminal將專案 clone 至本地位置：
+### Install dependencies
+```zsh
+$ npm install
 ```
-git clone https://github.com/Gincoolwant/plusleague.git
-```
-3. 進入專案資料夾
-```
-cd plusleague
-```
-4. 安裝使用套件： 
-```
-npm install
-```
-5. 設定環境變數，新增.env檔案(內容請參考.env example)：
-```
-GOOGLE_CLIENT_ID = #your Google Cloud console OAuth2.0 id
-GOOGLE_CLIENT_SECRET = #your Google Cloud console OAuth2.0 secret
-GOOGLE_REDIRECT_URL = #Google Cloud console OAuth2 redirect url, ex:http://localhost:3000/auth/google/callback
+### Configuration
+Locate the .env example file and rename it to .env.  
+Complete all the environment variables in the .env file.
+```yml
+PORT = #local port allowed, default:3000
 SESSION_SECRET = #session secret for passport(local) authenticate
 JWT_SECRET = #your jwt secret for passport(jwt) authenticate
-PORT = #local port allowed, default:3000
+
+GOOGLE_CLIENT_ID = #your google api client id
+GOOGLE_CLIENT_SECRET = #your google api client secret
+GOOGLE_REDIRECT_URL = #google oauth2 redirect url
+
+MYSQL_USERNAME = #your mysql username
+MYSQL_PASSWORD = #your mysql password
+MYSQL_DATABASE = #database name of mysql
+
+REDIS_URL = # redis url
 ```
-6. 建立MySQL DB取名為plus_league(以MySQL Workbench為例)
+
+### Web Scraping
+How to scrap the new season matches?  
+Taking 2023-2024 regular season for example.
+
+1. Scraping form the official page
+```zsh
+node ./crawler/src/crawler.js 2023 plg-regular 'https://pleagueofficial.com/schedule-regular-season/2023-24'
+
+#node ./crawler/src/crawler.js ${arg0} ${arg1} ${arg2}
+#arg0 = ${starting_year} ex: 2023
+#arg1 = ${matches_type} ex: plg-regular
+#arg2 = ${url} ex: 'https://pleagueofficial.com/schedule-regular-season/2023-24'
 ```
-create database plus_league;
+2. Creating new seeder file.
+```zsh
+npx sequelize db:seed:generate --name regular23-24-seed-file
 ```
-7. 設定資料庫config
+You will get a new seeder file.  
+(ex: 20231108065559-regular23-24-seed-file)
+
+3. Inserting the seeder to DB.
+```zsh
+npx sequelize db:seed --seed 20231108065559-regular23-24-seed-file
 ```
-開啟config.json修改
-"development": {
-    "username": "", // 輸入local端MySQL帳號
-    "password": "", // 輸入local端MySQL密碼
-    "database": "plus_league",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
-  }
+
+4. You are ready to go!
+
+### Setup DB
+In MySQL Workbench, create a database naming the exactly name in .env file.
+
+```sql
+CREATE DATABASE IF NOT EXISTS ${MYSQL_DATABASE}; 
 ```
-8. 建立Schema
+
+### Data migration
+Creating tables in DB depends on migration files through Sequelize.
+
 ```
 npx sequelize db:migrate
 ```
-9. 寫入種子資料
-```
-npx sequelize db:seed:all
-```
-6. 執行專案：
-```
-npm run start
+
+### Create seeders
+Establishing seeders.
+
+```zsh
+$ npx sequelize db:seed:all
 ```
 
-成功連線時，終端機會看見訊息： `App is listening on port 3000!`，請開啟瀏覽器輸入網址 http://localhost:3000 進入首頁。
-### 爬蟲
-抓取官網賽程資訊，請執行crawler.js
+### Start server
+Run server on localhost.
+
+```zsh
+$ npm run start
 ```
-node ./crawler/crawler.js
-```
-並更新資料庫
-```
-npx sequelize db:seed --seed 20230117111426-teams-seed-file --seed 20231108065559-regular23-24-seed-file
-```
+When the app is successfully connected, you will see the message: App is listening on port 3000!. Open your browser and enter the URL http://localhost:3000. It is running successfully on your localhost.
+
+### Stop server
+Pressing Ctrl + C twice stopping server.
 
 
-## 開發環境與工具
-+ [Visual Studio Code](https://visualstudio.microsoft.com/zh-hant/)
-+ [Node.js](https://nodejs.org/en/)
-+ [Express](https://www.npmjs.com/package/express)
-+ [MySQL](https://www.mysql.com/)
-+ [Sequelize](https://sequelize.org/)
-+ [googleapis](https://www.npmjs.com/package/googleapis)
-+ [dayjs](https://day.js.org/en/)
-+ [passport](https://www.npmjs.com/package/passport)
-+ [passport-local](https://www.passportjs.org/packages/passport-local/)
-+ [passport-jwt](https://www.passportjs.org/packages/passport-jwt/)
-+ [Express-Handlebars](https://www.npmjs.com/package/express-handlebars)
-+ [Bootstrap](https://getbootstrap.com/)
-+ [Font-awesome](https://fontawesome.com/)
-+ [Method-override](https://www.npmjs.com/package/method-override)
-+ [bcryptjs](https://www.npmjs.com/package/bcryptjs)
-+ [bootstrap-icons](https://icons.getbootstrap.com/)
-+ [connect-flash](https://www.npmjs.com/package/connect-flash)
-+ [dotenv](https://www.npmjs.com/package/dotenv)
-+ [express-session](https://www.npmjs.com/package/express-session)
+## 🛠️ Technologies
+<img src="https://img.shields.io/badge/javascript%20-%23323330.svg?&style=for-the-badge&logo=javascript&logoColor=%23F7DF1E"/>
+<img src="https://img.shields.io/badge/html5%20-%23E34F26.svg?&style=for-the-badge&logo=html5&logoColor=white"/>
+<img src="https://img.shields.io/badge/css3%20-%231572B6.svg?&style=for-the-badge&logo=css3&logoColor=white"/>
+<img src="https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white">
+<img src="https://img.shields.io/badge/node.js%20-%2343853D.svg?&style=for-the-badge&logo=node.js&logoColor=white"/>
+<img src="https://img.shields.io/badge/Express.js-404D59?style=for-the-badge"/>
+<img src="https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white"/>
+<img src="https://img.shields.io/badge/redis-%23DD0031.svg?&style=for-the-badge&logo=redis&logoColor=white"/>
+<img src="https://img.shields.io/badge/Visual_Studio_Code-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white"/>
 
+Source
++ [Plus League Official](https://pleagueofficial.com/)
 
-## 開發人員
+NPM Packages
++ [Express](https://www.npmjs.com/package/express) - web framework for node.js
++ [Express-Handlebars](https://www.npmjs.com/package/express-handlebars) - view engine for Express
++ [passport](https://www.npmjs.com/package/passport) - authentication middleware for Node.js.
++ [Sequelize](https://sequelize.org/) - ORM for SQL query builder
++ [googleapis](https://www.npmjs.com/package/googleapis) - Node.js client library for using Google APIs. Support for authorization and authentication with OAuth 2.0, API Keys and JWT tokens is included.
++ [bcryptjs](https://www.npmjs.com/package/bcryptjs) - store hashed password in the database
++ [dayjs](https://day.js.org/en/) - JavaScript library that parses, validates, manipulates, and displays dates and times.
+
+## 🖥️Contributor
 + [CK](https://github.com/Gincoolwant)
-+ E-Mail： soulbox790326@gmail.com
++ email: soulbox790326@gmail.com
+
+## 📚 License
+
+<img src="https://img.shields.io/github/license/clairepeng0808/smart-brain-app?style=flat-square&color=9cf" />
