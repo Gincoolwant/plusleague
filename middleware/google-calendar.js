@@ -7,8 +7,8 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
 
-const checkJwtAccessToken = (req, res, next) => {
-  if (!req.jwt?.accessToken || !req.user?.gToken) {
+const checkGoogleAuthToken = (req, res, next) => {
+  if (!req.jwt?.accessToken && !req.user?.gToken) {
     return res.redirect('/auth/google')
   }
   next()
@@ -17,6 +17,7 @@ const checkJwtAccessToken = (req, res, next) => {
 const matchFormatService = (req, res, next) => {
   return Match.findOne({
     where: {
+      season: req.params.season,
       type: req.params.type,
       gameId: req.params.game_id
     },
@@ -36,7 +37,7 @@ const matchFormatService = (req, res, next) => {
     .catch(err => console.log(err))
 }
 
-const insertCalendarEvent = (req, res, next) => {
+const insertEventToCalendar = (req, res, next) => {
   const accessToken = req.jwt.accessToken
   const refreshToken = req.jwt.gToken || req.user.gToken
 
@@ -66,7 +67,7 @@ const insertCalendarEvent = (req, res, next) => {
 }
 
 module.exports = {
-  checkJwtAccessToken,
+  checkGoogleAuthToken,
   matchFormatService,
-  insertCalendarEvent
+  insertEventToCalendar
 }

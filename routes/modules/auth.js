@@ -3,14 +3,14 @@ const passport = require('passport')
 const jwt = require('jsonwebtoken')
 
 const { User } = require('../../models')
-const { checkJwtAccessToken, insertCalendarEvent, matchFormatService } = require('../../middleware/google-calendar.js')
+const { checkGoogleAuthToken, insertEventToCalendar, matchFormatService } = require('../../middleware/google-calendar.js')
 
 const router = express.Router()
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
 
-router.post('/schedule/:type/:game_id', checkJwtAccessToken, matchFormatService, insertCalendarEvent, (req, res) => {
+router.post('/schedule/:season/:type/:game_id', checkGoogleAuthToken, matchFormatService, insertEventToCalendar, (req, res) => {
   req.flash('insertCalendar_success_messages', `${req.event.summary}，已成功加入您的行事曆。`)
   req.flash('event_link', `${req.event.htmlLink}`)
   res.redirect('/')

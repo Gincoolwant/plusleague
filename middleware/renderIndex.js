@@ -41,7 +41,7 @@ async function renderIndex (req, res, next) {
             ]
           },
           attributes: [
-            'type', 'game_id', 'game_time', 'arena',
+            'season', 'type', 'game_id', 'game_time', 'arena',
             [sequelize.col('guest.name'), 'g_name'],
             [sequelize.col('guest.logo'), 'g_logo'],
             [sequelize.col('home.name'), 'h_name'],
