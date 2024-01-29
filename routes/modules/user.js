@@ -4,7 +4,6 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
 const { User } = require('../../models')
-const { authenticated } = require('../../middleware/auth')
 
 const router = express.Router()
 
@@ -80,7 +79,7 @@ router.get('/logout', (req, res, next) => {
   })
 })
 
-router.get('/demoCalendar', authenticated, (req, res) => {
+router.get('/demoCalendar', (req, res) => {
   res.render('user1-calendar')
 })
 

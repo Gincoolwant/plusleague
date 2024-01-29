@@ -8,7 +8,8 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 const checkGoogleAuthToken = (req, res, next) => {
-  if (!req.jwt?.accessToken && !req.user?.gToken) {
+  const isAuthTokenExists = req.jwt?.accessToken || req.user?.gToken
+  if (!isAuthTokenExists) {
     return res.redirect('/auth/google')
   }
   next()
@@ -61,6 +62,8 @@ const insertEventToCalendar = (req, res, next) => {
       if (event.data.status === 'confirmed') {
         req.event.htmlLink = event.data.htmlLink
         next()
+      } else {
+        throw new Error('Failed to insert event into calendar.')
       }
     })
     .catch(err => console.log(err))
