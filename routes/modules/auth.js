@@ -13,7 +13,7 @@ if (process.env.NODE_ENV !== 'production') {
 router.post('/schedule/:season/:type/:game_id', checkGoogleAuthToken, matchFormatService, insertEventToCalendar, (req, res) => {
   req.flash('insertCalendar_success_messages', `${req.event.summary}，已成功加入您的行事曆。`)
   req.flash('event_link', `${req.event.htmlLink}`)
-  res.redirect('/')
+  res.redirect('back')
 })
 
 router.get('/google', passport.authenticate('google', {
