@@ -2,12 +2,10 @@ const { Op, QueryTypes } = require('sequelize')
 const dayjs = require('dayjs')
 
 const { Team, Match, sequelize } = require('../models')
-const { connectRedis, getRedisString, setRedisExpireString } = require('../helpers/redis-helper')
+const { cache } = require('../helpers/cache-helper')
 
 async function renderIndex (req, res, next) {
   try {
-    const redisClient = await connectRedis()
-
     const { searchTeamId, searchArena, searchYearMonth } = req.query
     const splitYearMonth = searchYearMonth ? searchYearMonth.split('-') : ''
     const year = splitYearMonth ? Number(splitYearMonth[0]) : ''
@@ -15,17 +13,10 @@ async function renderIndex (req, res, next) {
     const teamId = Number(searchTeamId) || ''
     const arena = searchArena || ''
 
-    const cacheMatches = await getRedisString(redisClient, `matches?${searchTeamId}${searchArena}${searchYearMonth}`)
+    const cacheMatches = await cache.getSet(`matches?${searchTeamId}${searchArena}${searchYearMonth}`)
 
     if (cacheMatches !== null) {
-      const [teams, arenas, yearMonthCombs] = await Promise.all([
-        Team.findAll({ raw: true }),
-        sequelize.query('SELECT DISTINCT arena FROM Matches WHERE game_time >= :now',
-          { replacements: { now: dayjs().format() }, type: QueryTypes.SELECT }),
-        sequelize.query('SELECT DISTINCT YEAR(game_time) AS year, MONTH(game_time) AS month FROM Matches WHERE game_time >= :now',
-          { replacements: { now: dayjs().format() }, type: QueryTypes.SELECT })
-      ])
-
+      const { teams, arenas, yearMonthCombs } = JSON.parse(await cache.getSet('selectionList'))
       return res.status(200).render('index', { teams, matches: JSON.parse(cacheMatches), arenas, yearMonthCombs, searchTeamId: Number(searchTeamId), searchArena, searchYearMonth })
     } else {
       const [teams, matches, arenas, yearMonthCombs] = await Promise.all([
@@ -60,7 +51,13 @@ async function renderIndex (req, res, next) {
           { replacements: { now: dayjs().format() }, type: QueryTypes.SELECT })
       ])
 
-      await setRedisExpireString(redisClient, `matches?${searchTeamId}${searchArena}${searchYearMonth}`, 60 * 60, matches)
+      const selectionList = {
+        teams,
+        arenas,
+        yearMonthCombs
+      }
+      await cache.addExpireSet(`matches?${searchTeamId}${searchArena}${searchYearMonth}`, 60 * 60, matches)
+      await cache.addExpireSet('selectionList', 60 * 60, selectionList)
       return res.status(200).render('index', { teams, matches, arenas, yearMonthCombs, searchTeamId: Number(searchTeamId), searchArena, searchYearMonth })
     }
   } catch (err) {

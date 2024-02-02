@@ -15,27 +15,31 @@ const checkGoogleAuthToken = (req, res, next) => {
   next()
 }
 
-const matchFormatService = (req, res, next) => {
-  return Match.findOne({
-    where: {
-      season: req.params.season,
-      type: req.params.type,
-      gameId: req.params.game_id
-    },
-    attributes: [
-      'type', 'game_id', 'game_time', 'arena',
-      [sequelize.literal('(SELECT logo FROM Teams WHERE Teams.id = Match.guest_id)'), 'g_logo'],
-      [sequelize.literal('(SELECT name FROM Teams WHERE Teams.id = Match.guest_id)'), 'g_name'],
-      [sequelize.literal('(SELECT logo FROM Teams WHERE Teams.id = Match.home_id)'), 'h_logo'],
-      [sequelize.literal('(SELECT name FROM Teams WHERE Teams.id = Match.home_id)'), 'h_name']
-    ],
-    raw: true
-  })
-    .then(match => {
-      req.event = matchToCalendarFormat(match)
-      next()
+const matchFormatService = async (req, res, next) => {
+  try {
+    const selectedMatch = await Match.findOne({
+      where: {
+        season: req.params.season,
+        type: req.params.type,
+        gameId: req.params.game_id
+      },
+      attributes: [
+        'type', 'game_id', 'game_time', 'arena',
+        [sequelize.literal('(SELECT logo FROM Teams WHERE Teams.id = Match.guest_id)'), 'g_logo'],
+        [sequelize.literal('(SELECT name FROM Teams WHERE Teams.id = Match.guest_id)'), 'g_name'],
+        [sequelize.literal('(SELECT logo FROM Teams WHERE Teams.id = Match.home_id)'), 'h_logo'],
+        [sequelize.literal('(SELECT name FROM Teams WHERE Teams.id = Match.home_id)'), 'h_name']
+      ],
+      raw: true
     })
-    .catch(err => console.log(err))
+    if (!selectedMatch) {
+      throw new Error('Cannot find the match')
+    }
+    req.event = matchToCalendarFormat(selectedMatch)
+    next()
+  } catch (err) {
+    next(err)
+  }
 }
 
 const insertEventToCalendar = (req, res, next) => {

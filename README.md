@@ -59,7 +59,7 @@ Once authorized, the selected match will be added to your personal Google Calend
 + Filter matches by month or team or venue.
 + Added Matches as Events to Your Google Calendar
 ### Admin Privileges
-+ Ability to launched/discontinued schedules.
++ Ability to listing/delisting schedules.
 + View a list of all registered users.
 
 ## ⚙️Install
