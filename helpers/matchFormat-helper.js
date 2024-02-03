@@ -1,6 +1,6 @@
 const dayjs = require('dayjs')
 
-const matchToCalendarFormat = (match) => {
+const formatIntoEvent = (match) => {
   const startTime = dayjs(match.game_time).format()
   const endTime = dayjs(match.game_time).add(2, 'hour').format()
   const event = {
@@ -25,5 +25,5 @@ const matchToCalendarFormat = (match) => {
 }
 
 module.exports = {
-  matchToCalendarFormat
+  formatIntoEvent
 }

@@ -6,20 +6,24 @@ const { cache } = require('../helpers/cache-helper')
 
 const adminService = {
   getMatchesFromTime: async (time) => {
-    return await Match.findAll({
-      where: { gameTime: { [Op.gte]: time } },
-      attributes: [
-        'id', 'type', 'game_id', 'game_time', 'arena',
-        [sequelize.literal('(SELECT logo FROM Teams WHERE Teams.id = Match.guest_id)'), 'g_logo'],
-        [sequelize.literal('(SELECT name FROM Teams WHERE Teams.id = Match.guest_id)'), 'g_name'],
-        [sequelize.literal('(SELECT logo FROM Teams WHERE Teams.id = Match.home_id)'), 'h_logo'],
-        [sequelize.literal('(SELECT name FROM Teams WHERE Teams.id = Match.home_id)'), 'h_name'],
-        'deleted_at'
-      ],
-      order: [['game_time', 'ASC']],
-      paranoid: false,
-      raw: true
-    })
+    try {
+      return await Match.findAll({
+        where: { gameTime: { [Op.gte]: time } },
+        attributes: [
+          'id', 'type', 'game_id', 'game_time', 'arena',
+          [sequelize.literal('(SELECT logo FROM Teams WHERE Teams.id = Match.guest_id)'), 'g_logo'],
+          [sequelize.literal('(SELECT name FROM Teams WHERE Teams.id = Match.guest_id)'), 'g_name'],
+          [sequelize.literal('(SELECT logo FROM Teams WHERE Teams.id = Match.home_id)'), 'h_logo'],
+          [sequelize.literal('(SELECT name FROM Teams WHERE Teams.id = Match.home_id)'), 'h_name'],
+          'deleted_at'
+        ],
+        order: [['game_time', 'ASC']],
+        paranoid: false,
+        raw: true
+      })
+    } catch (err) {
+      throw new Error('Failed to get all matches from now for admin.')
+    }
   },
   getAllUser: async () => {
     return await User.findAll({ raw: true })

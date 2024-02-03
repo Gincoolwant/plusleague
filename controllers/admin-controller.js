@@ -5,8 +5,8 @@ const adminService = require('../services/admin-service')
 
 const adminController = {
   getMatchesFromNow: async (req, res, next) => {
+    const now = dayjs()
     try {
-      const now = dayjs()
       const matches = await adminService.getMatchesFromTime(now)
       res.render('admin/admin', { matches })
     } catch (err) {

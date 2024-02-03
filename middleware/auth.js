@@ -21,7 +21,16 @@ const authenticatedAdmin = (req, res, next) => {
   return res.status(403).redirect('/users/login')
 }
 
+const authenticatedGoogleCalendar = (req, res, next) => {
+  const isAuthTokenExists = req.jwt?.accessToken || req.user?.gToken
+  if (!isAuthTokenExists) {
+    return res.redirect('/auth/google')
+  }
+  next()
+}
+
 module.exports = {
   authenticated,
-  authenticatedAdmin
+  authenticatedAdmin,
+  authenticatedGoogleCalendar
 }

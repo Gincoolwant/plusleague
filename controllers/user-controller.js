@@ -11,7 +11,6 @@ const userController = {
     delete userData.gToken
 
     const jwtToken = userService.signJwtToken(userData, process.env.JWT_SECRET, '15m')
-
     const cookieOptions = { maxAge: 30 * 60 * 1000, httpOnly: true, signed: true }
     res.cookie('pleagueJWT', jwtToken, cookieOptions)
     res.redirect('/')
