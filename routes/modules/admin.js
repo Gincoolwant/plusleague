@@ -1,10 +1,13 @@
 const express = require('express')
-const router = express.Router()
-const adminController = require('../../controllers/admin-controller')
 
-router.get('/matches', adminController.getMatchesFromNow)
-router.get('/users', adminController.getAllUser)
-router.delete('/matches/:id', adminController.delistMatch)
-router.patch('/matches/:id', adminController.listMatch)
+const adminController = require('../../controllers/admin-controller')
+const tryCatch = require('../../utils/tryCatch')
+
+const router = express.Router()
+
+router.get('/matches', tryCatch(adminController.getMatchesFromNow))
+router.get('/users', tryCatch(adminController.getAllUser))
+router.delete('/matches/:id', tryCatch(adminController.delistMatch))
+router.patch('/matches/:id', tryCatch(adminController.listMatch))
 
 module.exports = router
