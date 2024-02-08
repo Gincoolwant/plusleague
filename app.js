@@ -10,7 +10,7 @@ const morgan = require('morgan')
 const usePassport = require('./config/passport')
 const routes = require('./routes/index')
 const handlebarsHelpers = require('./helpers/handlebars-helper')
-const { errorHandler } = require('./middleware/errorHandle')
+const { errorLogger, errorResponder } = require('./middleware/errorHandle')
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
@@ -41,7 +41,8 @@ app.use((req, res, next) => {
 })
 
 app.use(routes)
-app.use(errorHandler)
+app.use(errorLogger)
+app.use(errorResponder)
 
 const port = process.env.PORT || 3000
 app.listen(port, () => console.log(`App is listening on port ${port}!`))

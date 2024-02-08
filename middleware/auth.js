@@ -1,10 +1,12 @@
 const passport = require('passport')
 
+const AppError = require('../utils/AppError')
+const errorCode = require('../utils/errorCode')
+
 const authenticated = (req, res, next) => {
   passport.authenticate('jwt', { session: false }, (err, user) => {
     if (err) {
-      req.flash('warning_messages', '錯誤發生...請聯絡開發者。')
-      res.status(404).redirect('/')
+      throw new AppError(errorCode.INVALID_JWT_TOKEN, 'jwt authenticate failed.', errorCode.INVALID_JWT_TOKEN.statusCode)
     }
     if (!user) {
       req.flash('warning_messages', '請登入使用。')

@@ -2,24 +2,12 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 
 const { User } = require('../models')
+const AppError = require('../utils/AppError')
+const errorCode = require('../utils/errorCode')
 
 const userService = {
-  getLoginPage: (req, cb) => {
-    try {
-      cb(null)
-    } catch (err) {
-      cb(err)
-    }
-  },
   signJwtToken: (userData, secret, expires) => {
     return jwt.sign(userData, secret, { expiresIn: expires })
-  },
-  getRegisterPage: (req, cb) => {
-    try {
-      cb(null)
-    } catch (err) {
-      cb(err)
-    }
   },
   registerValidator: (userData) => {
     const { email, password, confirmPassword } = userData
@@ -35,10 +23,13 @@ const userService = {
     return errors
   },
   getUserByEmail: async (email) => {
-    await User.findOne({ where: { email } })
+    const user = await User.findOne({ where: { email } })
+    return user
   },
   addUser: async (name, email, password) => {
-    await User.create({ name, email, password: bcrypt.hashSync(password, bcrypt.genSaltSync(10)) })
+    const user = await User.create({ name, email, password: bcrypt.hashSync(password, bcrypt.genSaltSync(10)) })
+    if (!user) throw new AppError(errorCode.USER_CREATE_FAIL, 'Failed to create new user', errorCode.USER_CREATE_FAIL)
+    return user
   }
 }
 

@@ -1,11 +1,13 @@
 const userService = require('../services/user-service')
+const AppError = require('../utils/AppError')
+const errorCode = require('../utils/errorCode')
 
 const userController = {
-  getLoginPage: (req, res, next) => {
-    userService.getLoginPage(req, (err, _data) => err ? next(err) : res.render('login'))
+  getLoginPage: (req, res) => {
+    res.render('login')
   },
   // 登入成功後，製作jwt token儲存至browser cookie
-  setJwtCookie: (req, res, next) => {
+  setJwtCookie: (req, res) => {
     const userData = req.user.toJSON()
     delete userData.password
     delete userData.gToken
@@ -15,10 +17,10 @@ const userController = {
     res.cookie('pleagueJWT', jwtToken, cookieOptions)
     res.redirect('/')
   },
-  getRegisterPage: (req, res, next) => {
-    userService.getRegisterPage(req, (err, _data) => err ? next(err) : res.render('register'))
+  getRegisterPage: (req, res) => {
+    res.render('register')
   },
-  registerUser: async (req, res, next) => {
+  registerUser: async (req, res) => {
     // 未輸入name以email帳號為name
     const { email, password } = req.body
     let { name } = req.body
@@ -32,29 +34,25 @@ const userController = {
     }
 
     // 確認email是否註冊，是: 提示已註冊，否: 創建使用者
-    try {
-      const isUserRegistered = await userService.getUserByEmail(email)
-      if (isUserRegistered) {
-        return res.render('register', { name, email, password, errors: [{ message: '此Email已註冊。' }] })
-      }
-      const newRegisteredUser = await userService.addUser(name, email, password)
-      // 立即登入
-      req.login(newRegisteredUser, (err) => {
-        if (err) {
-          throw new Error('Auto login failed.')
-        }
-        req.flash('success_messages', `歡迎${newRegisteredUser.name}的加入，馬上使用看看吧!`)
-        res.redirect('/')
-      })
-    } catch (error) {
-      next(error)
+    const isUserRegistered = await userService.getUserByEmail(email)
+    if (isUserRegistered) {
+      return res.render('register', { name, email, password, errors: [{ message: '此Email已註冊。' }] })
     }
+    const newRegisteredUser = await userService.addUser(name, email, password)
+    // 立即登入
+    req.login(newRegisteredUser, (err) => {
+      if (err) {
+        throw new AppError(errorCode.INVALID_AUTO_LOGIN, 'New register user auto login failed.', errorCode.INVALID_AUTO_LOGIN.statusCode)
+      }
+      req.flash('success_messages', `歡迎${newRegisteredUser.name}的加入，馬上使用看看吧!`)
+      res.status(201).redirect('/')
+    })
   },
-  logout: (req, res, next) => {
+  logout: (req, res) => {
     res.clearCookie('pleagueJWT')
     req.logout((err) => {
       if (err) {
-        return next(err)
+        throw new AppError(errorCode.LOG_OUT_FAIL, 'Log out failed.', errorCode.LOG_OUT_FAIL.statusCode)
       }
       req.flash('success_msg', '你已成功登出。')
       res.redirect('/')

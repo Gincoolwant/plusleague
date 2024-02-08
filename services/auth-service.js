@@ -1,6 +1,8 @@
 const { google } = require('googleapis')
 
 const { Match, User, sequelize } = require('../models')
+const AppError = require('../utils/AppError')
+const errorCode = require('../utils/errorCode')
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
@@ -20,7 +22,7 @@ const authService = {
       raw: true
     })
     if (!match) {
-      throw new Error('Cannot find the match')
+      throw new AppError(errorCode.MATCH_NOT_FOUND, 'Match not found.', errorCode.MATCH_NOT_FOUND.statusCode)
     }
     return match
   },
@@ -43,13 +45,16 @@ const authService = {
     })
 
     if (insertedEvent.data.status !== 'confirmed') {
-      throw new Error('Failed to insert event into google calendar.')
+      throw new AppError(errorCode.INSERT_EVENT_FAILED, 'Failed to insert event into google calendar.', errorCode.INSERT_EVENT_FAILED.statusCode)
     }
 
     return insertedEvent.data
   },
   storeGoogleToken: async (id, accessToken, refreshToken) => {
     const user = await User.findOne({ id }, { raw: true })
+    if (!user) {
+      throw new AppError(errorCode.USER_NOT_FOUND, 'Users not found.', errorCode.USER_NOT_FOUND.statusCode)
+    }
     user.gToken = refreshToken
     await user.save()
 
