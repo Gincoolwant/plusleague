@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs')
 const { User } = require('../models')
 const AppError = require('../utils/AppError')
 const errorCode = require('../utils/errorCode')
-const { localFileHandler } = require('../helpers/file-helper')
+const { imgurFileHandler } = require('../helpers/file-helper')
 
 const userService = {
   signJwtToken: (userData, secret, expires) => {
@@ -40,7 +40,7 @@ const userService = {
   updateUser: async (id, name, file) => {
     const [user, filePath] = await Promise.all([
       User.findByPk(id),
-      localFileHandler(file)
+      imgurFileHandler(file)
     ])
 
     if (!user) throw new AppError(errorCode.USER_CREATE_FAIL, 'Failed to create new user', errorCode.USER_CREATE_FAIL)
