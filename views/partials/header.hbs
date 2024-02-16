@@ -43,7 +43,8 @@
               role="button"
             >
               <img
-                src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img (31).webp"
+              {{!-- TODO: from db user avatar not fixed --}}
+                src="{{user.avatar}}"
                 class="rounded-circle"
                 height="50"
                 loading="lazy"
@@ -51,7 +52,7 @@
             </a>
             <ul class="dropdown-menu">
               <li>
-                <a class="dropdown-item" href="/users/{{this.id}}">My profile</a>
+                <a class="dropdown-item" href="/users/{{user.id}}/profile">Profile</a>
               </li>
               <li>
                 <a class="dropdown-item" href="/users/logout">Logout</a>

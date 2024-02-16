@@ -3,6 +3,7 @@ const passport = require('passport')
 
 const userController = require('../../controllers/user-controller')
 const tryCatch = require('../../utils/tryCatch')
+const upload = require('../../middleware/multer')
 
 const router = express.Router()
 
@@ -11,8 +12,10 @@ router.post('/login', passport.authenticate('local', { failureRedirect: '/users/
 router.get('/register', userController.getRegisterPage)
 router.post('/register', tryCatch(userController.registerUser))
 router.get('/logout', userController.logout)
+router.get('/:id/profile', userController.getProfile)
+router.put('/:id/profile', upload.single('avatar'), userController.putProfile)
 router.get('/demoCalendar', (req, res) => {
-  res.render('user1-calendar')
+  res.render('user/user1-calendar')
 })
 
 module.exports = router

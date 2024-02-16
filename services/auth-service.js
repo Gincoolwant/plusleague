@@ -53,7 +53,7 @@ const authService = {
   storeGoogleToken: async (id, accessToken, refreshToken) => {
     const user = await User.findOne({ id }, { raw: true })
     if (!user) {
-      throw new AppError(errorCode.USER_NOT_FOUND, 'Users not found.', errorCode.USER_NOT_FOUND.statusCode)
+      throw new AppError(errorCode.USER_NOT_FOUND, 'User not found.', errorCode.USER_NOT_FOUND.statusCode)
     }
     user.gToken = refreshToken
     await user.save()

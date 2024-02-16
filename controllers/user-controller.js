@@ -21,9 +21,10 @@ const userController = {
     res.render('register')
   },
   registerUser: async (req, res) => {
-    // 未輸入name以email帳號為name
     const { email, password } = req.body
     let { name } = req.body
+
+    // 未輸入name以email帳號為name
     if (!name) {
       name = email.slice(0, email.indexOf('@'))
     }
@@ -39,7 +40,8 @@ const userController = {
       return res.render('register', { name, email, password, errors: [{ message: '此Email已註冊。' }] })
     }
     const newRegisteredUser = await userService.addUser(name, email, password)
-    // 立即登入
+
+    // 註冊完畢，立即登入
     req.login(newRegisteredUser, (err) => {
       if (err) {
         throw new AppError(errorCode.INVALID_AUTO_LOGIN, 'New register user auto login failed.', errorCode.INVALID_AUTO_LOGIN.statusCode)
@@ -57,6 +59,24 @@ const userController = {
       req.flash('success_msg', '你已成功登出。')
       res.redirect('/')
     })
+  },
+  getProfile: async (req, res) => {
+    res.render('user/profile', { user: req.user })
+  },
+  putProfile: async (req, res) => {
+    const { id } = req.params
+    const { name } = req.body
+    const { file } = req
+
+    // 必填欄位及確認密碼驗證
+    const errors = []
+    if (!name) {
+      errors.push({ message: '欄位name必填。' })
+    }
+
+    await userService.updateUser(id, name, file)
+    req.flash('success_messages', '已成功修改個人資料。')
+    res.redirect(`/users/${id}/profile`)
   }
 }
 

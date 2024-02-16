@@ -11,3 +11,5 @@ MYSQL_PASSWORD = #your mysql password
 MYSQL_DATABASE = #database name of mysql
 
 REDIS_URL = # redis url
+
+IMGUR_CLIENT_ID= #Input your Imgur Client ID
