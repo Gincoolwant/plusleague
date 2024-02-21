@@ -76,3 +76,15 @@
   </div>
   {{/each}}
 </div>
+{{#if user}}
+{{!-- float window --}}
+<button id="open-window-button" onclick="showWindow()"><i class="fa-solid fa-calendar-days"></i></button>
+<div id="calendar-window" class="hidden">
+  <div class="window-header">
+    <div class="window-title">全賽程收錄</div>
+    <button class="close-button" onclick="closeWindow()">x</button>
+  </div>
+  <a class="dropdown-item mb-1 mt-1"  href="/plus-league-calendar.ics" download="plus_league_schedule.ics">Apple</a>
+  <a class="dropdown-item"  href="/plus-league-calendar.ics" download="plus_league_schedule.ics">Google</a>
+</div>
+{{/if}}
