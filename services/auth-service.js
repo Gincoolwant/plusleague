@@ -26,7 +26,24 @@ const authService = {
     }
     return match
   },
-  insertEventToGoogleCalendar: async (event, accessToken, refreshToken) => {
+  findAllMatch: async (season, type) => {
+    const matches = await Match.findAll({
+      where: { season, type },
+      attributes: [
+        'type', 'game_id', 'game_time', 'arena',
+        [sequelize.literal('(SELECT logo FROM Teams WHERE Teams.id = Match.guest_id)'), 'g_logo'],
+        [sequelize.literal('(SELECT name FROM Teams WHERE Teams.id = Match.guest_id)'), 'g_name'],
+        [sequelize.literal('(SELECT logo FROM Teams WHERE Teams.id = Match.home_id)'), 'h_logo'],
+        [sequelize.literal('(SELECT name FROM Teams WHERE Teams.id = Match.home_id)'), 'h_name']
+      ],
+      raw: true
+    })
+    if (!matches) {
+      throw new AppError(errorCode.MATCH_NOT_FOUND, 'Matches not found.', errorCode.MATCH_NOT_FOUND.statusCode)
+    }
+    return matches
+  },
+  insertToGoogleCalendar: async (event, accessToken, refreshToken) => {
     const oauth2Client = new google.auth.OAuth2(
       process.env.GOOGLE_CLIENT_ID,
       process.env.GOOGLE_CLIENT_SECRET,
@@ -39,16 +56,29 @@ const authService = {
     })
 
     const calendar = google.calendar({ version: 'v3', auth: oauth2Client })
-    const insertedEvent = await calendar.events.insert({
-      calendarId: 'primary',
-      resource: event
-    })
+    if (event === 'all') {
+      const insertedCalendarList = await calendar.calendarList.insert({
+        requestBody: {
+          id: process.env.PLG_CALENDAR_GOOGLE
+        }
+      })
 
-    if (insertedEvent.data.status !== 'confirmed') {
-      throw new AppError(errorCode.INSERT_EVENT_FAILED, 'Failed to insert event into google calendar.', errorCode.INSERT_EVENT_FAILED.statusCode)
+      if (insertedCalendarList.status !== 200) {
+        throw new AppError(errorCode.INSERT_EVENT_FAILED, 'Failed to insert calendar list into google calendar.', errorCode.INSERT_EVENT_FAILED.statusCode)
+      }
+      console.log('Inserted PLG calendar list done.')
+    } else {
+      const insertedEvent = await calendar.events.insert({
+        calendarId: 'primary',
+        resource: event
+      })
+
+      if (insertedEvent.data.status !== 'confirmed') {
+        throw new AppError(errorCode.INSERT_EVENT_FAILED, 'Failed to insert event into google calendar.', errorCode.INSERT_EVENT_FAILED.statusCode)
+      }
+
+      return insertedEvent.data
     }
-
-    return insertedEvent.data
   },
   storeGoogleToken: async (id, accessToken, refreshToken) => {
     const user = await User.findOne({ id }, { raw: true })

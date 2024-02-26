@@ -1,10 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 const dayjs = require('dayjs')
-const utc = require('dayjs/plugin/utc')
 
-dayjs.extend(utc)
-// 假設 jsonData 是您的 JSON 格式資料
 const plgRegular2023 = require('../schedule/2023plg-regular.json')
 const teamList = {
   1: '臺北富邦勇士',
@@ -25,7 +22,7 @@ let icsContent = 'BEGIN:VCALENDAR\r\n'
 icsContent += 'VERSION:2.0\r\n'
 icsContent += 'PRODID:-//CK//Plus League//EN\r\n'
 
-// 將每個賽事加入到 iCalendar 中
+// 將每個賽事加入到 ics
 plgRegular2023.forEach(game => {
   const startDate = dayjs(game.game_time).format('YYYYMMDDTHHmmss')
   const endDate = dayjs(game.game_time).add(2, 'h').format('YYYYMMDDTHHmmss')
@@ -42,7 +39,7 @@ plgRegular2023.forEach(game => {
   icsContent += 'END:VEVENT\r\n'
 })
 
-// 結束 iCalendar 文本
+// 結束 ics
 icsContent += 'END:VCALENDAR\r\n'
 
 // 寫入檔案

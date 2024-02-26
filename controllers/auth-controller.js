@@ -3,15 +3,24 @@ const { formatIntoEvent } = require('../helpers/matchFormat-helper')
 const jwt = require('jsonwebtoken')
 
 const authController = {
-  insertMatchToCalendar: async (req, res) => {
+  addMatchToCalendar: async (req, res) => {
     const { season, type, gameId } = req.params
     const accessTokenGoogle = req.jwt.accessToken
     const refreshTokenGoogle = req.jwt.gToken || req.user.gToken
     const match = await authService.findMatch(season, type, gameId)
     const event = formatIntoEvent(match)
-    const insertedEvent = await authService.insertEventToGoogleCalendar(event, accessTokenGoogle, refreshTokenGoogle)
+    const insertedEvent = await authService.insertToGoogleCalendar(event, accessTokenGoogle, refreshTokenGoogle)
     req.flash('insertCalendar_success_messages', `${insertedEvent.summary}，已成功加入您的行事曆。`)
     req.flash('event_link', `${insertedEvent.htmlLink}`)
+    res.redirect('back')
+  },
+  addAllToCalendar: async (req, res) => {
+    const { season } = req.params
+    const accessTokenGoogle = req.jwt.accessToken
+    const refreshTokenGoogle = req.jwt.gToken || req.user.gToken
+    await authService.insertToGoogleCalendar('all', accessTokenGoogle, refreshTokenGoogle)
+    req.flash('insertCalendar_success_messages', `${season}賽季例行賽已成功加入您的行事曆。`)
+    req.flash('event_link', '')
     res.redirect('back')
   },
   storeGoogleToken: async (req, res, next) => {
