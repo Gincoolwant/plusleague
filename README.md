@@ -56,11 +56,12 @@ Once authorized, the selected match will be added to your personal Google Calend
 + Passport.js implementation for login authentication.
 + Supporting JWT authentication.
 ### User Privileges 
-+ Filter matches by month or team or venue.
-+ Added Matches as Events to Your Google Calendar
++ Filter matches by month, team, or venue.
++ Added Matches as events to Your Google/IOS Calendar.
++ Customize the user name and avatar.
 ### Admin Privileges
-+ Ability to listing/delisting schedules.
-+ View a list of all registered users.
++ Capability to list or delist schedules.
++ Viewing a list of all registered users.
 
 ## ⚙️Install
 ### 1. Quick start - Docker compose
@@ -105,6 +106,10 @@ MYSQL_PASSWORD = #your mysql password
 MYSQL_DATABASE = #database name of mysql
 
 REDIS_URL = # redis url
+
+IMGUR_CLIENT_ID= #Input your Imgur CLIENT ID
+IMGUR_CLIENT_SECRET = #Input your Imgur CLIENT SECRET
+IMGUR_REFRESH_TOKEN = #Input your Imgur REFRESH TOKEN
 ```
 
 ### Setup DB
