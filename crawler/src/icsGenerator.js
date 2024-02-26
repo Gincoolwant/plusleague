@@ -1,6 +1,9 @@
 const fs = require('fs')
 const path = require('path')
+const dayjs = require('dayjs')
+const utc = require('dayjs/plugin/utc')
 
+dayjs.extend(utc)
 // 假設 jsonData 是您的 JSON 格式資料
 const plgRegular2023 = require('../schedule/2023plg-regular.json')
 const teamList = {
@@ -24,8 +27,8 @@ icsContent += 'PRODID:-//CK//Plus League//EN\r\n'
 
 // 將每個賽事加入到 iCalendar 中
 plgRegular2023.forEach(game => {
-  const startDate = new Date(game.game_time).toISOString().replace(/-/g, '').replace(/:/g, '').slice(0, -5)
-  const endDate = new Date(game.game_time).toISOString().replace(/-/g, '').replace(/:/g, '').slice(0, -5)
+  const startDate = dayjs(game.game_time).format('YYYYMMDDTHHmmss')
+  const endDate = dayjs(game.game_time).add(2, 'h').format('YYYYMMDDTHHmmss')
   const summary = `${game.game_id}${teamList[game.guest_id]} vs ${teamList[game.home_id]}`
   const location = game.arena
   const description = `plg-regular - 賽事編號${game.game_id}`
@@ -42,7 +45,7 @@ plgRegular2023.forEach(game => {
 // 結束 iCalendar 文本
 icsContent += 'END:VCALENDAR\r\n'
 
-// 寫入至檔案
+// 寫入檔案
 const outputFilename = path.join(__dirname, '../../public', 'plus-league-calendar.ics')
 fs.writeFileSync(outputFilename, icsContent)
 
