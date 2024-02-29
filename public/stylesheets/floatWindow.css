@@ -1,9 +1,9 @@
 #calendar-window {
   position: fixed;
-  bottom: 50px;
-  right: 20px;
+  bottom: 100px;
+  right: 30px;
   width: auto;
-  background-color: #f0f0f0;
+  background-color: #ffffff;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   z-index: 1000;
@@ -12,7 +12,7 @@
 
 #open-window-button {
   position: fixed;
-  bottom: 30px;
+  bottom: 80px;
   right: 20px;
   padding: 10px 15px;
   background-color: #0084ff;
@@ -42,4 +42,51 @@
 
 .hidden {
   display: none;
+}
+
+#donate-window {
+  position: fixed;
+  bottom: 40px;
+  right: 30px;
+  width: auto;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  display: none;
+}
+
+#open-donate-window-button {
+  position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 15px;
+    background-color: #f5d049;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.donate-options {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 5px;
+}
+
+.donate-option {
+  background-color: #ecdd5a;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 10px;
+  margin: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.donate-option:hover {
+  background-color: #ff9d14;
 }
