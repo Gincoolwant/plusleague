@@ -49,7 +49,7 @@ Once authorized, the selected match will be added to your personal Google Calend
 
 ## 🌟Features
 ### Schedule Source
-+ Utilizes Axios and Cheerio for web scraping from the Plus League official website.
++ Utilizes Axios and Cheerio for web scraping from the Plus-League official website.
 ### Login and Registration
 + User registration and login functionality with flash message error prompts.
 + Secure password storage using bcrypt.
@@ -59,6 +59,7 @@ Once authorized, the selected match will be added to your personal Google Calend
 + Filter matches by month, team, or venue.
 + Added Matches as events to Your Google/IOS Calendar.
 + Customize the user name and avatar.
++ Small amount of donation to the developer.
 ### Admin Privileges
 + Capability to list or delist schedules.
 + Viewing a list of all registered users.
@@ -107,9 +108,16 @@ MYSQL_DATABASE = #database name of mysql
 
 REDIS_URL = # redis url
 
-IMGUR_CLIENT_ID= #Input your Imgur CLIENT ID
+IMGUR_CLIENT_ID = #Input your Imgur CLIENT ID
 IMGUR_CLIENT_SECRET = #Input your Imgur CLIENT SECRET
 IMGUR_REFRESH_TOKEN = #Input your Imgur REFRESH TOKEN
+
+MerchantID = #ECPAY MerchantID
+HashKey =  #ECPAY HashKey
+HashIV = #ECPAY HashIV
+
+# Default calendar with full plg schedule
+PLG_CALENDAR_GOOGLE= c41e4cae988376e3d43bf457def3e4b24fff67d28dfc1713f1c1bb5dd29e4600@group.calendar.google.com
 ```
 
 ### Setup DB

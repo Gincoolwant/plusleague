@@ -16,5 +16,9 @@ IMGUR_CLIENT_ID= #Input your Imgur CLIENT ID
 IMGUR_CLIENT_SECRET = #Input your Imgur CLIENT SECRET
 IMGUR_REFRESH_TOKEN = #Input your Imgur REFRESH TOKEN
 
+MerchantID = #ECPAY MerchantID
+HashKey =  #ECPAY HashKey
+HashIV = #ECPAY HashIV
+
 # Default calendar with full plg schedule
 PLG_CALENDAR_GOOGLE= c41e4cae988376e3d43bf457def3e4b24fff67d28dfc1713f1c1bb5dd29e4600@group.calendar.google.com

@@ -46,7 +46,7 @@ router.get('/', (req, res) => {
     MerchantTradeNo: TradeNo,
     MerchantTradeDate,
     TotalAmount: amount,
-    TradeDesc: '測試交易描述',
+    TradeDesc: '小額贊助',
     ItemName: '請CK喝杯咖啡',
     ReturnURL: `${HOST}/donation/return`,
     ClientBackURL: `${HOST}/donation/clientReturn`,
